@@ -1,6 +1,6 @@
 <template>
   <PageNavigation />
-  <main>
+  <main class="pt-20">
     <NuxtPage />
   </main>
   <FooterPage />

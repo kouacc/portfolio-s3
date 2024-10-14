@@ -10,6 +10,7 @@ export default {
     "./app.vue",
     "./error.vue",
   ],
+  darkMode: "selector",
   theme: {
     colors: {
       background: colors.zinc["200"],
