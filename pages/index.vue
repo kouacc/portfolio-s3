@@ -112,14 +112,16 @@ useHead({
 
         </section>
     </section>
-    <section class="square-grid grid items-center h-screen">
-        <div class="place-self-center flex flex-col items-center gap-20">
-            <div class="flex flex-col gap-5 items-center w-fit">
-                <h1 class="font-geist text-7xl text-fill dark:text-fill_dark">Et pourquoi pas...</h1>
-                <span class="font-departuremono text-sky-400 text-7xl">travailler ensemble ?</span>
-            </div>
-            <div class="inline-flex items-center gap-10">
-                <button>Contact</button><button>E-mail</button>
+    <section class="gradient-bg items-center h-screen">
+        <div class="h-full square-grid grid mask-conical">
+            <div class="place-self-center flex flex-col items-center gap-20">
+                <div class="flex flex-col gap-5 items-center w-fit">
+                    <h1 class="font-geist text-7xl text-fill dark:text-fill_dark">Et pourquoi pas...</h1>
+                    <span class="font-departuremono text-sky-400 text-7xl">travailler ensemble ?</span>
+                </div>
+                <div class="inline-flex items-center gap-10">
+                    <button>Contact</button><button>E-mail</button>
+                </div>
             </div>
         </div>
     </section>
