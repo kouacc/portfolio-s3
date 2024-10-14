@@ -4,7 +4,7 @@ const { data } = await useFetch('/api/projects')
 
 <template>
     <section class="bg-background dark:bg-background_dark">
-        <section class="dot-grid bg-blue-500 flex flex-col justify-center items-center pt-96 px-20 pb-32 ">
+        <section class="dot-grid bg-blue-500 flex flex-col justify-center items-center pt-96 px-20 h-screen ">
         <div class="flex justify-center">
             <h1 class="megazoid-text-title text-white text-8xl absolute z-40 top-0 bottom-0 right-0 left-1" style="-webkit-text-stroke-width: 6px;">Maxence Lallemand</h1>
             <h1 class="megazoid-text-title text-sky-400 text-8xl absolute z-30 top-4 bottom-0 right-0 left-5" style="-webkit-text-stroke-width: 6px;">Maxence Lallemand</h1>
@@ -46,7 +46,7 @@ const { data } = await useFetch('/api/projects')
         </div>
         <hr class="col-start-2 col-span-10">
         <section class="col-start-1 col-span-full flex flex-col gap-11">
-            <h2 class="font-geistmono text-gray-400">Compétences</h2>
+            <h2 class="home-h2">Compétences</h2>
             <div class="grid grid-cols-5 gap-20 text-fill dark:text-fill_dark">
                 <section class="flex flex-col gap-5">
                     <h3 class="font-geist text-base">Intégration</h3>
@@ -102,6 +102,21 @@ const { data } = await useFetch('/api/projects')
                 </section>
             </div>
         </section>
+        <section class="grid-start-1 col-span-full">
+            <h2 class="home-h2">Mon parcours</h2>
+
+        </section>
+    </section>
+    <section class="square-grid grid items-center h-screen">
+        <div class="place-self-center flex flex-col items-center gap-20">
+            <div class="flex flex-col gap-5 items-center w-fit">
+                <h1 class="font-geist text-7xl text-fill dark:text-fill_dark">Et pourquoi pas...</h1>
+                <span class="font-departuremono text-sky-400 text-7xl">travailler ensemble ?</span>
+            </div>
+            <div class="inline-flex items-center gap-10">
+                <button>Contact</button><button>E-mail</button>
+            </div>
+        </div>
     </section>
 </section>
 </template>

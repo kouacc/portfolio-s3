@@ -36,6 +36,7 @@ export default {
         geist: ["Geist", "sans-serif"],
         geistmono: ["Geist Mono", "monospace"],
         megazoid: ["Megazoid", "sans-serif"],
+        departuremono: ["Departure Mono", "monospace"],
       },
     },
   },
