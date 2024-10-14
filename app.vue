@@ -1,4 +1,5 @@
 <template>
+  <PageNavigation />
   <main>
     <NuxtPage />
   </main>
