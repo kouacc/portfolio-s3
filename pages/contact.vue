@@ -1,5 +1,9 @@
 <script setup lang="ts">
-const { data } = await useFetch('/api/projects')
+useHead({
+  bodyAttrs: {
+    class: 'gradient-bg'
+  }
+})
 </script>
 
 <template>

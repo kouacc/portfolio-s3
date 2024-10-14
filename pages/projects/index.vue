@@ -1,5 +1,9 @@
 <script setup lang="ts">
-
+useHead({
+  bodyAttrs: {
+    class: 'gradient-bg'
+  }
+})
 </script>
 
 <template>

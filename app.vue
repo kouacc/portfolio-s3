@@ -1,6 +1,11 @@
+<script setup lang="ts">
+const appConfig = useAppConfig()
+
+</script>
+
 <template>
   <PageNavigation />
-  <main class="gradient-bg">
+  <main>
     <NuxtPage />
   </main>
   <FooterPage />

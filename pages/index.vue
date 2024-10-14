@@ -1,15 +1,20 @@
 <script setup lang="ts">
-const { data } = await useFetch('/api/projects')
+useHead({
+  bodyAttrs: {
+    class: 'bg-background dark:bg-background_dark'
+  },
+  title: 'Portfolio - Maxence Lallemand'
+})
 </script>
 
 <template>
-    <section class="bg-background dark:bg-background_dark">
+    <section class="space-y-24">
         <section class="dot-grid bg-blue-500 flex flex-col justify-center items-center pt-96 px-20 h-screen ">
         <div class="flex justify-center">
-            <h1 class="megazoid-text-title text-white text-8xl absolute z-40 top-0 bottom-0 right-0 left-1" style="-webkit-text-stroke-width: 6px;">Maxence Lallemand</h1>
-            <h1 class="megazoid-text-title text-sky-400 text-8xl absolute z-30 top-4 bottom-0 right-0 left-5" style="-webkit-text-stroke-width: 6px;">Maxence Lallemand</h1>
-            <h1 class="megazoid-text-title text-white text-8xl absolute z-20 top-8 bottom-0 right-0 left-9" style="-webkit-text-stroke-width: 6px;">Maxence Lallemand</h1>
-            <h1 class="megazoid-text-title text-sky-400 text-8xl absolute z-10 top-12 bottom-0 right-0 left-12" style="-webkit-text-stroke-width: 6px;">Maxence Lallemand</h1>
+            <h1 class="megazoid-text-title text-white text-8xl absolute z-40 top-0 bottom-0 right-0 left-1 w-fit h-fit" style="-webkit-text-stroke-width: 6px;">Maxence Lallemand</h1>
+            <h1 class="megazoid-text-title text-sky-400 text-8xl absolute z-30 top-4 bottom-0 right-0 left-5 w-fit h-fit" style="-webkit-text-stroke-width: 6px;">Maxence Lallemand</h1>
+            <h1 class="megazoid-text-title text-white text-8xl absolute z-20 top-8 bottom-0 right-0 left-9 w-fit h-fit" style="-webkit-text-stroke-width: 6px;">Maxence Lallemand</h1>
+            <h1 class="megazoid-text-title text-sky-400 text-8xl absolute z-10 top-12 bottom-0 right-0 left-12 w-fit h-fit" style="-webkit-text-stroke-width: 6px;">Maxence Lallemand</h1>
         </div>
         <h2 class="megazoid-text-title text-white text-5xl" style="-webkit-text-stroke-width: 4px;">Développeur web</h2>
         <div class="w-fit border-b-4 border-white p-3 flex gap-5">
@@ -19,7 +24,7 @@ const { data } = await useFetch('/api/projects')
         </div>
         <span class="relative left-96 bottom-8 font-geistmono rotate-90 inline-flex items-center text-white">Scroll down<Icon name="lucide:chevron-right" size="24" /></span>
     </section>
-    <section class="base-grid pt-32">
+    <section class="base-grid">
         <section class="col-start-5 col-span-4">
             <h2 class="font-geistmono text-gray-400">About Me.</h2>
             <p>Je m’appelle Maxence, je suis étudiant de 2ème année en BUT MMI à Montbéliard.<br><br>Développeur web full-stack à mes heures perdues, je travaille sur des projets tels que WiiLink.<br><br>Et quand je travaille pas, je joue à des jeux vidéos, écoute de la musique, fait du sport, ou 😴</p>
@@ -37,7 +42,7 @@ const { data } = await useFetch('/api/projects')
                 </div>
                 <div class="row-start-2 col-span-1 col-start-4 rounded-xl p-2.5 bg-primary dark:bg-primary_dark border border-secondary dark:border-secondary_dark text-fill dark:text-fill_dark">
                     <h3>Mood actuel</h3>
-                    <span class="font-geistmono text-6xl">A</span>
+                    <span class="font-geistmono text-6xl">😔</span>
                 </div>
                 <svg class="row-start-2 col-start-5" xmlns="http://www.w3.org/2000/svg" width="129" height="122" viewBox="0 0 129 122" fill="none">
 <path d="M47.7 44.9875C61.5349 31.8011 64.5 0 64.5 0C64.5 0 67.4651 31.8011 81.3 44.9875C95.1349 58.1739 128.5 61 128.5 61C128.5 61 93.8143 62.0348 79.7 75.4875C65.5857 88.9402 64.5 122 64.5 122C64.5 122 62.9624 87.3572 47.7 73.9625C33.5885 61.5778 0.5 61 0.5 61C0.5 61 33.8651 58.1739 47.7 44.9875Z" fill="#38BDF8"/>
