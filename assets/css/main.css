@@ -11,10 +11,15 @@
 }
 
 @layer components {
-    .megazoid-text {
+    .megazoid-text-title {
         @apply font-megazoid;
         -webkit-text-stroke-color: black;
-        
+    }
+
+    .megazoid-text-h1 {
+        @apply font-megazoid text-7xl;
+        -webkit-text-stroke-color: black;
+        text-shadow: 7px 7px 0px #38BDF8;
     }
 
     .dot-grid {
@@ -27,5 +32,13 @@
 @layer utilities {
     .base-grid {
         @apply lg:grid lg:grid-cols-12 lg:gap-8 lg:justify-center px-6
+    }
+
+    .gradient-bg {
+        background: var(--bg-gradient, url(<path-to-image>) lightgray 0% 0% / 100px 100px repeat, radial-gradient(65.18% 95.97% at 8.19% 69.55%, rgba(134, 239, 172, 0.65) 0%, rgba(228, 228, 231, 0.65) 100%), radial-gradient(65.04% 99% at 82.95% 69.04%, #38BDF8 0%, #E4E4E7 100%));
+    }
+
+    .container {
+      @apply max-w-screen-xl lg:px-10 md:px-7 sm:px-5;
     }
 }

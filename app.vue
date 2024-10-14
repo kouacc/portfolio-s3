@@ -1,6 +1,6 @@
 <template>
   <PageNavigation />
-  <main>
+  <main class="gradient-bg">
     <NuxtPage />
   </main>
   <FooterPage />
