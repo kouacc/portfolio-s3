@@ -13,7 +13,7 @@ export default {
   darkMode: "selector",
   theme: {
     colors: {
-      background: colors.zinc["100"],
+      background: colors.zinc["200"],
       primary: colors.zinc["100"],
       secondary: colors.zinc["300"],
       tertiary: colors.slate["100"],

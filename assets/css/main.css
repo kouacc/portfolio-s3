@@ -31,7 +31,7 @@
 
 @layer utilities {
     .base-grid {
-        @apply lg:grid lg:grid-cols-12 lg:gap-8 lg:justify-center px-6
+        @apply lg:grid lg:grid-cols-12 lg:gap-8 lg:justify-center px-16
     }
 
     .gradient-bg {
