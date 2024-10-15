@@ -19,6 +19,8 @@
     "vue-router": "latest"
   },
   "devDependencies": {
+    "@tailwindcss/forms": "^0.5.9",
+    "@tailwindcss/typography": "^0.5.15",
     "@vueuse/core": "^11.1.0",
     "@vueuse/nuxt": "^11.1.0",
     "autoprefixer": "^10.4.20",
