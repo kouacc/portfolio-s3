@@ -11,5 +11,9 @@ export default defineNuxtConfig({
     },
   },
 
+  experimental: {
+    viewTransition: true
+  },
+
   modules: ["@nuxt/fonts", "@nuxt/icon", "@vueuse/nuxt"],
 });

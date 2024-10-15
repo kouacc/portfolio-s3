@@ -10,3 +10,4 @@ const appConfig = useAppConfig()
   </main>
   <FooterPage />
 </template>
+
