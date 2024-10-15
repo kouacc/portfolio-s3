@@ -9,7 +9,7 @@ const projects = await useFetch('/api/projects')
 </script>
 
 <template>
-    <div class="py-24 container">
+    <div class="py-24 container text-fill dark:text-fill_dark">
         <h1 class="text-7xl megazoid-text-h1 text-white" style="-webkit-text-stroke-width: 5px;">Projets</h1>
         <h2>Tous mes projets</h2>
     </div>
