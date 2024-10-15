@@ -7,7 +7,7 @@ useHead({
 </script>
 
 <template>
-    <div class="pt-24 container">
+    <div class="py-24 container">
         <h1 class="megazoid-text-h1 text-white" style="-webkit-text-stroke-width: 5px;">Contact</h1>
         <form action="" method="post" class="grille">
             <label>
