@@ -1,4 +1,4 @@
-import { db } from "../utils/orm";
+import { db } from "../../utils/orm";
 import { projectTable } from "~/database/schema";
 
 export default defineEventHandler(async (event) => {
