@@ -2,18 +2,23 @@
 const props = withDefaults(defineProps<{
     variant?: 'primary' | 'secondary'
     size?: 'small' | 'medium' | 'large'
-    text: string
     href?: string
+    click?: () => void
     icon?: string | object | undefined
     }>(), {
     variant: 'primary',
-    text: 'Button',
+    size: 'small',
     href: '#',
 })
 
 const variantStyles = {
-    primary: 'bg-sky-700',
-    secondary: 'bg-zinc-700'
+    primary: 'bg-sky-700 shadow-[0px_0px_0px_1px_#0369A1] bg-gradient-to-t/15 from-bg-white/0 to-bg-white/50',
+    secondary: 'bg-zinc-800 shadow-[0px_0px_0px_1px_#3F3F46] bg-gradient-to-t/15 from-bg-white/0 to-bg-white/50'
+}
+
+const bgStyles = {
+    primary: 'background: linear-gradient(180deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.00) 100%), #0369A1',
+    secondary: 'background: linear-gradient(180deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.00) 100%), #27272A'
 }
 
 const sizes = {
@@ -24,6 +29,6 @@ const sizes = {
 </script>
 
 <template>
-    <button v-if="!href" class="rounded-xl px-8" :class="[variantStyles[props.variant], sizes[props.size]]">{{ text }}</button>
-    <RouterLink v-else :href="props.href" class="rounded-xl px-8" :class="[variantStyles[props.variant], sizes[props.size]]">{{ text }}</RouterLink>
+    <button v-if="!href" @click="props.click" class="rounded-xl px-8 border-[0.5px] border-white/40 inline-flex items-center gap-3" :class="[variantStyles[props.variant], sizes[props.size]]" :style="bgStyles[props.variant]"><slot /></button>
+    <RouterLink v-else :to="props.href" class="rounded-xl px-8 border-[0.5px] border-white/40 inline-flex items-center gap-3" :class="[variantStyles[props.variant], sizes[props.size]]" :style="bgStyles[props.variant]"><slot /></RouterLink>
 </template>
