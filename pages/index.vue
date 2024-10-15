@@ -9,12 +9,12 @@ useHead({
 
 <template>
     <section class="space-y-24">
-        <section class="dot-grid bg-blue-500 flex flex-col justify-center items-center pt-96 px-20 h-screen ">
+        <section class="dot-grid bg-blue-500 flex flex-col justify-center items-center pt-32 px-20 h-screen ">
         <div class="flex justify-center">
-            <h1 class="megazoid-text-title text-white text-4xl lg:text-8xl absolute z-40 top-0 bottom-0 right-0 left-1 w-fit h-fit" style="-webkit-text-stroke-width: 7px;">Maxence Lallemand</h1>
-            <h1 class="megazoid-text-title text-sky-400 text-4xl lg:text-8xl absolute z-30 top-4 bottom-0 right-0 left-5 w-fit h-fit" style="-webkit-text-stroke-width: 7px;">Maxence Lallemand</h1>
-            <h1 class="megazoid-text-title text-white text-4xl lg:text-8xl absolute z-20 top-8 bottom-0 right-0 left-9 w-fit h-fit" style="-webkit-text-stroke-width: 7px;">Maxence Lallemand</h1>
-            <h1 class="megazoid-text-title text-sky-400 text-4xl lg:text-8xl absolute z-10 top-12 bottom-0 right-0 left-12 w-fit h-fit" style="-webkit-text-stroke-width: 7px;">Maxence Lallemand</h1>
+            <h1 class="megazoid-text-title text-white text-4xl lg:text-8xl relative z-40 w-fit h-fit" style="-webkit-text-stroke-width: 7px;">Maxence Lallemand</h1>
+            <h1 class="megazoid-text-title text-sky-400 text-4xl lg:text-8xl relative z-30 w-fit h-fit" style="-webkit-text-stroke-width: 7px;">Maxence Lallemand</h1>
+            <h1 class="megazoid-text-title text-white text-4xl lg:text-8xl relative z-20 w-fit h-fit" style="-webkit-text-stroke-width: 7px;">Maxence Lallemand</h1>
+            <h1 class="megazoid-text-title text-sky-400 text-4xl lg:text-8xl relative z-10 w-fit h-fit" style="-webkit-text-stroke-width: 7px;">Maxence Lallemand</h1>
         </div>
         <h2 class="megazoid-text-title text-white text-5xl" style="-webkit-text-stroke-width: 4px;">Développeur web</h2>
         <div class="w-fit border-b-4 border-white p-3 flex gap-5">
@@ -128,7 +128,7 @@ useHead({
                     </div>
                     <div class="inline-flex items-center gap-10">
                         <ActionButton variant="primary" size="large" href="/contact" class="text-white"><span>Me contacter</span></ActionButton>
-                        <ActionButton variant="secondary" size="large" text="E-mail" href="mailto:maxence.lallemand0@gmail.com" class="text-white"><Icon name="lucide:mail" size="24"/><span>E-mail</span></ActionButton>
+                        <ActionButton variant="secondary" size="large" text="E-mail" class="text-white"><Icon name="lucide:mail" size="24"/><span>E-mail</span></ActionButton>
                     </div>
                 </div>
             </div>
