@@ -4,6 +4,8 @@ useHead({
     class: 'gradient-bg dark:gradient-bg-dark'
   }
 })
+
+const projects = await useFetch('/api/projects')
 </script>
 
 <template>
