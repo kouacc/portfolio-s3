@@ -1,9 +1,17 @@
 <script setup lang="ts">
+import { nextTick } from 'vue';
+
 const isDark = useDark({
-  selector: 'html',
-  attribute: 'class',
-  valueDark: 'dark',
-  valueLight: 'light',
+  onChanged(isDark) {
+    nextTick(() => {
+      document.startViewTransition(() => {
+        nextTick(() => {
+          document.documentElement.setAttribute('data-theme', isDark ? 'dark' : 'light');
+        });
+      })
+    });
+  },
+
 })
 const toggleDark = useToggle(isDark)
 </script>

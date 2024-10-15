@@ -68,12 +68,12 @@
     }
 }
 
-::view-transition-old(root) {
+::view-transition-old(root), [data-theme='dark']::view-transition-old(root) {
     animation: none;
     z-index: -1;
   }
 
-::view-transition-new(root) {
+::view-transition-new(root), [data-theme='dark']::view-transition-new(root) {
     animation: unclip 1s;
     clip-path: polygon(-100vmax 100%, 100% 100%, 100% -100vmax);
   }
