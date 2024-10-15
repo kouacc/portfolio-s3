@@ -29,8 +29,18 @@
     }
 
     .square-grid {
-        background-size: 40px 40px;
-        background-image: linear-gradient(to right, rgba(37, 68, 100, 0.30) 1px, transparent 1px), linear-gradient(to bottom, rgba(37, 68, 100, 0.30) 1px, transparent 1px);
+        --size: 45px;
+        --line: color-mix(in lch, canvasText, transparent 70%);
+        background: linear-gradient(
+          90deg,
+          var(--line) 1px,
+          transparent 1px var(--size)
+        )
+        50% 50% / var(--size) var(--size),
+      linear-gradient(var(--line) 1px, transparent 1px var(--size)) 50% 50% /
+        var(--size) var(--size);
+        mask: linear-gradient(103deg, #000 -43.49%, rgba(0, 0, 0, 0.02) 70.54%);
+        @apply h-screen w-screen relative z-0 top-0 inset-0
     }
 
     .home-h2 {
@@ -38,7 +48,11 @@
     }
 
     .gradient-bg {
-        background: radial-gradient(65.18% 95.97% at 8.19% 69.55%, rgba(134, 239, 172, 0.65) 0%, rgba(228, 228, 231, 0.65) 100%), radial-gradient(65.04% 99% at 82.95% 69.04%, #38BDF8 0%, #E4E4E7 100%) ;
+        background: radial-gradient(65.18% 95.97% at 8.19% 69.55%, rgba(134, 239, 172, 0.65) 0%, rgba(228, 228, 231, 0.65) 100%), radial-gradient(65.04% 99% at 82.95% 69.04%, #38BDF8 0%, #E4E4E7 100%);
+    }
+
+    .gradient-bg-dark {
+        background: radial-gradient(65.18% 95.97% at 8.19% 69.55%, rgba(22, 101, 52, 0.65) 0%, rgba(9, 9, 11, 0.65) 100%), radial-gradient(65.04% 99% at 82.95% 69.04%, #0369A1 0%, #09090B 100%);
     }
 }
 
@@ -51,22 +65,5 @@
 
     .container {
       @apply max-w-screen-xl lg:px-10 md:px-7 sm:px-5;
-    }
-
-    .mask-conical {
-        mask-image: conic-gradient(
-            from 180deg, 
-            black, 
-            transparent
-        );
-        mask-position: 70% 50%;
-        mask-size: 200% 200%;
-        -webkit-mask-image: conic-gradient(
-          from 180deg, 
-          black, 
-          transparent
-        );
-        -webkit-mask-position: 70% 50%;
-        -webkit-mask-size: 200% 200%;
     }
 }
