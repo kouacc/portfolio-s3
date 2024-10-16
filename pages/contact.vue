@@ -35,7 +35,7 @@ const submitForm = async (event: Event) => {
                 <span class="text-fill dark:text-fill_dark">Message</span>
                 <textarea class="rounded-xl bg-primary dark:bg-primary_dark border-secondary dark:border-secondary_dark" />
             </label>
-            <input type="submit" value="Envoyer">
+            <input type="submit" class="text-fill dark:text-fill_dark" value="Envoyer">
         </form>
     </div>
 </template>
