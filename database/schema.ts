@@ -27,6 +27,7 @@ export const userTable = sqliteTable("users", {
   id: integer("id").primaryKey(),
   username: text("username").notNull(),
   password_hash: text("password_hash").notNull(),
+  salt: text("salt").notNull(),
   created_at: text("created_at")
     .notNull()
     .default(sql`(CURRENT_TIMESTAMP)`),
