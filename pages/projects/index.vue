@@ -5,7 +5,7 @@ useHead({
   }
 })
 
-const projects = await useFetch('/api/projects')
+const projects = await useFetch('/api/projects/fetchprojects')
 </script>
 
 <template>

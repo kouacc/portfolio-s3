@@ -3,7 +3,7 @@ import { projectTable } from "~/database/schema";
 import { eq } from "../../utils/orm";
 
 export default defineEventHandler(async (event) => {
-    const id = Number(event.context.params?.id)
+    const id = getRouterParam(event, "id");
 
     if (!id) {
         throw createError({
