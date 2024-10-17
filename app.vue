@@ -4,10 +4,8 @@ const appConfig = useAppConfig()
 </script>
 
 <template>
-  <PageNavigation />
-  <main class="h-screen">
+  <NuxtLayout>
     <NuxtPage />
-  </main>
-  <FooterPage />
+  </NuxtLayout>
 </template>
 
