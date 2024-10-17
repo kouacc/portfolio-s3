@@ -13,6 +13,6 @@ export function generateJWT(id: number, username: string, surname: string): stri
 }
 
 export function verifyJWT(token: string) {
-  var decoded = jsonwebtoken.verify(token, process.env.JWT_TOKEN as string);
+  var decoded = jsonwebtoken.verify(token, process.env.JWT_SECRET as string);
   return decoded;
 }
