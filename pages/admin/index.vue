@@ -5,9 +5,10 @@ useHead({
   },
   title: 'Gestion - Maxence Lallemand'
 })
+
+const { data, status } = await useFetch('/api/projects/fetchprojects')
 </script>
 
 <template>
-
-
+  
 </template>

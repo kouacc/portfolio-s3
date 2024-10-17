@@ -26,7 +26,7 @@ useHead({
     </section>
     <section class="base-grid">
         <section class="col-start-5 col-span-4">
-            <h2 class="font-geistmono text-gray-400">About Me.</h2>
+            <h2 class="home-h2 font-geistmono text-gray-400">About Me.</h2>
             <p>Je m’appelle Maxence, je suis étudiant de 2ème année en BUT MMI à Montbéliard.<br><br>Développeur web full-stack à mes heures perdues, je travaille sur des projets tels que WiiLink.<br><br>Et quand je travaille pas, je joue à des jeux vidéos, écoute de la musique, fait du sport, ou 😴</p>
         </section>
         <div class="lg:col-start-3 lg:col-span-8">
@@ -127,8 +127,8 @@ useHead({
                         <span class="font-departuremono text-sky-400 text-[42px] lg:text-7xl text-center">travailler ensemble ?</span>
                     </div>
                     <div class="inline-flex items-center gap-10">
-                        <ActionButton variant="primary" size="large" href="/contact" class="text-white"><span>Me contacter</span></ActionButton>
-                        <ActionButton variant="secondary" size="large" text="E-mail" class="text-white"><Icon name="lucide:mail" size="24"/><span>E-mail</span></ActionButton>
+                        <ActionButton variant="primary" size="large" href="/contact" class=""><span class="text-white">Me contacter</span></ActionButton>
+                        <ActionButton variant="secondary" size="large" text="E-mail"><Icon name="lucide:mail" class="text-white" size="24"/><span class="text-white">E-mail</span></ActionButton>
                     </div>
                 </div>
             </div>
