@@ -37,7 +37,7 @@ const token = await useFetch<JWT>('/api/protected/decode', {
     <div class="space-y-8">
       <section class="flex justify-between items-center">
         <h2>Projets</h2>
-        <ActionButton variant="primary" href="/editor"><Icon size="24" name="lucide:plus" class="text-white"/><span class="text-white">Créer un projet</span></ActionButton>
+        <ActionButton variant="primary" href="/admin/editor"><Icon size="24" name="lucide:plus" class="text-white"/><span class="text-white">Créer un projet</span></ActionButton>
       </section>
       <ul class="rounded-xl flex flex-col">
         <li class="bg-primary dark:bg-primary_dark border border-secondary dark:border-secondary_dark flex items-center justify-between px-10 py-6 first:rounded-t-xl last:rounded-b-xl" v-for="projet in data" :key="projet.id">
@@ -45,7 +45,7 @@ const token = await useFetch<JWT>('/api/protected/decode', {
           <div class="inline-flex items-center gap-6">
             <span class="font-geist text-base">Ajouté le : {{ formatDate(projet.created_at) }}</span>
             <div class="inline-flex items-center gap-5">
-              <NuxtLink to="/editor/[[id]]"><Icon name="lucide:square-pen" size="24" /></NuxtLink>
+              <NuxtLink to="/admin/editor"><Icon name="lucide:square-pen" size="24" /></NuxtLink>
               <button><Icon name="lucide:trash-2" size="24" class="text-red-500" /></button>    
             </div>
           </div>
@@ -56,7 +56,7 @@ const token = await useFetch<JWT>('/api/protected/decode', {
     <hr class="h-0.5 my-8 bg-fill border-0 dark:bg-fill_dark">
     <section class="space-y-8">
       <h2>Utilitaires</h2>
-      <ul class="flex items-center justify-between">
+      <ul class="flex flex-wrap items-center justify-between">
         <li><ActionButton variant="secondary"><span class="text-white">Logs backend</span><Icon name="lucide:logs" size="24" class="text-white"/></ActionButton></li>
         <li><ActionButton variant="secondary"><span class="text-white">Analytics</span><Icon name="lucide:chart-line" size="24" class="text-white"/></ActionButton></li>
         <li><ActionButton variant="secondary"><span class="text-white">Exporter projets</span><Icon name="lucide:file-symlink" size="24" class="text-white"/></ActionButton></li>
