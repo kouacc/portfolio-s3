@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { debounce } from 'lodash-es'
+import { marked } from 'marked'
 const route = useRoute('/admin/editor/:id')
 
 useHead({
@@ -12,18 +14,27 @@ definePageMeta({
     middleware: 'auth',
     layout: 'editor'
 })
+
+const isSaved = ref<boolean>(true)
+const input = ref('# Nouveau projet')
+const update = debounce((e) => {
+  input.value = e.target.value
+}, 100)
+const output = computed(() => marked(input.value))
 </script>
 
 <template>
-    <div class="py-24">
-        
+    <div class="pt-24 flex flex-row">
+        <textarea class="w-1/2 h-[calc(100vh-6rem)] p-10" name="" id="" v-model="input" @input="update"></textarea><div class="w-1/2 h-[calc(100vh-6rem)] p-10 prose dark:prose-invert" v-html="output"></div>
     </div>
-    <nav class="bg-primary dark:bg-primary_dark px-3 py-2 rounded-xl mb-16 fixed left-1/2 -translate-x-1/2">
-        <ul class="flex items-center gap-3">
+
+    <nav class="mb-16 fixed bottom-0 left-1/2 -translate-x-1/2 flex flex-row items-center gap-5">
+        <ul class="flex items-center gap-3 bg-primary dark:bg-primary_dark px-3 py-2 rounded-xl border border-secondary dark:border-secondary_dark">
             <li><button class="inline-flex items-center"><Icon name="fa6-solid:gear" size="24" class="mx-2 my-1.5"/></button></li>
             <li><NuxtLink class="inline-flex items-center"><Icon name="fa6-solid:expand" size="24" class="mx-2 my-1.5"/></NuxtLink></li>
-            <li><ActionButton variant="primary" href="/admin/editor"><Icon size="24" name="lucide:plus" class="text-white"/><span class="text-white">Créer un projet</span></ActionButton></li>
+            <li><ActionButton variant="primary" href="/admin/editor"><span class="text-white">Créer le projet</span></ActionButton></li>
         </ul>
-        
+        <Icon v-if="isSaved" name="fa6-solid:circle-check" size="24" class="text-green-500"/>
+        <Icon v-else name="lucide:hourglass" size="24" class="text-red-500"/>
     </nav>
 </template>
