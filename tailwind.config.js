@@ -31,6 +31,7 @@ export default {
       black: colors.black,
       white: colors.white,
       zinc: colors.zinc,
+      yellow: colors.yellow,
     },
     extend: {
       fontFamily: {
