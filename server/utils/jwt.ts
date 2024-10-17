@@ -1,5 +1,4 @@
 import * as jwt from "jsonwebtoken";
-require("dotenv").config();
 
 interface JWT_Structure {
   id: Number;

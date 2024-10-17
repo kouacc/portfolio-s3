@@ -15,5 +15,10 @@ export default defineNuxtConfig({
     viewTransition: true
   },
 
+  runtimeConfig: {
+    JWT_SECRET: '',
+    ADMIN_PASSWORD: ''
+  },
+
   modules: ["@nuxt/fonts", "@nuxt/icon", "@vueuse/nuxt"],
 });
