@@ -18,7 +18,7 @@ definePageMeta({
     <div class="py-24">
         
     </div>
-    <nav class="bg-primary dark:bg-primary_dark px-3 py-2 rounded-xl fixed left-1/2 -translate-x-1/2">
+    <nav class="bg-primary dark:bg-primary_dark px-3 py-2 rounded-xl mb-16 fixed left-1/2 -translate-x-1/2">
         <ul class="flex items-center gap-3">
             <li><button class="inline-flex items-center"><Icon name="fa6-solid:gear" size="24" class="mx-2 my-1.5"/></button></li>
             <li><NuxtLink class="inline-flex items-center"><Icon name="fa6-solid:expand" size="24" class="mx-2 my-1.5"/></NuxtLink></li>

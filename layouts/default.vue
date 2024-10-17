@@ -1,6 +1,6 @@
 <template>
     <PageNavigation />
-    <main class="h-screen">
+    <main>
         <slot />
     </main>
     <FooterPage />

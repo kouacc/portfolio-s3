@@ -30,7 +30,7 @@ const token = await useFetch<JWT>('/api/protected/decode', {
 </script>
 
 <template>
-  <div class="container py-24 space-y-16">
+  <div class="container pt-32 pb-64 space-y-16">
     <div class="dot-grid px-3 py-5 w-fit">
       <h1>Bienvenue, {{ token.data.value?.name }} !</h1>
     </div>
