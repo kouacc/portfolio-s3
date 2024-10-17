@@ -30,5 +30,5 @@ const sizes = {
 
 <template>
     <button v-if="!href" @click="props.click" class="rounded-xl px-8 border-[0.5px] border-white/40 inline-flex items-center gap-3" :class="[variantStyles[props.variant], sizes[props.size]]" :style="bgStyles[props.variant]"><slot /></button>
-    <RouterLink v-else :to="props.href" class="rounded-xl px-8 border-[0.5px] border-white/40 inline-flex items-center gap-3" :class="[variantStyles[props.variant], sizes[props.size]]" :style="bgStyles[props.variant]"><slot /></RouterLink>
+    <NuxtLink v-else :to="props.href" class="rounded-xl px-8 border-[0.5px] border-white/40 inline-flex items-center gap-3" :class="[variantStyles[props.variant], sizes[props.size]]" :style="bgStyles[props.variant]"><slot /></NuxtLink>
 </template>
