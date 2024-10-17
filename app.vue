@@ -5,7 +5,7 @@ const appConfig = useAppConfig()
 
 <template>
   <PageNavigation />
-  <main>
+  <main class="h-screen">
     <NuxtPage />
   </main>
   <FooterPage />
