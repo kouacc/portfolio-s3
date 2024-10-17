@@ -7,7 +7,9 @@
     "dev": "nuxt dev",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
-    "postinstall": "nuxt prepare"
+    "postinstall": "nuxt prepare",
+    "studio": "npx drizzle-kit studio",
+    "db:push": "npx drizzle-kit push"
   },
   "dependencies": {
     "@nuxt/fonts": "^0.10.0",
