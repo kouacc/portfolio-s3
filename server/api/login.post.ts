@@ -1,6 +1,7 @@
 import { db } from '../utils/orm';
 import { userTable } from "~/database/schema";
 import { eq } from '../utils/orm';
+import { generateJWT } from '../utils/jwt';
 import crypto from 'crypto'
 
 export default defineEventHandler(async (event) => {
@@ -22,7 +23,10 @@ export default defineEventHandler(async (event) => {
     const hash = crypto.pbkdf2Sync(password, user.salt, 310000, 32, 'sha256')
 
     if (Buffer.compare(hash, Buffer.from(user.password_hash)) === 0) {
-        
+        const token = generateJWT(user.id, user.username)
+        const cookie = setCookie(event, 'token', token)
+        // return cookie
+        return cookie
     } else {
         return {
             "status": 401,

@@ -1,4 +1,4 @@
-import { sqliteTable, text, integer } from "drizzle-orm/sqlite-core";
+import { sqliteTable, text, integer, blob } from "drizzle-orm/sqlite-core";
 import { sql, type InferSelectModel } from "drizzle-orm";
 
 export const projectTable = sqliteTable("projects", {
@@ -26,8 +26,8 @@ export const projectTable = sqliteTable("projects", {
 export const userTable = sqliteTable("users", {
   id: integer("id").primaryKey(),
   username: text("username").notNull(),
-  password_hash: text("password_hash").notNull(),
-  salt: text("salt").notNull(),
+  password_hash: blob("password_hash", { mode: 'buffer'}).notNull(),
+  salt: blob("salt", { mode: 'buffer'}).notNull(),
   created_at: text("created_at")
     .notNull()
     .default(sql`(CURRENT_TIMESTAMP)`),
@@ -35,6 +35,17 @@ export const userTable = sqliteTable("users", {
     .notNull()
     .default(sql`(CURRENT_TIMESTAMP)`),
 });
+
+export const contactTable = sqliteTable("contact_forms", {
+  id: integer("id").primaryKey({ autoIncrement: true }),
+  name: text("name").notNull(),
+  surname: text("surname").notNull(),
+  email: text("email").notNull(),
+  message: text("message").notNull(),
+  created_at: text("created_at")
+    .notNull()
+    .default(sql`(CURRENT_TIMESTAMP)`),
+})
 
 export type Project = InferSelectModel<typeof projectTable>;
 export type User = InferSelectModel<typeof userTable>;
