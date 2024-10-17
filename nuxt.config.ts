@@ -11,9 +11,9 @@ export default defineNuxtConfig({
     },
   },
 
-  experimental: {
+  /* experimental: {
     viewTransition: true
-  },
+  }, */
 
   runtimeConfig: {
     JWT_SECRET: '',
