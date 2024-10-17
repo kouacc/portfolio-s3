@@ -9,6 +9,9 @@ useHead({
   },
   title: 'Gestion - Maxence Lallemand'
 })
+
+const submitForm = async () => {
+}
 </script>
 
 <template>
