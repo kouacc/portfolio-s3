@@ -23,7 +23,7 @@ export default defineEventHandler(async (event) => {
     const hash = crypto.pbkdf2Sync(password, user.salt, 310000, 32, 'sha256')
 
     if (Buffer.compare(hash, Buffer.from(user.password_hash)) === 0) {
-        const token = generateJWT(user.id, user.username)
+        const token = generateJWT(user.id, user.username, user.name)
         const cookie = setCookie(event, 'token', token)
         // return cookie
         return cookie

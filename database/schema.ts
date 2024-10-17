@@ -26,6 +26,7 @@ export const projectTable = sqliteTable("projects", {
 export const userTable = sqliteTable("users", {
   id: integer("id").primaryKey(),
   username: text("username").notNull(),
+  name: text('name').notNull(),
   password_hash: blob("password_hash", { mode: 'buffer'}).notNull(),
   salt: blob("salt", { mode: 'buffer'}).notNull(),
   created_at: text("created_at")

@@ -14,7 +14,6 @@ const submitForm = async (event: Event) => {
         body: new FormData(event.target as HTMLFormElement)
 
     })
-    console.log(data.value)
 }
 
 const form = ref({
