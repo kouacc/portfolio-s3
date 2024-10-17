@@ -1,3 +1,5 @@
+import { verifyJWT } from "~/utils/jwt";
+
 export default defineEventHandler(async (event) => {
   // read the authorization header
   const authorization = event.headers.get("Authorization");
