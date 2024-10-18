@@ -61,54 +61,54 @@ useHead({
             <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-20 text-fill dark:text-fill_dark">
                 <section class="flex flex-col gap-5">
                     <h3 class="font-geist text-base">Intégration</h3>
-                    <ul class="grid grid-cols-2 gap-2 w-fit">
-                        <li class="w-fit h-fit"><Icon class="fill-fill dark:fill-fill_dark" size="48" name="simple-icons:html5" /></li>
-                        <li class="w-fit h-fit"><Icon class="fill-fill dark:fill-fill_dark" size="48" name="simple-icons:css3" /></li>
-                        <li class="w-fit h-fit"><Icon class="fill-fill dark:fill-fill_dark" size="48" name="simple-icons:tailwindcss" /></li>
+                    <ul class="grid grid-cols-2 gap-y-4 gap-x-8 group">
+                        <li class="w-fit h-fit group-has-[:hover]:blur-sm hover:!blur-none transition-all"><IconTooltip class="fill-fill dark:fill-fill_dark" size="48" name="simple-icons:html5"></IconTooltip></li>
+                        <li class="w-fit h-fit group-has-[:hover]:blur-sm hover:!blur-none transition-all"><IconTooltip class="fill-fill dark:fill-fill_dark" size="48" name="simple-icons:css3"></IconTooltip></li>
+                        <li class="w-fit h-fit group-has-[:hover]:blur-sm hover:!blur-none transition-all"><IconTooltip class="fill-fill dark:fill-fill_dark" size="48" name="simple-icons:tailwindcss"></IconTooltip></li>
                     </ul>
                 </section>
                 <section class="flex flex-col gap-5 w-fit">
                     <h3 class="font-geist text-base">Frontend</h3>
-                    <ul class="grid grid-cols-2 gap-y-4 gap-x-8">
-                        <li class="w-fit h-fit"><Icon class="fill-fill dark:fill-fill_dark" size="48" name="simple-icons:javascript" /></li>
-                        <li class="w-fit h-fit"><Icon class="fill-fill dark:fill-fill_dark" size="48" name="simple-icons:typescript" /></li>
-                        <li class="w-fit h-fit"><Icon class="fill-fill dark:fill-fill_dark" size="48" name="simple-icons:alpinedotjs" /></li>
-                        <li class="w-fit h-fit"><Icon class="fill-fill dark:fill-fill_dark" size="48" name="simple-icons:astro" /></li>
-                        <li class="w-fit h-fit"><Icon class="fill-fill dark:fill-fill_dark" size="48" name="simple-icons:vuedotjs" /></li>
-                        <li class="w-fit h-fit"><Icon class="fill-fill dark:fill-fill_dark" size="48" name="simple-icons:wordpress" /></li>
-                        <li class="w-fit h-fit"><Icon class="fill-fill dark:fill-fill_dark" size="48" name="simple-icons:expo" /></li>
-                        <li class="w-fit h-fit"><Icon class="fill-fill dark:fill-fill_dark" size="48" name="simple-icons:react" /></li>
-                        <li class="w-fit h-fit"><Icon class="fill-fill dark:fill-fill_dark" size="48" name="simple-icons:blazor" /></li>
+                    <ul class="grid grid-cols-2 gap-y-4 gap-x-8 group">
+                        <li class="w-fit h-fit group-has-[:hover]:blur-sm hover:!blur-none transition-all"><IconTooltip class="fill-fill dark:fill-fill_dark" size="48" name="simple-icons:javascript"></IconTooltip></li>
+                        <li class="w-fit h-fit group-has-[:hover]:blur-sm hover:!blur-none transition-all"><IconTooltip class="fill-fill dark:fill-fill_dark" size="48" name="simple-icons:typescript"></IconTooltip></li>
+                        <li class="w-fit h-fit group-has-[:hover]:blur-sm hover:!blur-none transition-all"><IconTooltip class="fill-fill dark:fill-fill_dark" size="48" name="simple-icons:alpinedotjs"></IconTooltip></li>
+                        <li class="w-fit h-fit group-has-[:hover]:blur-sm hover:!blur-none transition-all"><IconTooltip class="fill-fill dark:fill-fill_dark" size="48" name="simple-icons:astro"></IconTooltip></li>
+                        <li class="w-fit h-fit group-has-[:hover]:blur-sm hover:!blur-none transition-all"><IconTooltip class="fill-fill dark:fill-fill_dark" size="48" name="simple-icons:vuedotjs"></IconTooltip></li>
+                        <li class="w-fit h-fit group-has-[:hover]:blur-sm hover:!blur-none transition-all"><IconTooltip class="fill-fill dark:fill-fill_dark" size="48" name="simple-icons:wordpress"></IconTooltip></li>
+                        <li class="w-fit h-fit group-has-[:hover]:blur-sm hover:!blur-none transition-all"><IconTooltip class="fill-fill dark:fill-fill_dark" size="48" name="simple-icons:expo"></IconTooltip></li>
+                        <li class="w-fit h-fit group-has-[:hover]:blur-sm hover:!blur-none transition-all"><IconTooltip class="fill-fill dark:fill-fill_dark" size="48" name="simple-icons:react"></IconTooltip></li>
+                        <li class="w-fit h-fit group-has-[:hover]:blur-sm hover:!blur-none transition-all"><IconTooltip class="fill-fill dark:fill-fill_dark" size="48" name="simple-icons:blazor"></IconTooltip></li>
                     </ul>
                 </section>
                 <section class="flex flex-col gap-5 w-fit">
                     <h3 class="font-geist text-base">Backend</h3>
-                    <ul class="grid grid-cols-2 gap-y-4 gap-x-8">
-                        <li class="w-fit h-fit"><Icon class="fill-fill dark:fill-fill_dark" size="48" name="simple-icons:pocketbase" /></li>
-                        <li class="w-fit h-fit"><Icon class="fill-fill dark:fill-fill_dark" size="48" name="simple-icons:express" /></li>
-                        <li class="w-fit h-fit"><Icon class="fill-fill dark:fill-fill_dark" size="48" name="simple-icons:flask" /></li>
-                        <li class="w-fit h-fit"><Icon class="fill-fill dark:fill-fill_dark" size="48" name="simple-icons:gin" /></li>
-                        <li class="w-fit h-fit"><Icon class="fill-fill dark:fill-fill_dark" size="48" name="simple-icons:postgresql" /></li>
+                    <ul class="grid grid-cols-2 gap-y-4 gap-x-8 group">
+                        <li class="w-fit h-fit group-has-[:hover]:blur-sm hover:!blur-none transition-all"><IconTooltip class="fill-fill dark:fill-fill_dark" size="48" name="simple-icons:pocketbase"></IconTooltip></li>
+                        <li class="w-fit h-fit group-has-[:hover]:blur-sm hover:!blur-none transition-all"><IconTooltip class="fill-fill dark:fill-fill_dark" size="48" name="simple-icons:express"></IconTooltip></li>
+                        <li class="w-fit h-fit group-has-[:hover]:blur-sm hover:!blur-none transition-all"><IconTooltip class="fill-fill dark:fill-fill_dark" size="48" name="simple-icons:flask"></IconTooltip></li>
+                        <li class="w-fit h-fit group-has-[:hover]:blur-sm hover:!blur-none transition-all"><IconTooltip class="fill-fill dark:fill-fill_dark" size="48" name="simple-icons:gin"></IconTooltip></li>
+                        <li class="w-fit h-fit group-has-[:hover]:blur-sm hover:!blur-none transition-all"><IconTooltip class="fill-fill dark:fill-fill_dark" size="48" name="simple-icons:postgresql"></IconTooltip></li>
                     </ul>
                 </section>
                 <section class="flex flex-col gap-5 w-fit">
                     <h3 class="font-geist text-base">Création</h3>
-                    <ul class="grid grid-cols-2 gap-y-4 gap-x-8">
-                        <li class="w-fit h-fit"><Icon class="fill-fill dark:fill-fill_dark" size="48" name="simple-icons:adobephotoshop" /></li>
-                        <li class="w-fit h-fit"><Icon class="fill-fill dark:fill-fill_dark" size="48" name="simple-icons:adobeillustrator" /></li>
-                        <li class="w-fit h-fit"><Icon class="fill-fill dark:fill-fill_dark" size="48" name="simple-icons:figma" /></li>
-                        <li class="w-fit h-fit"><Icon class="fill-fill dark:fill-fill_dark" size="48" name="simple-icons:davinciresolve" /></li>
-                        <li class="w-fit h-fit"><Icon class="fill-fill dark:fill-fill_dark" size="48" name="simple-icons:adobeindesign" /></li>
+                    <ul class="grid grid-cols-2 gap-y-4 gap-x-8 group">
+                        <li class="w-fit h-fit group-has-[:hover]:blur-sm hover:!blur-none transition-all"><IconTooltip class="fill-fill dark:fill-fill_dark" size="48" name="simple-icons:adobephotoshop"></IconTooltip></li>
+                        <li class="w-fit h-fit group-has-[:hover]:blur-sm hover:!blur-none transition-all"><IconTooltip class="fill-fill dark:fill-fill_dark" size="48" name="simple-icons:adobeillustrator"></IconTooltip></li>
+                        <li class="w-fit h-fit group-has-[:hover]:blur-sm hover:!blur-none transition-all"><IconTooltip class="fill-fill dark:fill-fill_dark" size="48" name="simple-icons:figma"></IconTooltip></li>
+                        <li class="w-fit h-fit group-has-[:hover]:blur-sm hover:!blur-none transition-all"><IconTooltip class="fill-fill dark:fill-fill_dark" size="48" name="simple-icons:davinciresolve"></IconTooltip></li>
+                        <li class="w-fit h-fit group-has-[:hover]:blur-sm hover:!blur-none transition-all"><IconTooltip class="fill-fill dark:fill-fill_dark" size="48" name="simple-icons:adobeindesign"></IconTooltip></li>
                     </ul>
                 </section>
                 <section class="flex flex-col gap-5 w-fit">
                     <h3 class="font-geist text-base">Autres</h3>
-                    <ul class="grid grid-cols-2 gap-y-4 gap-x-8">
-                        <li class="w-fit h-fit"><Icon class="fill-fill dark:fill-fill_dark" size="48" name="simple-icons:nodedotjs" /></li>
-                        <li class="w-fit h-fit"><Icon class="fill-fill dark:fill-fill_dark" size="48" name="simple-icons:python" /></li>
-                        <li class="w-fit h-fit"><Icon class="fill-fill dark:fill-fill_dark" size="48" name="simple-icons:git" /></li>
-                        <li class="w-fit h-fit"><Icon class="fill-fill dark:fill-fill_dark" size="48" name="simple-icons:docker" /></li>
-                        <li class="w-fit h-fit"><Icon class="fill-fill dark:fill-fill_dark" size="48" name="simple-icons:go" /></li>
+                    <ul class="grid grid-cols-2 gap-y-4 gap-x-8 group">
+                        <li class="w-fit h-fit group-has-[:hover]:blur-sm hover:!blur-none transition-all"><IconTooltip class="fill-fill dark:fill-fill_dark" size="48" name="simple-icons:nodedotjs"></IconTooltip></li>
+                        <li class="w-fit h-fit group-has-[:hover]:blur-sm hover:!blur-none transition-all"><IconTooltip class="fill-fill dark:fill-fill_dark" size="48" name="simple-icons:python"></IconTooltip></li>
+                        <li class="w-fit h-fit group-has-[:hover]:blur-sm hover:!blur-none transition-all"><IconTooltip class="fill-fill dark:fill-fill_dark" size="48" name="simple-icons:git"></IconTooltip></li>
+                        <li class="w-fit h-fit group-has-[:hover]:blur-sm hover:!blur-none transition-all"><IconTooltip class="fill-fill dark:fill-fill_dark" size="48" name="simple-icons:docker"></IconTooltip></li>
+                        <li class="w-fit h-fit group-has-[:hover]:blur-sm hover:!blur-none transition-all"><IconTooltip class="fill-fill dark:fill-fill_dark" size="48" name="simple-icons:go"></IconTooltip></li>
                     </ul>
                 </section>
             </div>
