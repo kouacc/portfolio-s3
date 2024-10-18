@@ -64,6 +64,14 @@ const filteredTools = computed(() => {
   return tools.value.available;
 });
 
+function handleToolClick(slug: string) {
+  if (tools.value.selected.includes(slug)) {
+    tools.value.selected = tools.value.selected.filter(selected => selected !== slug);
+  } else {
+    tools.value.selected.push(slug);
+  }
+}
+
 const isSaved = ref<boolean>(true)
 const update = debounce((e) => {
   project.content = e.target.value
@@ -80,7 +88,7 @@ const output = computed(() => marked(project.content))
         <ul class="flex items-center gap-3 bg-primary dark:bg-primary_dark px-3 py-2 rounded-xl border border-secondary dark:border-secondary_dark">
             <li><button @click="settingsOverlay = true" class="inline-flex items-center"><IconTooltip name="fa6-solid:gear" size="24" class="mx-2 my-1.5"><span>Paramètres du projet</span></IconTooltip></button></li>
             <li><NuxtLink class="inline-flex items-center cursor-pointer"><IconTooltip name="fa6-solid:expand" size="24" class="mx-2 my-1.5"><span>Aperçu</span></IconTooltip></NuxtLink></li>
-            <li><ActionButton variant="primary" href="/admin/editor"><span class="text-white">Créer le projet</span></ActionButton></li>
+            <li><ActionButton variant="primary" href="/admin/editor"><span class="text-white">{{ !route.params.id ? 'Créer le projet' : 'Modifier le projet' }}</span></ActionButton></li>
         </ul>
         <Icon v-if="isSaved" name="fa6-solid:circle-check" size="24" class="text-green-500"/>
         <Icon v-else name="lucide:hourglass" size="24" class="text-red-500"/>
@@ -116,23 +124,28 @@ const output = computed(() => marked(project.content))
           </label>
         </div>
       </div>
-      <div v-show="tools.isModalOpen" class="absolute w-2/5 h-[calc(100vh-16rem)] right-0 bottom-0 rounded-tl-xl bg-primary dark:bg-primary_dark p-8 space-y-5">
+      <div v-show="tools.isModalOpen" class="absolute w-2/5 h-[calc(100vh-6rem)] right-0 bottom-0 rounded-tl-xl bg-primary dark:bg-primary_dark p-8 space-y-5">
         <section class="flex justify-between items-center">
           <h2>Outils</h2>
-          <ActionButton variant="primary"><span>Valider</span></ActionButton>
+          <ActionButton variant="primary" @click="tools.isModalOpen = false"><span class="text-white">Valider</span></ActionButton>
         </section>
-        <input type="text" v-model="tools.searchfield" placeholder="Rechercher..." class="rounded-xl  text-fill dark:text-fill_dark px-5 py-2">
-        <section class="flex justify-between items-center">
-          <h3>Outils sélectionnés</h3>
-          <ActionButton variant="secondary"><Icon name="lucide:trash-2" size="24" /><span>Effacer tout</span></ActionButton>
-        </section>
+        <input type="text" v-model="tools.searchfield" placeholder="Rechercher..." class="w-full rounded-xl  text-fill dark:text-fill_dark px-5 py-2">
+        <div class="space-y-3">
+          <section class="flex justify-between items-center">
+            <h3>Outils sélectionnés</h3>
+            <ActionButton variant="secondary" @click="tools.selected = []"><Icon name="lucide:trash-2" size="24" class="text-white" /><span class="text-white">Effacer tout</span></ActionButton>
+          </section>
+          <ul class="flex gap-4">
+            <li v-for="icon in tools.selected" :key="icon"><Icon :name="`simple-icons:${icon}`" size="36"/></li>
+          </ul>
+        </div>
         <div class="space-y-2">
           <div class="flex justify-between">
             <span>Alimenté par <NuxtLink class="underline" to="https://simpleicons.org/">Simple Icons</NuxtLink></span>
             <span>{{ filteredTools.length }} icônes</span>
           </div>
           <ul>
-            <li v-for="icon in paginatedTools" :key="icon.title" @click="tools.selected.push(icon.slug)" class="flex justify-between items-center px-2 py-1.5 first:rounded-t-xl last:rounded-b-xl bg-secondary dark:bg-secondary_dark border border-primary dark:border-primary_dark" :class="{ '!bg-gray-200' : tools.selected.includes(icon.slug)}">
+            <li v-for="icon in paginatedTools" :key="icon.title" @click="handleToolClick(icon.slug)" class="flex justify-between items-center px-2 py-1.5 first:rounded-t-xl last:rounded-b-xl bg-secondary dark:bg-secondary_dark border border-primary dark:border-primary_dark" :class="{ '!bg-gray-200' : tools.selected.includes(icon.slug)}">
               <span>{{ icon.title }}</span>
             </li>
           </ul>
