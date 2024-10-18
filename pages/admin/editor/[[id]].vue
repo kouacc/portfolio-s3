@@ -3,6 +3,7 @@ import { debounce } from 'lodash-es'
 import { marked } from 'marked'
 import { useStorage } from '@vueuse/core';
 import type { Project } from '~/database/schema';
+import icons from '~/assets/icons.json'
 const route = useRoute('/admin/editor/:id')
 
 useHead({
@@ -41,6 +42,27 @@ if (route.params.id) {
 }
 
 const settingsOverlay = ref<boolean>(false)
+const tools = ref({
+  isModalOpen: false,
+  available: icons.icons.map(icon => ({ title: icon.title, slug: icon.slug })),
+  selected: [] as string[],
+  searchfield: '',
+  pages_count: Math.ceil(icons.icons.length / 10),
+  selected_page: 1,
+})
+
+const paginatedTools = computed(() => {
+  const start = (tools.value.selected_page - 1) * 10;
+  const end = start + 10;
+  return filteredTools.value.slice(start, end);
+});
+
+const filteredTools = computed(() => {
+  if (tools.value.searchfield) {
+    return tools.value.available.filter(icon => icon.title.toLowerCase().includes(tools.value.searchfield.toLowerCase()));
+  }
+  return tools.value.available;
+});
 
 const isSaved = ref<boolean>(true)
 const update = debounce((e) => {
@@ -85,7 +107,7 @@ const output = computed(() => marked(project.content))
             </label>
             <label class="flex flex-1 flex-col gap-5">
               <span>Outils</span>
-              <button class="bg-secondary dark:bg-secondary_dark text-fill dark:text-fill_dark rounded-xl px-5 py-2">Sélectionner</button>
+              <button @click="tools.isModalOpen = true" class="bg-secondary dark:bg-secondary_dark text-fill dark:text-fill_dark rounded-xl px-5 py-2">Sélectionner</button>
             </label>
           </div>
           <label class="flex flex-col gap-5">
@@ -94,8 +116,33 @@ const output = computed(() => marked(project.content))
           </label>
         </div>
       </div>
-      <div class="absolute w-2/5 h-[calc(100vh-16rem)] right-0 bottom-0 rounded-tl-xl bg-primary dark:bg-primary_dark p-8">
-        <h2>Outils</h2>
+      <div v-show="tools.isModalOpen" class="absolute w-2/5 h-[calc(100vh-16rem)] right-0 bottom-0 rounded-tl-xl bg-primary dark:bg-primary_dark p-8 space-y-5">
+        <section class="flex justify-between items-center">
+          <h2>Outils</h2>
+          <ActionButton variant="primary"><span>Valider</span></ActionButton>
+        </section>
+        <input type="text" v-model="tools.searchfield" placeholder="Rechercher..." class="rounded-xl  text-fill dark:text-fill_dark px-5 py-2">
+        <section class="flex justify-between items-center">
+          <h3>Outils sélectionnés</h3>
+          <ActionButton variant="secondary"><Icon name="lucide:trash-2" size="24" /><span>Effacer tout</span></ActionButton>
+        </section>
+        <div class="space-y-2">
+          <div class="flex justify-between">
+            <span>Alimenté par <NuxtLink class="underline" to="https://simpleicons.org/">Simple Icons</NuxtLink></span>
+            <span>{{ filteredTools.length }} icônes</span>
+          </div>
+          <ul>
+            <li v-for="icon in paginatedTools" :key="icon.title" @click="tools.selected.push(icon.slug)" class="flex justify-between items-center px-2 py-1.5 first:rounded-t-xl last:rounded-b-xl bg-secondary dark:bg-secondary_dark border border-primary dark:border-primary_dark" :class="{ '!bg-gray-200' : tools.selected.includes(icon.slug)}">
+              <span>{{ icon.title }}</span>
+            </li>
+          </ul>
+          <div class="flex justify-between items-center">
+            <span>Page {{ tools.selected_page }} sur {{ Math.ceil(filteredTools.length / 10) }}</span>
+            <div class="flex justify-center gap-10">
+              <button class="flex border border-secondary dark:border-secondary_dark rounded-xl bg-primary dark:bg-primary_dark disabled:bg-black/30 p-2" @click="tools.selected_page = Math.max(tools.selected_page - 1, 1)" :disabled="tools.selected_page === 1"><Icon name="lucide:chevron-left" size="24"/></button><button class="flex border border-secondary dark:border-secondary_dark rounded-xl bg-primary dark:bg-primary_dark disabled:bg-black/30 p-2" @click="tools.selected_page = Math.min(tools.selected_page + 1, Math.ceil(filteredTools.length / 10))" :disabled="tools.selected_page === Math.ceil(filteredTools.length / 10)"><Icon name="lucide:chevron-right" size="24"/></button>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
 </template>
