@@ -1,7 +1,7 @@
 <script setup lang="ts">
-definePageMeta({
+/* definePageMeta({
   middleware: ['auth']
-})
+}) */
 
 useHead({
   bodyAttrs: {
@@ -52,7 +52,7 @@ const token = await useFetch<JWT>('/api/protected/decode', {
           <div class="inline-flex items-center gap-6">
             <span class="font-geist text-base">Ajouté le : {{ formatDate(projet.created_at) }}</span>
             <div class="inline-flex items-center gap-5">
-              <NuxtLink to="/admin/editor"><Icon name="lucide:square-pen" size="24" /></NuxtLink>
+              <NuxtLink :to="{ name: 'admin-editor-id', params: { id: projet.id} }"><Icon name="lucide:square-pen" size="24" /></NuxtLink>
               <button><Icon name="lucide:trash-2" size="24" class="text-red-500" /></button>    
             </div>
           </div>

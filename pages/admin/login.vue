@@ -23,9 +23,9 @@ const form = ref({
 </script>
 
 <template>
-    <div class="container py-24">
+    <div class="container py-24 h-screen">
         <h1>Gestion du site</h1>
-        <form @submit="submitForm" class="flex flex-col">
+        <form @submit="submitForm" class="flex flex-col gap-10">
             <input type="text" name="username" id="" required v-model="form.username">
             <input type="password" name="password" id="" required v-model="form.password">
             <input type="submit" value="Connexion">
