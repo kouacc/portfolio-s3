@@ -1,6 +1,6 @@
 <script setup lang="ts">
 definePageMeta({
-  middleware: 'auth'
+  middleware: ['auth']
 })
 
 useHead({
@@ -11,10 +11,17 @@ useHead({
 })
 
 interface JWT {
-  id: Number,
-  username: String,
-  name: String,
-  iat: Number,
+  payload: {
+    exp: number,
+    iat: number,
+    id: number,
+    name: string,
+    username: string
+  },
+  protectedHeader: {
+    alg: string,
+  }
+
 }
 
 const cookie = useCookie<string>('token')
@@ -32,7 +39,7 @@ const token = await useFetch<JWT>('/api/protected/decode', {
 <template>
   <div class="container pt-32 pb-64 space-y-16">
     <div class="dot-grid px-3 py-5 w-fit">
-      <h1>Bienvenue, {{ token.data.value?.name }} !</h1>
+      <h1>Bienvenue, {{ token.data.value?.payload.name }} !</h1>
     </div>
     <div class="space-y-8">
       <section class="flex justify-between items-center">
