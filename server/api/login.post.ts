@@ -25,6 +25,27 @@ export default defineEventHandler(async (event) => {
   if (Buffer.compare(hash, Buffer.from(user.password_hash)) === 0) {
     const token = await generateJWT(user.id, user.username, user.name);
     const cookie = setCookie(event, "token", token);
+
+    //send status to webhook
+    await $fetch(process.env.DISCORD_WEBHOOK as string, {
+      method: "POST",
+      body: {
+        username: "Portfolio",
+        embeds: [
+          {
+            title: "Nouvelle connexion",
+            type: "rich",
+            description: `Username utilisé : ${username}\n`,
+            color: 0x00ff00,
+            footer: {
+              text: "Portfolio",
+            },
+            timestamp: new Date(),
+          },
+        ],
+      },
+    });
+
     // return cookie
     return cookie;
   } else {
