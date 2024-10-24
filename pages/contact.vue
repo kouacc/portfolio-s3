@@ -6,12 +6,17 @@ useHead({
 })
 
 const submitForm = async (event: Event) => {
-    alert('Message envoyé !')
-    await $fetch('/api/contact', {
+    try {
+        event.preventDefault()
+        await $fetch('/api/contact', {
         method: 'POST',
-        body: new FormData(event.target as HTMLFormElement)
-
-    })
+        body: new FormData(event.target as HTMLFormElement)  
+        })
+        alert('Message envoyé !')
+} catch (error) {
+        console.error(error)
+    }
+    
 }
 </script>
 
@@ -21,19 +26,19 @@ const submitForm = async (event: Event) => {
         <form @submit="submitForm" method="post" enctype="multipart/form-data" class="flex flex-col gap-5">
             <label class="flex flex-col gap-2.5">
                 <span class="text-fill dark:text-fill_dark">Nom</span>
-                <input class="rounded-xl bg-primary dark:bg-primary_dark border-secondary dark:border-secondary_dark" type="text">
+                <input class="rounded-xl bg-primary dark:bg-primary_dark border-secondary dark:border-secondary_dark" type="text" name="name">
             </label>
             <label class="flex flex-col gap-2.5">
                 <span class="text-fill dark:text-fill_dark">Prénom</span>
-                <input class="rounded-xl bg-primary dark:bg-primary_dark border-secondary dark:border-secondary_dark" type="text">
+                <input class="rounded-xl bg-primary dark:bg-primary_dark border-secondary dark:border-secondary_dark" type="text" name="surname">
             </label>
             <label class="flex flex-col gap-2.5">
                 <span class="text-fill dark:text-fill_dark">Adresse e-mail</span>
-                <input class="rounded-xl bg-primary dark:bg-primary_dark border-secondary dark:border-secondary_dark" type="email">
+                <input class="rounded-xl bg-primary dark:bg-primary_dark border-secondary dark:border-secondary_dark" type="email" name="email">
             </label>
             <label class="flex flex-col gap-2.5">
                 <span class="text-fill dark:text-fill_dark">Message</span>
-                <textarea class="rounded-xl bg-primary dark:bg-primary_dark border-secondary dark:border-secondary_dark" />
+                <textarea class="rounded-xl bg-primary dark:bg-primary_dark border-secondary dark:border-secondary_dark" name="message" />
             </label>
             <input type="submit" class="text-fill dark:text-fill_dark" value="Envoyer">
         </form>

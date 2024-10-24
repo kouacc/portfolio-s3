@@ -1,5 +1,5 @@
 import { sqliteTable, text, integer, blob } from "drizzle-orm/sqlite-core";
-import { sql, type InferSelectModel } from "drizzle-orm";
+import { sql, type InferInsertModel, type InferSelectModel } from "drizzle-orm";
 
 export const projectTable = sqliteTable("projects", {
   id: integer("id").primaryKey({ autoIncrement: true }),
@@ -50,4 +50,6 @@ export const contactTable = sqliteTable("contact_forms", {
 
 export type Project = InferSelectModel<typeof projectTable>;
 export type User = InferSelectModel<typeof userTable>;
+export type Contact = InferInsertModel<typeof contactTable>;
+export type ContactSelect = InferSelectModel<typeof contactTable>;
 
