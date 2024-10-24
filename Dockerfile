@@ -4,6 +4,13 @@ FROM node:latest
 WORKDIR /
 COPY . .
 RUN npm install
+
+# Generate database.db file in /database
+RUN touch database/database.db
+
+# Run Database migrations
+RUN npx drizzle-kit pull
+
 RUN npm run build
 
 # Remove everything except .output
