@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { debounce } from 'lodash-es'
 import { marked } from 'marked'
-import { useStorage } from '@vueuse/core';
+import { onClickOutside } from '@vueuse/core';
 import type { Project } from '~/database/schema';
 import icons from '~/assets/icons.json'
 const route = useRoute('/admin/editor/:id')
@@ -99,6 +99,11 @@ const update = debounce((e) => {
 }, 100)
 const output = computed(() => marked(project.content))
 
+const settings = ref(null)
+
+onClickOutside(settings, () => {
+  settingsOverlay.value = false
+})
 </script>
 
 <template>
@@ -116,7 +121,7 @@ const output = computed(() => marked(project.content))
     </nav>
     <Transition>
     <div v-show="settingsOverlay" class="w-screen h-screen absolute z-50 top-0 bg-black/60 transition-all">
-      <div class="bg-primary dark:bg-primary_dark absolute bottom-0 w-1/2 h-[calc(100vh-6rem)] p-8 rounded-r-xl space-y-6">
+      <div ref="settings" class="bg-primary dark:bg-primary_dark absolute bottom-0 w-1/2 h-[calc(100vh-6rem)] p-8 rounded-r-xl space-y-6">
         <section class="flex justify-between">
           <h2>Paramètres</h2>
           <button @click="settingsOverlay = false" class="flex p-2 rounded-xl transition-all hover:bg-white/10"><Icon name="lucide:x" size="32" /></button>
