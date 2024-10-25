@@ -35,14 +35,14 @@ const token = await useFetch<JWT>('/api/protected/decode', {
   } 
 })
 
-async function exportContact() {
-  const { data } = await useFetch('/api/protected/exportContact', {
-  onRequest({ request, options }) {
-    if (cookie.value) {
-      options.headers.set('Authorization', cookie.value)
-    }
-  } 
-})
+async function exportData(table: "Projects" | "Contact") {
+  const { data } = await useFetch(`/api/protected/export${table}`, {
+    onRequest({ request, options }) {
+      if (cookie.value) {
+        options.headers.set('Authorization', cookie.value)
+      }
+    } 
+  })
   // convert data to blob
   if (data.value) {
     const blob = new Blob([JSON.stringify(data.value)], { type: 'text/json' })
@@ -51,7 +51,7 @@ async function exportContact() {
     const url = window.URL.createObjectURL(blob)
     const a = document.createElement('a')
     a.href = url
-    a.download = `contact-${date}.json`
+    a.download = `${table.toLowerCase()}-${date}.json`
     a.click()
 
     setTimeout(() => {
@@ -94,8 +94,8 @@ async function exportContact() {
       <ul class="flex flex-wrap items-center justify-between">
         <li><ActionButton variant="secondary"><span class="text-white">Logs backend</span><Icon name="lucide:logs" size="24" class="text-white"/></ActionButton></li>
         <li><ActionButton variant="secondary"><span class="text-white">Analytics</span><Icon name="lucide:chart-line" size="24" class="text-white"/></ActionButton></li>
-        <li><ActionButton variant="secondary"><span class="text-white">Exporter projets</span><Icon name="lucide:file-symlink" size="24" class="text-white"/></ActionButton></li>
-        <li><ActionButton variant="secondary" @click="exportContact()"><span class="text-white">Exporter contact</span><Icon name="lucide:rectangle-ellipsis" size="24" class="text-white"/></ActionButton></li>
+        <li><ActionButton variant="secondary" @click="exportData('Projects')"><span class="text-white">Exporter projets</span><Icon name="lucide:file-symlink" size="24" class="text-white"/></ActionButton></li>
+        <li><ActionButton variant="secondary" @click="exportData('Contact')"><span class="text-white">Exporter contact</span><Icon name="lucide:rectangle-ellipsis" size="24" class="text-white"/></ActionButton></li>
         <li><ActionButton variant="secondary"><span class="text-red-500">Changer le mot de passe</span><Icon name="lucide:key-round" size="24" class="text-red-500"/></ActionButton></li>
       </ul>
     </section>
