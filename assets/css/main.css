@@ -19,7 +19,7 @@
         @apply font-geist text-2xl md:text-3xl lg:text-5xl
     }
 
-    input[type="text"], input[type="password"], input[type="email"], textarea { 
+    input[type="text"], input[type="password"], input[type="email"], input[type="search"], textarea { 
         @apply bg-primary dark:bg-primary_dark border border-secondary dark:border-secondary_dark text-fill dark:text-fill_dark rounded-xl
     }
 

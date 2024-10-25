@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { debounce } from 'lodash-es'
 import { marked } from 'marked'
-import { onClickOutside } from '@vueuse/core';
+import { onClickOutside, useDraggable } from '@vueuse/core';
 import type { Project } from '~/database/schema';
 import icons from '~/assets/icons.json'
 const route = useRoute('/admin/editor/:id')
@@ -50,13 +50,13 @@ const tools = ref({
   available: icons.icons.map(icon => ({ title: icon.title, slug: icon.slug })),
   selected: [] as string[],
   searchfield: '',
-  pages_count: Math.ceil(icons.icons.length / 10),
+  pages_count: Math.ceil(icons.icons.length / 15),
   selected_page: 1,
 })
 
 const paginatedTools = computed(() => {
-  const start = (tools.value.selected_page - 1) * 10;
-  const end = start + 10;
+  const start = (tools.value.selected_page - 1) * 15;
+  const end = start + 15;
   return filteredTools.value.slice(start, end);
 });
 
@@ -99,11 +99,13 @@ const update = debounce((e) => {
 }, 100)
 const output = computed(() => marked(project.content))
 
-const settings = ref(null)
+const iconsWindow = ref<HTMLElement | null>(null)
 
-onClickOutside(settings, () => {
-  settingsOverlay.value = false
+
+const { x, y, style } = useDraggable(iconsWindow, {
+  initialValue: { x: 40, y: 40 },
 })
+
 </script>
 
 <template>
@@ -121,7 +123,7 @@ onClickOutside(settings, () => {
     </nav>
     <Transition>
     <div v-show="settingsOverlay" class="w-screen h-screen absolute z-50 top-0 bg-black/60 transition-all">
-      <div ref="settings" class="bg-primary dark:bg-primary_dark absolute bottom-0 w-1/2 h-[calc(100vh-6rem)] p-8 rounded-r-xl space-y-6">
+      <div class="bg-primary dark:bg-primary_dark absolute bottom-0 w-1/2 h-[calc(100vh-6rem)] p-8 rounded-r-xl space-y-6">
         <section class="flex justify-between">
           <h2>Paramètres</h2>
           <button @click="settingsOverlay = false" class="flex p-2 rounded-xl transition-all hover:bg-white/10"><Icon name="lucide:x" size="32" /></button>
@@ -157,35 +159,35 @@ onClickOutside(settings, () => {
           </ul>
         </div>
       </div>
-      <div v-show="tools.isModalOpen" class="absolute w-2/5 h-[calc(100vh-6rem)] right-0 bottom-0 rounded-tl-xl bg-primary dark:bg-primary_dark p-8 space-y-5">
+      <div ref="iconsWindow" :style="style" style="position: fixed" v-show="tools.isModalOpen" class="absolute w-2/5 h-fit right-0 bottom-0 rounded-tl-xl bg-primary dark:bg-primary_dark p-8 space-y-5">
         <section class="flex justify-between items-center">
           <h2>Outils</h2>
           <ActionButton variant="primary" @click="tools.isModalOpen = false"><span class="text-white">Valider</span></ActionButton>
         </section>
-        <input type="text" v-model="tools.searchfield" placeholder="Rechercher..." class="w-full rounded-xl  text-fill dark:text-fill_dark px-5 py-2">
+        <input type="search" v-model="tools.searchfield" placeholder="Rechercher..." class="w-full rounded-xl  text-fill dark:text-fill_dark px-5 py-2">
         <div class="space-y-3">
           <section class="flex justify-between items-center">
             <h3>Outils sélectionnés</h3>
             <ActionButton variant="secondary" @click="tools.selected = []"><Icon name="lucide:trash-2" size="24" class="text-white" /><span class="text-white">Effacer tout</span></ActionButton>
           </section>
-          <ul class="flex gap-4">
+          <TransitionGroup tag="ul" class="flex gap-4 flex-wrap">
             <li v-for="icon in tools.selected" :key="icon"><Icon :name="`simple-icons:${icon}`" size="36"/></li>
-          </ul>
+          </TransitionGroup>
         </div>
         <div class="space-y-2">
           <div class="flex justify-between">
             <span>Alimenté par <NuxtLink class="underline" to="https://simpleicons.org/">Simple Icons</NuxtLink></span>
             <span>{{ filteredTools.length }} icônes</span>
           </div>
-          <ul>
-            <li v-for="icon in paginatedTools" :key="icon.title" @click="handleToolClick(icon.slug)" class="flex justify-between items-center px-2 py-1.5 first:rounded-t-xl last:rounded-b-xl bg-secondary dark:bg-secondary_dark border border-primary dark:border-primary_dark" :class="{ '!bg-gray-200' : tools.selected.includes(icon.slug)}">
-              <span>{{ icon.title }}</span>
+          <ul class="grid grid-cols-3 gap-1">
+            <li v-for="icon in paginatedTools" :key="icon.title" @click="handleToolClick(icon.slug)" class="w-full justify-between items-center px-2 py-1.5 rounded-xl bg-secondary dark:bg-secondary_dark border border-primary dark:border-primary_dark" :class="{ '!bg-gray-400' : tools.selected.includes(icon.slug)}">
+              <span class="line-clamp-1">{{ icon.title }}</span>
             </li>
           </ul>
           <div class="flex justify-between items-center">
-            <span>Page {{ tools.selected_page }} sur {{ Math.ceil(filteredTools.length / 10) }}</span>
+            <span>Page {{ tools.selected_page }} sur {{ Math.ceil(filteredTools.length / 15) }}</span>
             <div class="flex justify-center gap-10">
-              <button class="flex border border-secondary dark:border-secondary_dark rounded-xl bg-primary dark:bg-primary_dark disabled:bg-black/30 p-2" @click="tools.selected_page = Math.max(tools.selected_page - 1, 1)" :disabled="tools.selected_page === 1"><Icon name="lucide:chevron-left" size="24"/></button><button class="flex border border-secondary dark:border-secondary_dark rounded-xl bg-primary dark:bg-primary_dark disabled:bg-black/30 p-2" @click="tools.selected_page = Math.min(tools.selected_page + 1, Math.ceil(filteredTools.length / 10))" :disabled="tools.selected_page === Math.ceil(filteredTools.length / 10)"><Icon name="lucide:chevron-right" size="24"/></button>
+              <button class="flex border border-secondary dark:border-secondary_dark rounded-xl bg-primary dark:bg-primary_dark disabled:bg-black/30 p-2" @click="tools.selected_page = Math.max(tools.selected_page - 1, 1)" :disabled="tools.selected_page === 1"><Icon name="lucide:chevron-left" size="24"/></button><button class="flex border border-secondary dark:border-secondary_dark rounded-xl bg-primary dark:bg-primary_dark disabled:bg-black/30 p-2" @click="tools.selected_page = Math.min(tools.selected_page + 1, Math.ceil(filteredTools.length / 15))" :disabled="tools.selected_page === Math.ceil(filteredTools.length / 15)"><Icon name="lucide:chevron-right" size="24"/></button>
             </div>
           </div>
         </div>
@@ -193,3 +195,15 @@ onClickOutside(settings, () => {
     </div>
     </Transition>
 </template>
+
+<style>
+.v-enter-active,
+.v-leave-active {
+  transition: opacity 0.5s ease;
+}
+
+.v-enter-from,
+.v-leave-to {
+  opacity: 0;
+}
+</style>
