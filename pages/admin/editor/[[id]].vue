@@ -113,14 +113,14 @@ const { x, y, style } = useDraggable(iconsWindow, {
         <textarea class="w-full sm:w-1/2 h-1/2 sm:h-[calc(100vh-6rem)] p-10" name="" id="" v-model="project.content" @input="update"></textarea>
         <div class="w-full sm:w-1/2 h-1/2 sm:h-[calc(100vh-6rem)] p-10 prose dark:prose-invert" v-html="output"></div>
     </div>
-    <nav class="mb-16 fixed bottom-0 left-1/2 -translate-x-1/2 flex flex-row items-center gap-5">
-        <ul class="flex items-center gap-3 bg-primary dark:bg-primary_dark px-3 py-2 rounded-xl border border-secondary dark:border-secondary_dark">
+    <nav class="sm:mb-16 fixed bottom-0 sm:left-1/2 sm:-translate-x-1/2 flex flex-row items-center gap-5">
+        <ul class="w-screen sm:w-fit flex items-center justify-evenly gap-3 bg-primary dark:bg-primary_dark px-3 py-6 sm:py-2 sm:rounded-xl border border-secondary dark:border-secondary_dark">
             <li><button @click="settingsOverlay = true" class="inline-flex items-center transition-all rounded-lg hover:bg-white/10"><IconTooltip name="fa6-solid:gear" size="24" class="mx-2 my-1.5"><span>Paramètres du projet</span></IconTooltip></button></li>
             <li><NuxtLink class="inline-flex items-center cursor-pointer transition-all rounded-lg hover:bg-white/10"><IconTooltip name="fa6-solid:expand" size="24" class="mx-2 my-1.5"><span>Aperçu</span></IconTooltip></NuxtLink></li>
             <li><ActionButton variant="primary" href="/admin/editor"><span class="text-white">{{ !route.params.id ? 'Créer le projet' : 'Modifier le projet' }}</span></ActionButton></li>
         </ul>
-        <Icon v-if="isSaved" name="fa6-solid:circle-check" size="24" class="text-green-500"/>
-        <Icon v-else name="lucide:hourglass" size="24" class="text-red-500"/>
+        <Icon v-if="isSaved" name="fa6-solid:circle-check" size="24" class="hidden sm:block text-green-500"/>
+        <Icon v-else name="lucide:hourglass" size="24" class="hidden sm:block text-red-500"/>
     </nav>
     <Transition>
     <div v-show="settingsOverlay" class="w-screen h-screen absolute z-50 top-0 bg-black/60 transition-all">

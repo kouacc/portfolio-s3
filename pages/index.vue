@@ -11,10 +11,10 @@ useHead({
     <section class="space-y-24">
         <section class="dot-grid bg-blue-500 flex flex-col justify-center items-center pt-32 px-20 h-screen ">
         <div class="flex justify-center">
-            <h1 class="megazoid-text-title text-white text-4xl lg:text-8xl relative z-40 w-fit h-fit" style="-webkit-text-stroke-width: 7px;">Maxence Lallemand</h1>
-            <h1 class="megazoid-text-title text-sky-400 text-4xl lg:text-8xl relative z-30 w-fit h-fit" style="-webkit-text-stroke-width: 7px;">Maxence Lallemand</h1>
-            <h1 class="megazoid-text-title text-white text-4xl lg:text-8xl relative z-20 w-fit h-fit" style="-webkit-text-stroke-width: 7px;">Maxence Lallemand</h1>
-            <h1 class="megazoid-text-title text-sky-400 text-4xl lg:text-8xl relative z-10 w-fit h-fit" style="-webkit-text-stroke-width: 7px;">Maxence Lallemand</h1>
+            <h1 class="megazoid-text-title text-white text-4xl lg:text-8xl w-fit h-fit" style="-webkit-text-stroke-width: 7px;">Maxence Lallemand</h1>
+            <h1 class="megazoid-text-title text-sky-400 text-4xl lg:text-8xl w-fit h-fit" style="-webkit-text-stroke-width: 7px;">Maxence Lallemand</h1>
+            <h1 class="megazoid-text-title text-white text-4xl lg:text-8xl w-fit h-fit" style="-webkit-text-stroke-width: 7px;">Maxence Lallemand</h1>
+            <h1 class="megazoid-text-title text-sky-400 text-4xl lg:text-8xl w-fit h-fit" style="-webkit-text-stroke-width: 7px;">Maxence Lallemand</h1>
         </div>
         <h2 class="megazoid-text-title text-white text-5xl" style="-webkit-text-stroke-width: 4px;">Développeur web</h2>
         <div class="w-fit border-b-4 border-white p-3 flex gap-5">
@@ -55,7 +55,7 @@ useHead({
 </svg>
             </div>
         </div>
-        <hr class="col-start-2 col-span-10">
+        <hr class="col-start-2 col-span-10 border-[#878787]">
         <section class="col-start-1 col-span-full flex flex-col gap-11">
             <h2 class="home-h2">Compétences</h2>
             <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-20 text-fill dark:text-fill_dark">
@@ -117,13 +117,39 @@ useHead({
         </section>
         <section class="grid-start-1 col-span-full">
             <h2 class="home-h2">Mon parcours</h2>
-
+            <div>
+                    <ul class="relative top-16 flex flex-row justify-between">
+                        <li class="space-y-4 font-geistmono">
+                            <p class="font-geistmono">2023</p>
+                            <p>BUT MMI à Montbéliard, parcours Dev</p>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="88" height="87" viewBox="0 0 88 87" fill="none">
+                                <path d="M21.5409 43.3743C21.388 24.8787 0.866836 0.426377 0.866836 0.426377C0.866836 0.426377 25.3192 20.9476 43.8147 21.1004C62.3103 21.2533 86.4268 1.13348 86.4268 1.13348C86.4268 1.13348 64.1649 24.8588 64.3208 43.7278C64.4768 62.5969 87.1339 86.6934 87.1339 86.6934C87.1339 86.6934 61.6184 63.2166 42.0293 63.8627C23.9173 64.4601 1.57394 85.9863 1.57394 85.9863C1.57394 85.9863 21.6937 61.8698 21.5409 43.3743Z" fill="#38BDF8"/>
+                            </svg>
+                        </li>
+                        <li class="space-y-4 font-geistmono">
+                            <p class="font-geistmono">2023-2026</p>
+                            <p>BUT MMI à Montbéliard, parcours Dev</p>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="88" height="87" viewBox="0 0 88 87" fill="none">
+                                <path d="M21.5409 43.3743C21.388 24.8787 0.866836 0.426377 0.866836 0.426377C0.866836 0.426377 25.3192 20.9476 43.8147 21.1004C62.3103 21.2533 86.4268 1.13348 86.4268 1.13348C86.4268 1.13348 64.1649 24.8588 64.3208 43.7278C64.4768 62.5969 87.1339 86.6934 87.1339 86.6934C87.1339 86.6934 61.6184 63.2166 42.0293 63.8627C23.9173 64.4601 1.57394 85.9863 1.57394 85.9863C1.57394 85.9863 21.6937 61.8698 21.5409 43.3743Z" fill="#38BDF8"/>
+                            </svg>
+                        </li>
+                        <li class="space-y-4 font-geistmono">
+                            <p class="font-geistmono">?</p>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="88" height="87" viewBox="0 0 88 87" fill="none">
+                                <path d="M21.5409 43.3743C21.388 24.8787 0.866836 0.426377 0.866836 0.426377C0.866836 0.426377 25.3192 20.9476 43.8147 21.1004C62.3103 21.2533 86.4268 1.13348 86.4268 1.13348C86.4268 1.13348 64.1649 24.8588 64.3208 43.7278C64.4768 62.5969 87.1339 86.6934 87.1339 86.6934C87.1339 86.6934 61.6184 63.2166 42.0293 63.8627C23.9173 64.4601 1.57394 85.9863 1.57394 85.9863C1.57394 85.9863 21.6937 61.8698 21.5409 43.3743Z" fill="#38BDF8"/>
+                            </svg>
+                        </li>
+                    </ul>
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-full" viewBox="0 0 1303 45" fill="none">
+                    <path d="M1302.12 24.2412C1303.29 23.0696 1303.29 21.1701 1302.12 19.9986L1283.03 0.90667C1281.86 -0.264904 1279.96 -0.264904 1278.79 0.90667C1277.62 2.07824 1277.62 3.97774 1278.79 5.14931L1295.76 22.1199L1278.79 39.0904C1277.62 40.262 1277.62 42.1615 1278.79 43.3331C1279.96 44.5047 1281.86 44.5047 1283.03 43.3331L1302.12 24.2412ZM0 25.1199H1300V19.1199H0L0 25.1199Z" fill="white"/>
+                </svg>
+            </div>
         </section>
     </section>
     <section class="gradient-bg dark:gradient-bg-dark items-center h-[105vh] grid place-items-center">
         <div class="square-grid h-full"></div>
         <div class="grid w-full absolute">
-                <div class="place-self-center relative z-50 flex flex-col items-center gap-20 w-full">
+                <div class="place-self-center relative z-0 flex flex-col items-center gap-20 w-full">
                     <div class="flex flex-col gap-1 items-center w-fit">
                         <h1 class="font-geist text-[42px] lg:text-7xl text-fill dark:text-fill_dark">Et pourquoi pas...</h1>
                         <span class="font-departuremono text-sky-400 text-[42px] lg:text-7xl text-center">travailler ensemble ?</span>
