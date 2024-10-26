@@ -9,6 +9,8 @@ export default defineEventHandler(async (event) => {
   const username = formData.get("username") as string;
   const password = formData.get("password") as string;
 
+  const useragent = event.node.req.headers["user-agent"];
+
   const user = await db.query.userTable.findFirst({
     where: eq(userTable.username, username),
   });
@@ -35,10 +37,10 @@ export default defineEventHandler(async (event) => {
           {
             title: "Nouvelle connexion",
             type: "rich",
-            description: `Username utilisé : ${username}\n`,
+            description: `Username utilisé : ${username}\nUser-agent : ${useragent}`,
             color: 0x00ff00,
             footer: {
-              text: "Portfolio",
+              text: "Logs - Portfolio",
             },
             timestamp: new Date(),
           },
