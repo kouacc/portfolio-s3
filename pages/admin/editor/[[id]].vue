@@ -109,8 +109,9 @@ const { x, y, style } = useDraggable(iconsWindow, {
 </script>
 
 <template>
-    <div class="pt-24 flex flex-row">
-        <textarea class="w-1/2 h-[calc(100vh-6rem)] p-10" name="" id="" v-model="project.content" @input="update"></textarea><div class="w-1/2 h-[calc(100vh-6rem)] p-10 prose dark:prose-invert" v-html="output"></div>
+    <div class="pt-24 h-screen flex flex-col sm:flex-row">
+        <textarea class="w-full sm:w-1/2 h-1/2 sm:h-[calc(100vh-6rem)] p-10" name="" id="" v-model="project.content" @input="update"></textarea>
+        <div class="w-full sm:w-1/2 h-1/2 sm:h-[calc(100vh-6rem)] p-10 prose dark:prose-invert" v-html="output"></div>
     </div>
     <nav class="mb-16 fixed bottom-0 left-1/2 -translate-x-1/2 flex flex-row items-center gap-5">
         <ul class="flex items-center gap-3 bg-primary dark:bg-primary_dark px-3 py-2 rounded-xl border border-secondary dark:border-secondary_dark">
