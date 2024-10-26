@@ -76,10 +76,36 @@
         @apply lg:grid lg:grid-cols-12 lg:gap-8 lg:justify-center px-16
     }
 
-    
-
     .container {
       @apply max-w-screen-xl lg:px-10 md:px-7 sm:px-5 px-4 mx-auto;
+    }
+
+    .primary-bg {
+        @apply bg-primary dark:bg-primary_dark
+    }
+
+    .secondary-bg {
+        @apply bg-secondary dark:bg-secondary_dark
+    }
+
+    .tertiary-bg {
+        @apply bg-tertiary dark:bg-tertiary_dark
+    }
+
+    .primary-border {
+        @apply border-primary dark:border-primary_dark
+    }
+
+    .secondary-border {
+        @apply border-secondary dark:border-secondary_dark
+    }
+
+    .tertiary-border {
+        @apply border-tertiary dark:border-tertiary_dark
+    }
+
+    .fill-text {
+        @apply text-fill dark:text-fill_dark
     }
 }
 
