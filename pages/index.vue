@@ -9,42 +9,45 @@ useHead({
 
 <template>
   <section class="space-y-24">
-    <section
-      class="dot-grid bg-blue-500 flex flex-col justify-center items-center pt-32 px-20 h-screen"
+    <div
+      class="dot-grid-hero bg-blue-500 flex flex-col justify-evenly items-center pt-32 px-20 h-screen"
     >
-      <div class="flex justify-center">
+    <div class="w-full space-y-10 flex flex-col items-center">
+      <section class="flex justify-center relative w-full pb-24">
         <h1
-          class="megazoid-text-title text-white text-4xl lg:text-8xl w-fit h-fit"
+          class="megazoid-text-title text-sky-400 text-4xl lg:text-8xl h-fit absolute"
           style="-webkit-text-stroke-width: 15pt"
         >
           Maxence Lallemand
         </h1>
         <h1
-          class="megazoid-text-title text-sky-400 text-4xl lg:text-8xl w-fit h-fit"
+          class="megazoid-text-title text-white text-4xl lg:text-8xl h-fit absolute -top-5 -ml-8"
           style="-webkit-text-stroke-width: 15pt"
         >
           Maxence Lallemand
         </h1>
         <h1
-          class="megazoid-text-title text-white text-4xl lg:text-8xl w-fit h-fit"
+          class="megazoid-text-title text-sky-400 text-4xl lg:text-8xl h-fit absolute -top-10 -ml-16"
           style="-webkit-text-stroke-width: 15pt"
         >
           Maxence Lallemand
         </h1>
         <h1
-          class="megazoid-text-title text-sky-400 text-4xl lg:text-8xl w-fit h-fit"
+          class="megazoid-text-title text-white text-4xl lg:text-8xl h-fit absolute -top-[3.75rem] -ml-[6rem]"
           style="-webkit-text-stroke-width: 15pt"
         >
           Maxence Lallemand
         </h1>
-      </div>
+      </section>
+      
       <h2
         class="megazoid-text-title text-white text-5xl"
-        style="-webkit-text-stroke-width: 4px"
+        style="-webkit-text-stroke-width: 13pt"
       >
         Développeur web
       </h2>
-      <div class="w-fit border-b-4 border-white p-3 flex gap-5">
+    </div>
+      <div class="hidden w-fit border-b-2 border-white p-3 px-12 flex gap-5 place-content-end">
         <a href=""
           ><Icon name="simple-icons:linkedin" class="text-white" size="30"
         /></a>
@@ -56,10 +59,10 @@ useHead({
         /></a>
       </div>
       <span
-        class="hidden lg:inline-flex relative left-96 bottom-8 font-geistmono rotate-90 items-center text-white"
+        class="hidden lg:inline-flex absolute right-40 bottom-24 font-geistmono rotate-90 items-center text-white"
         >Scroll down<Icon name="lucide:chevron-right" size="24"
       /></span>
-    </section>
+    </div>
     <section class="base-grid">
       <section class="col-start-5 col-span-4">
         <h2 class="home-h2 font-geistmono text-gray-400">About Me.</h2>

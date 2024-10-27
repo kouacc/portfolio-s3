@@ -64,7 +64,7 @@ async function exportData(table: "Projects" | "Contact") {
 
 <template>
   <div class="container pt-32 pb-64 space-y-16">
-    <div class="dot-grid px-3 py-5 w-fit">
+    <div class="dot-grid dark:dot-grid-dark px-3 py-5 w-fit">
       <h1>Bienvenue, {{ token.data.value?.payload.name }} !</h1>
     </div>
     <div class="space-y-8">
