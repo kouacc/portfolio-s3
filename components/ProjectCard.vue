@@ -1,16 +1,10 @@
 <script setup lang="ts">
-const props = withDefaults(
-  defineProps<{
+const props = defineProps<{
     projectName: string;
     projectDate: string;
     projectImg: string;
-    size?: 'default' | 'large';
     href: string;
-  }>(),
-  {
-    size: 'default',
-  }
-);
+}>()
 
 
 </script>
