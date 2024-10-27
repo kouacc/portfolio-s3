@@ -23,7 +23,7 @@ const submitForm = async (event: Event) => {
   <div class="py-24 container">
     <h1
       class="megazoid-text-h1 text-white"
-      style="-webkit-text-stroke-width: 5px"
+      data-text="Contact"
     >
       Contact
     </h1>

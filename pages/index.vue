@@ -15,25 +15,25 @@ useHead({
       <div class="flex justify-center">
         <h1
           class="megazoid-text-title text-white text-4xl lg:text-8xl w-fit h-fit"
-          style="-webkit-text-stroke-width: 7px"
+          style="-webkit-text-stroke-width: 15pt"
         >
           Maxence Lallemand
         </h1>
         <h1
           class="megazoid-text-title text-sky-400 text-4xl lg:text-8xl w-fit h-fit"
-          style="-webkit-text-stroke-width: 7px"
+          style="-webkit-text-stroke-width: 15pt"
         >
           Maxence Lallemand
         </h1>
         <h1
           class="megazoid-text-title text-white text-4xl lg:text-8xl w-fit h-fit"
-          style="-webkit-text-stroke-width: 7px"
+          style="-webkit-text-stroke-width: 15pt"
         >
           Maxence Lallemand
         </h1>
         <h1
           class="megazoid-text-title text-sky-400 text-4xl lg:text-8xl w-fit h-fit"
-          style="-webkit-text-stroke-width: 7px"
+          style="-webkit-text-stroke-width: 15pt"
         >
           Maxence Lallemand
         </h1>

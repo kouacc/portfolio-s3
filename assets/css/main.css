@@ -31,13 +31,26 @@
     .megazoid-text-title {
         @apply font-megazoid;
         -webkit-text-stroke-color: black;
+        paint-order: stroke fill
     }
 
     .megazoid-text-h1 {
-        @apply font-megazoid text-7xl;
+        @apply font-megazoid text-7xl relative;
         -webkit-text-stroke-color: black;
-        text-shadow: 7px 7px 0px #38BDF8;
+        paint-order: stroke fill;
+        z-index: 1;
+        -webkit-text-stroke-width: 10pt;
     }
+
+    .megazoid-text-h1::before {
+    content: attr(data-text);
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    color: transparent;
+    text-shadow: 10px 10px 0px #38BDF8;
+}
 
     .dot-grid {
         background-image: radial-gradient(rgba(0, 0, 0, 0.147) 10px, transparent 0);
