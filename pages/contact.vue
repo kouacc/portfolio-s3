@@ -33,34 +33,34 @@ const submitForm = async (event: Event) => {
       enctype="multipart/form-data"
       class="flex flex-col gap-5"
     >
-      <label class="flex flex-col gap-2.5">
-        <span class="fill-text">Nom</span>
+      <label class="grid grid-cols-12 gap-2.5">
+        <span class="fill-text col-span-2">Nom</span>
         <input
-          class="rounded-xl primary-bg secondary-border"
+          class="rounded-xl primary-bg secondary-border col-span-10"
           type="text"
           name="name"
         />
       </label>
-      <label class="flex flex-col gap-2.5">
-        <span class="fill-text">Prénom</span>
+      <label class="grid grid-cols-12 gap-2.5">
+        <span class="fill-text col-span-2">Prénom</span>
         <input
-          class="rounded-xl primary-bg secondary-border"
+          class="rounded-xl primary-bg secondary-border col-span-10"
           type="text"
           name="surname"
         />
       </label>
-      <label class="flex flex-col gap-2.5">
-        <span class="fill-text">Adresse e-mail</span>
+      <label class="grid grid-cols-12 gap-2.5">
+        <span class="fill-text col-span-2">Adresse e-mail</span>
         <input
-          class="rounded-xl primary-bg secondary-border"
+          class="rounded-xl primary-bg secondary-border col-span-10"
           type="email"
           name="email"
         />
       </label>
-      <label class="flex flex-col gap-2.5">
-        <span class="fill-text">Message</span>
+      <label class="grid grid-cols-12 gap-2.5">
+        <span class="fill-text col-span-2">Message</span>
         <textarea
-          class="rounded-xl primary-bg secondary-border"
+          class="rounded-xl primary-bg secondary-border col-span-10"
           name="message"
         />
       </label>

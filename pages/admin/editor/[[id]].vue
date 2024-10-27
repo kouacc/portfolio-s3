@@ -311,7 +311,7 @@ const { x, y, style } = useDraggable(iconsWindow, {
             >
             <div class="flex justify-center gap-10">
               <button
-                class="flex border secondary-border rounded-xl primary-bg disabled:bg-black/30 p-2"
+                class="pagination-btn"
                 @click="
                   tools.selected_page = Math.max(tools.selected_page - 1, 1)
                 "
@@ -319,7 +319,7 @@ const { x, y, style } = useDraggable(iconsWindow, {
               >
                 <Icon name="lucide:chevron-left" size="24" /></button
               ><button
-                class="flex border secondary-border rounded-xl primary-bg disabled:bg-black/30 p-2"
+                class="pagination-btn"
                 @click="
                   tools.selected_page = Math.min(
                     tools.selected_page + 1,
