@@ -22,7 +22,7 @@
     }
 
     input[type="text"], input[type="password"], input[type="email"], input[type="search"], textarea { 
-        @apply bg-primary dark:bg-primary_dark border border-secondary dark:border-secondary_dark text-fill dark:text-fill_dark rounded-xl
+        @apply bg-primary dark:bg-primary_dark border border-secondary dark:border-secondary_dark text-fill dark:text-fill_dark rounded-xl focus:ring-sky-400
     }
 
 }
@@ -52,9 +52,24 @@
     text-shadow: 10px 10px 0px #38BDF8;
 }
 
+    .pagination-btn {
+        @apply flex border secondary-border rounded-xl primary-bg disabled:bg-black/30 p-2
+    }
+
+    .primary-btn-submit {
+        background: linear-gradient(180deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.00) 100%), #0369A1;
+        @apply rounded-xl px-8 border-[0.5px] border-white/40 inline-flex items-center gap-3 py-2.5 bg-sky-700 shadow-[0px_0px_0px_1px_#0369A1] text-white;
+    }
+
     .dot-grid {
-        background-image: radial-gradient(rgba(0, 0, 0, 0.147) 10px, transparent 0);
-        background-size: 40px 40px;
+        background-image: radial-gradient(#3d465117 5px, transparent 0);
+        background-size: 15px 15px;
+        background-position: -19px -19px;
+    }
+
+    .dot-grid-dark {
+        background-image: radial-gradient(#3d465150 5px, transparent 0);
+        background-size: 15px 15px;
         background-position: -19px -19px;
     }
 
@@ -121,7 +136,7 @@
       #a2e3ff,
       #307fa1
     );
-    mask-size: 500px 500px;
+    mask-size: 1000px 1000px;
     mask-position: 50% 50%;
     transition: --complete 0.6s;
     transition-timing-function: linear(
