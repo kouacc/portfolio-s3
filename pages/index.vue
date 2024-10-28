@@ -10,44 +10,45 @@ useHead({
 <template>
   <section class="space-y-24">
     <div
-      class="dot-grid-hero bg-blue-500 flex flex-col justify-evenly items-center pt-32 px-20 h-screen"
+      class="dot-grid-hero bg-blue-500 flex flex-col justify-end items-center pt-32 pb-20 px-2 h-screen gap-32"
     >
-    <div class="w-full space-y-10 flex flex-col items-center">
-      <section class="flex justify-center relative w-full pb-24">
+    <div class="w-full space-y-10 flex flex-col items-center relative">
+      <section class="flex items-center justify-center relative w-full pb-24 lg:text-nowrap left-10">
         <h1
-          class="megazoid-text-title text-sky-400 text-4xl lg:text-8xl h-fit absolute"
+          class="megazoid-text-title text-sky-400 text-5xl md:text-7xl xl:text-8xl text-center h-fit absolute top-0"
           style="-webkit-text-stroke-width: 15pt"
         >
           Maxence Lallemand
         </h1>
         <h1
-          class="megazoid-text-title text-white text-4xl lg:text-8xl h-fit absolute -top-5 -ml-8"
+          class="megazoid-text-title text-white text-5xl md:text-7xl xl:text-8xl text-center h-fit absolute -top-5 -ml-8"
           style="-webkit-text-stroke-width: 15pt"
         >
           Maxence Lallemand
         </h1>
         <h1
-          class="megazoid-text-title text-sky-400 text-4xl lg:text-8xl h-fit absolute -top-10 -ml-16"
+          class="megazoid-text-title text-sky-400 text-5xl md:text-7xl xl:text-8xl text-center h-fit absolute -top-10 -ml-16"
           style="-webkit-text-stroke-width: 15pt"
         >
           Maxence Lallemand
         </h1>
         <h1
-          class="megazoid-text-title text-white text-4xl lg:text-8xl h-fit absolute -top-[3.75rem] -ml-[6rem]"
+          class="megazoid-text-title text-white text-5xl md:text-7xl xl:text-8xl text-center h-fit absolute -top-[3.75rem] -ml-[6rem]"
           style="-webkit-text-stroke-width: 15pt"
         >
+        <Star :stroke="true" class="absolute -left-10 bottom-14 z-40 -rotate-12 hover:rotate-6 transition-transform" />
           Maxence Lallemand
         </h1>
       </section>
       
       <h2
-        class="megazoid-text-title text-white text-5xl"
+        class="megazoid-text-title text-white text-3xl sm:text-5xl"
         style="-webkit-text-stroke-width: 13pt"
       >
         Développeur web
       </h2>
     </div>
-      <div class="hidden w-fit border-b-2 border-white p-3 px-12 flex gap-5 place-content-end">
+      <div class="w-fit border-b-2 border-white p-3 px-12 flex gap-5 place-content-end">
         <a href=""
           ><Icon name="simple-icons:linkedin" class="text-white" size="30"
         /></a>
@@ -60,7 +61,7 @@ useHead({
       </div>
       <span
         class="hidden lg:inline-flex absolute right-40 bottom-24 font-geistmono rotate-90 items-center text-white"
-        >Scroll down<Icon name="lucide:chevron-right" size="24"
+        >Scroll down<Icon name="lucide:chevron-right" size="24" class="text-white"
       /></span>
     </div>
     <section class="base-grid">
@@ -483,7 +484,7 @@ useHead({
       </section>
     </section>
     <section
-      class="gradient-bg dark:gradient-bg-dark items-center h-[105vh] grid place-items-center"
+      class="gradient-bg dark:gradient-bg-dark items-center h-[105vh] flex place-items-center"
     >
       <div class="square-grid h-full"></div>
       <div class="grid w-full absolute">

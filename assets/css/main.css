@@ -62,7 +62,7 @@
     }
 
     .dot-grid {
-        background-image: radial-gradient(#3d465117 5px, transparent 0);
+        background-image: radial-gradient(#3d46510b 5px, transparent 0);
         background-size: 15px 15px;
         background-position: -19px -19px;
     }
@@ -70,6 +70,12 @@
     .dot-grid-dark {
         background-image: radial-gradient(#3d465150 5px, transparent 0);
         background-size: 15px 15px;
+        background-position: -19px -19px;
+    }
+
+    .dot-grid-hero {
+        background-image: radial-gradient(#3d46513d 10px, transparent 0);
+        background-size: 40px 40px;
         background-position: -19px -19px;
     }
 
@@ -173,6 +179,10 @@
 @layer utilities {
     .base-grid {
         @apply lg:grid lg:grid-cols-12 lg:gap-8 lg:justify-center px-16
+    }
+
+    .content-grid {
+        @apply lg:grid lg:grid-cols-12 lg:gap-8 lg:justify-center
     }
 
     .container {
