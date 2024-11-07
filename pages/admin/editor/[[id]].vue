@@ -28,7 +28,11 @@ const project = reactive({
 });
 
 const project_imgs = ref<string[]>([]);
-const fileInput = ref<HTMLInputElement | null>(null);
+const cover_img = ref<string>()
+const coverInput = ref<HTMLInputElement>();
+const imgsInput = ref<HTMLInputElement>();
+
+const cookie = useCookie<string>("token");
 
 if (route.params.id) {
   const { data } = await useFetch<Project>(`/api/projects/${route.params.id}`);
@@ -81,23 +85,64 @@ function handleToolClick(slug: string) {
   }
 }
 
-const onFileChange = (event: Event) => {
+const onFileChange = (event: Event, inputType: 'project_imgs' | 'cover_img') => {
   const target = event.target as HTMLInputElement;
   if (target.files) {
     const files = Array.from(target.files);
-    project_imgs.value = [];
+
+    if (inputType === 'project_imgs') {
+      project_imgs.value = [];
+    } else if (inputType === 'cover_img') {
+      cover_img.value = '';
+    }
 
     files.forEach((file) => {
       const reader = new FileReader();
       reader.onload = (e: ProgressEvent<FileReader>) => {
-        if (e.target?.result) {
-          project_imgs.value.push(e.target.result as string);
+        const result = e.target?.result;
+        if (result) {
+          if (inputType === 'cover_img') {
+            cover_img.value = result as string;
+          } else if (inputType === 'project_imgs') {
+            project_imgs.value.push(result as string);
         }
       };
-      reader.readAsDataURL(file);
+    };
+    reader.readAsDataURL(file);
+  })
+}}
+
+async function sendProject() {
+  const formData = new FormData();
+  formData.append("title", project.title);
+  formData.append("content", project.content);
+  formData.append("year", project.year);
+  formData.append("status", project.status);
+  formData.append("repository_link", project.repository_link);
+  formData.append("tools", JSON.stringify(project.tools));
+  //append the cover and project imgs File elements to the formdata
+  if (coverInput.value && coverInput.value.files && coverInput.value.files[0]) {
+    console.log(coverInput.value.files[0]);
+    formData.append("cover_img", coverInput.value.files[0]);
+  }
+  if (imgsInput.value && imgsInput.value.files) {
+    project_imgs.value.forEach((img) => {
+      formData.append("project_imgs", imgsInput.value.files[0]);
     });
   }
-};
+
+  const method = route.params.id ? "PUT" : "POST";
+  const url = route.params.id ? `/api/protected/editProject` : "/api/protected/addProject";
+  await $fetch<Project>(url, {
+    method,
+    body: formData,
+    headers: {
+      "Authorization": cookie.value
+    }
+  });
+
+  alert("Projet enregistré avec succès !");
+}
 
 const isSaved = ref<boolean>(true);
 const update = debounce((e) => {
@@ -151,7 +196,7 @@ const { x, y, style } = useDraggable(iconsWindow, {
         >
       </li>
       <li>
-        <ActionButton variant="primary" href="/admin/editor"
+        <ActionButton @click="sendProject()" variant="primary" href="/admin/editor"
           ><span class="text-white">{{
             !route.params.id ? "Créer le projet" : "Modifier le projet"
           }}</span></ActionButton
@@ -218,25 +263,46 @@ const { x, y, style } = useDraggable(iconsWindow, {
           </div>
           <div class="flex items-end">
             <label class="flex flex-col gap-5">
-              <span>Images et médias</span>
+              <span>Cover</span>
               <input
-                ref="fileInput"
+                ref="coverInput"
                 class="file:rounded-xl file:px-5 file:py-2 file:border-none file:secondary-bg file:text-fill dark:file:text-fill_dark file:hover:bg-white/25 font-geist file:transition-all"
                 type="file"
                 accept="image/jpeg, image/webp, image/png, image/gif"
-                multiple
-                @change="onFileChange"
+                @change="(event) => onFileChange(event, 'cover_img')"
               />
             </label>
             <ActionButton
               variant="secondary"
-              @click="(project_imgs = []), (fileInput.value = '')"
+              @click="(cover_img = ''), (coverInput.value = '')"
+              ><Icon name="lucide:trash-2" class="text-white" /><span
+                class="text-white"
+                >Supprimer</span
+              ></ActionButton
+            >
+          </div>
+          <div class="flex items-end">
+            <label class="flex flex-col gap-5">
+              <span>Images et médias</span>
+              <input
+                ref="imgsInput"
+                class="file:rounded-xl file:px-5 file:py-2 file:border-none file:secondary-bg file:text-fill dark:file:text-fill_dark file:hover:bg-white/25 font-geist file:transition-all"
+                type="file"
+                accept="image/jpeg, image/webp, image/png, image/gif"
+                multiple
+                @change="(event) => onFileChange(event, 'project_imgs')"
+              />
+            </label>
+            <ActionButton
+              variant="secondary"
+              @click="(project_imgs = []), (imgsInput.value = '')"
               ><Icon name="lucide:trash-2" class="text-white" /><span
                 class="text-white"
                 >Tout supprimer</span
               ></ActionButton
             >
           </div>
+          <img :src="cover_img">
           <ul>
             <li
               v-for="img in project_imgs"
