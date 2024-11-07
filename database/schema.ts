@@ -15,6 +15,8 @@ export const projectTable = sqliteTable("projects", {
   tools: text("tools", { mode: "json" })
     .notNull()
     .default(sql`'[]'`),
+  cover: text("cover"),
+  images: text("images", { mode: "json" }).default(sql`'[]'`),
   created_at: text("created_at")
     .notNull()
     .default(sql`(CURRENT_TIMESTAMP)`),

@@ -6,6 +6,8 @@ useHead({
 });
 
 const { data } = await useFetch("/api/projects/fetchprojects");
+
+console.log(data.value?.length)
 </script>
 
 <template>
@@ -25,7 +27,7 @@ const { data } = await useFetch("/api/projects/fetchprojects");
     <div class="space-y-14">
       <section class="flex justify-between items-center">
         <h2>Tous mes projets</h2>
-        <div class="flex gap-2">
+        <div v-if="data && data.length >= 8" class="flex gap-2">
           <button class="pagination-btn"><Icon name="lucide:chevron-left" size="24" /></button>
           <button class="pagination-btn"><Icon name="lucide:chevron-right" size="24" /></button>
         </div>
