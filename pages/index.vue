@@ -13,27 +13,27 @@ useHead({
       class="dot-grid-hero bg-blue-500 flex flex-col justify-end items-center pt-32 pb-20 px-2 h-screen gap-32"
     >
     <div class="w-full space-y-10 flex flex-col items-center relative">
-      <section class="flex items-center justify-center relative w-full pb-24 lg:text-nowrap left-10">
+      <section class="flex items-center justify-center relative w-full pb-24 lg:text-nowrap">
         <h1
-          class="megazoid-text-title text-sky-400 text-5xl md:text-7xl xl:text-8xl text-center h-fit absolute top-0"
+          class="select-none megazoid-text-title text-sky-400 text-5xl md:text-7xl xl:text-8xl text-center h-fit absolute top-0"
           style="-webkit-text-stroke-width: 15pt"
         >
           Maxence Lallemand
         </h1>
         <h1
-          class="megazoid-text-title text-white text-5xl md:text-7xl xl:text-8xl text-center h-fit absolute -top-5 -ml-8"
+          class="select-none megazoid-text-title text-white text-5xl md:text-7xl xl:text-8xl text-center h-fit absolute -top-5 -ml-8"
           style="-webkit-text-stroke-width: 15pt"
         >
           Maxence Lallemand
         </h1>
         <h1
-          class="megazoid-text-title text-sky-400 text-5xl md:text-7xl xl:text-8xl text-center h-fit absolute -top-10 -ml-16"
+          class="select-none megazoid-text-title text-sky-400 text-5xl md:text-7xl xl:text-8xl text-center h-fit absolute -top-10 -ml-16"
           style="-webkit-text-stroke-width: 15pt"
         >
           Maxence Lallemand
         </h1>
         <h1
-          class="megazoid-text-title text-white text-5xl md:text-7xl xl:text-8xl text-center h-fit absolute -top-[3.75rem] -ml-[6rem]"
+          class="select-none megazoid-text-title text-white text-5xl md:text-7xl xl:text-8xl text-center h-fit absolute -top-[3.75rem] -ml-[6rem]"
           style="-webkit-text-stroke-width: 15pt"
         >
         <Star :stroke="true" class="absolute -left-10 bottom-14 z-40 -rotate-12 hover:rotate-6 transition-transform" />
@@ -42,7 +42,7 @@ useHead({
       </section>
       
       <h2
-        class="megazoid-text-title text-white text-3xl sm:text-5xl"
+        class="select-none megazoid-text-title text-white text-3xl sm:text-5xl"
         style="-webkit-text-stroke-width: 13pt"
       >
         Développeur web
