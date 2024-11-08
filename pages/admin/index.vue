@@ -60,6 +60,18 @@ async function exportData(table: "Projects" | "Contact") {
     console.error("Failed to fetch data for exportContact");
   }
 }
+
+async function deleteProject(id: number) {
+  const { data } = await useFetch(`/api/protected/deleteProject/${id}`, {
+    method: "DELETE",
+    headers: {
+      Authorization: cookie.value,
+    },
+  })
+  if ((data.value as { status: number }).status === 202) {
+    location.reload()
+  }
+}
 </script>
 
 <template>
@@ -93,7 +105,7 @@ async function exportData(table: "Projects" | "Contact") {
                 :to="{ name: 'admin-editor-id', params: { id: projet.id } }"
                 ><Icon name="lucide:square-pen" size="24"
               /></NuxtLink>
-              <button>
+              <button @click="deleteProject(projet.id)">
                 <Icon name="lucide:trash-2" size="24" class="text-red-500" />
               </button>
             </div>

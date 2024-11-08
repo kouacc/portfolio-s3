@@ -145,13 +145,13 @@ async function sendProject() {
     }
   });
 
-  /* if ((data.value as { status: number, body: string }).status === 200) {
+  if ((data.value as { status: number, body: string }).status === 200) {
     useRouter().push("/admin");
   } else if ((data.value as { status: number, body: string }).status === 400) {
     alert("Une erreur est survenue.")
   } else {
     alert("Une erreur est survenue.");
-  } */
+  }
 }
 
 const isSaved = ref<boolean>(true);
