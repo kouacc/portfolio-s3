@@ -20,5 +20,14 @@ export default defineNuxtConfig({
     ADMIN_PASSWORD: ''
   },
 
+  nitro: {
+    storage: {
+      content: {
+        driver: 'fs',
+        base: './public/content'
+      }
+    }
+  },
+
   modules: ["@nuxt/fonts", "@nuxt/icon", "@vueuse/nuxt"],
 });

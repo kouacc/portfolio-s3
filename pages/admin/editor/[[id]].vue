@@ -24,11 +24,15 @@ const project = reactive({
   year: "",
   status: "",
   repository_link: "",
-  tools: [],
+  tools: [] as string[],
 });
 
 const project_imgs = ref<string[]>([]);
 const cover_img = ref<string>()
+
+const coverFile = ref<File>();
+const projectFiles = ref<File[]>([]);
+
 const coverInput = ref<HTMLInputElement>();
 const imgsInput = ref<HTMLInputElement>();
 
@@ -54,7 +58,6 @@ const tools = ref({
     title: icon.title,
     slug: icon.slug,
   })),
-  selected: [] as string[],
   searchfield: "",
   pages_count: Math.ceil(icons.icons.length / 15),
   selected_page: 1,
@@ -76,12 +79,12 @@ const filteredTools = computed(() => {
 });
 
 function handleToolClick(slug: string) {
-  if (tools.value.selected.includes(slug)) {
-    tools.value.selected = tools.value.selected.filter(
+  if (project.tools.includes(slug)) {
+    project.tools = project.tools.filter(
       (selected) => selected !== slug
     );
   } else {
-    tools.value.selected.push(slug);
+    project.tools.push(slug);
   }
 }
 
@@ -103,8 +106,10 @@ const onFileChange = (event: Event, inputType: 'project_imgs' | 'cover_img') => 
         if (result) {
           if (inputType === 'cover_img') {
             cover_img.value = result as string;
+            coverFile.value = file;
           } else if (inputType === 'project_imgs') {
             project_imgs.value.push(result as string);
+            projectFiles.value.push(file);
         }
       };
     };
@@ -121,19 +126,18 @@ async function sendProject() {
   formData.append("repository_link", project.repository_link);
   formData.append("tools", JSON.stringify(project.tools));
   //append the cover and project imgs File elements to the formdata
-  if (coverInput.value && coverInput.value.files && coverInput.value.files[0]) {
-    console.log(coverInput.value.files[0]);
-    formData.append("cover_img", coverInput.value.files[0]);
+  if (coverFile.value) {
+    formData.append("cover_img", coverFile.value);
   }
-  if (imgsInput.value && imgsInput.value.files) {
-    project_imgs.value.forEach((img) => {
-      formData.append("project_imgs", imgsInput.value.files[0]);
+  if (projectFiles.value) {
+    projectFiles.value.forEach((file, index) => {
+      formData.append(`project_imgs[${index}]`, file);
     });
   }
 
   const method = route.params.id ? "PUT" : "POST";
   const url = route.params.id ? `/api/protected/editProject` : "/api/protected/addProject";
-  await $fetch<Project>(url, {
+  const { data } = await useFetch(url, {
     method,
     body: formData,
     headers: {
@@ -141,7 +145,13 @@ async function sendProject() {
     }
   });
 
-  alert("Projet enregistré avec succès !");
+  /* if ((data.value as { status: number, body: string }).status === 200) {
+    useRouter().push("/admin");
+  } else if ((data.value as { status: number, body: string }).status === 400) {
+    alert("Une erreur est survenue.")
+  } else {
+    alert("Une erreur est survenue.");
+  } */
 }
 
 const isSaved = ref<boolean>(true);
@@ -336,7 +346,7 @@ const { x, y, style } = useDraggable(iconsWindow, {
         <div class="space-y-3">
           <section class="flex justify-between items-center">
             <h3>Outils sélectionnés</h3>
-            <ActionButton variant="secondary" @click="tools.selected = []"
+            <ActionButton variant="secondary" @click="project.tools = []"
               ><Icon name="lucide:trash-2" size="24" class="text-white" /><span
                 class="text-white"
                 >Effacer tout</span
@@ -344,7 +354,7 @@ const { x, y, style } = useDraggable(iconsWindow, {
             >
           </section>
           <TransitionGroup tag="ul" class="flex gap-4 flex-wrap">
-            <li v-for="icon in tools.selected" :key="icon">
+            <li v-for="icon in project.tools" :key="icon">
               <Icon :name="`simple-icons:${icon}`" size="36" />
             </li>
           </TransitionGroup>
@@ -365,7 +375,7 @@ const { x, y, style } = useDraggable(iconsWindow, {
               :key="icon.title"
               @click="handleToolClick(icon.slug)"
               class="w-full justify-between items-center px-2 py-1.5 rounded-xl secondary-bg border primary-border"
-              :class="{ '!bg-gray-400': tools.selected.includes(icon.slug) }"
+              :class="{ '!bg-gray-400': project.tools.includes(icon.slug) }"
             >
               <span class="line-clamp-1">{{ icon.title }}</span>
             </li>

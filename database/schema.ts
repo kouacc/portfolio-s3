@@ -5,7 +5,7 @@ export const projectTable = sqliteTable("projects", {
   id: integer("id").primaryKey({ autoIncrement: true }),
   title: text("title").notNull(),
   content: text("content").notNull(),
-  year: integer("year").notNull(),
+  year: text("year").notNull(),
   status: text("status", {
     enum: ["Terminé", "En cours", "En pause", "Abandonné"],
   })
