@@ -8,6 +8,7 @@ export default defineEventHandler(async (event) => {
       title: true,
       year: true,
       created_at: true,
+      cover: true,
     }
   });
   return projects;
