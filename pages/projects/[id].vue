@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import { type Project } from "~/database/schema";
 import { marked } from "marked";
+import { onMounted } from "vue";
+import gsap from "gsap";
 import icons from '~/assets/icons.json';
 
 const $route = useRoute();
@@ -9,6 +11,11 @@ useHead({
     class: "gradient-bg dark:gradient-bg-dark",
   },
 });
+
+onMounted(() => {
+  gsap.from('.trigger-cover', { opacity: 0, x: -50, duration: 1 });
+  gsap.from('.trigger-info', { opacity: 0, x: -50, duration: 1, delay: 0.2 });
+})
 
 const { data } = useFetch<Project>(`/api/projects/${$route.params.id}`);
 
@@ -35,8 +42,8 @@ const modified_date = data?.value ? new Date(data.value.modified_at).toLocaleStr
     </section>
     <div class="content-grid">
       <div class="col-start-1 col-span-5 space-y-8">
-        <img class="rounded-xl" src="/Frame 1.jpg" alt="">
-        <div class=" rounded-xl px-12 py-11 space-y-12 dot-grid dark:dot-grid-dark bg-background dark:bg-background_dark">
+        <img class="trigger-cover rounded-xl" src="/Frame 1.jpg" alt="">
+        <div class="trigger-info rounded-xl px-12 py-11 space-y-12 dot-grid dark:dot-grid-dark bg-background dark:bg-background_dark">
           <div class="font-geistmono flex flex-col gap-3">
             <span>Année de réalisation</span>
             <span>{{ data?.year }}</span>

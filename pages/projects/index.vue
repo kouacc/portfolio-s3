@@ -1,4 +1,7 @@
 <script setup lang="ts">
+import { onMounted } from "vue";
+import gsap from "gsap";
+
 useHead({
   bodyAttrs: {
     class: "gradient-bg dark:gradient-bg-dark",
@@ -7,7 +10,14 @@ useHead({
 
 const { data } = await useFetch("/api/projects/fetchprojects");
 
-console.log(data.value?.length)
+const latestProjects = data.value?.sort((a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime()).slice(0, 3);
+
+onMounted(() => {
+  gsap.from('.trigger-0', { opacity: 0, x: -50, duration: 1 });
+  gsap.from('.trigger-1', { opacity: 0, x: 50, duration: 1, delay: 0.2 });
+  gsap.from('.trigger-2', { opacity: 0, x: 50, duration: 1, delay: 0.4 });
+  gsap.from('.trigger', { opacity: 0, y: 50, duration: 1, stagger: 0.1, delay: 0.4 });
+});
 </script>
 
 <template>
@@ -20,9 +30,9 @@ console.log(data.value?.length)
     </h1>
     
     <div class="grid grid-cols-3 gap-8">
-      <ProjectCard class="col-span-2 row-span-2 w-full" href="/projects/1" projectName="Test" projectDate="01/01/2024" projectImg="/Frame 1.jpg"/>
-      <ProjectCard class="col-start-3" href="/projects/1" projectName="Test" projectDate="01/01/2024" projectImg="/Frame 1.jpg"/>
-      <ProjectCard class="col-start-3" href="/projects/1" projectName="Test" projectDate="01/01/2024" projectImg="/Frame 1.jpg"/>
+      <ProjectCard class="trigger-0 col-span-2 row-span-2 w-full" :href="`/projects/${latestProjects[0].id}`" :projectName="latestProjects[0].title" :projectDate="latestProjects[0].year" :projectImg="`/content/${latestProjects[0].id}/${latestProjects[0].cover}`"/>
+      <ProjectCard class="trigger-1 col-start-3" :href="`/projects/${latestProjects[1].id}`" :projectName="latestProjects[1].title" :projectDate="latestProjects[1].year" :projectImg="`/content/${latestProjects[0].id}/${latestProjects[0].cover}`"/>
+      <ProjectCard class="trigger-2 col-start-3" :href="`/projects/${latestProjects[2].id}`" :projectName="latestProjects[2].title" :projectDate="latestProjects[2].year" :projectImg="`/content/${latestProjects[0].id}/${latestProjects[0].cover}`"/>
     </div>
     <div class="space-y-14">
       <section class="flex justify-between items-center">
@@ -33,7 +43,7 @@ console.log(data.value?.length)
         </div>
       </section>
       <div class="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
-        <ProjectCard v-for="projet in data" :key="projet.id" :href="`/projects/${projet.id}`" :projectName="projet.title" :projectDate="projet.year" projectImg="/Frame 1.jpg" />
+        <ProjectCard class="trigger" v-for="projet in data" :key="projet.id" :href="`/projects/${projet.id}`" :projectName="projet.title" :projectDate="projet.year" :projectImg="`/content/${projet.id}/${projet.cover}`" />
       </div>
     </div>
     

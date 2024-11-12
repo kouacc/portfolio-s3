@@ -1,16 +1,76 @@
 <script setup lang="ts">
+import gsap from 'gsap';
+import ScrollTrigger from 'gsap/ScrollTrigger';
+
 useHead({
   bodyAttrs: {
     class: "bg-background dark:bg-background_dark overflow-x-hidden",
   },
   title: "Portfolio - Maxence Lallemand",
 });
+
+import { onMounted } from 'vue';
+
+onMounted(() => {
+  gsap.registerPlugin(ScrollTrigger);
+
+  // Hero section fade in
+  gsap.from('.trigger-0', {
+    opacity: 0,
+    duration: 1,
+    y: 100
+  });
+
+  // About section
+  gsap.from('.trigger-1', {
+    scrollTrigger: {
+      trigger: '.trigger-1',
+      start: 'top 80%',
+    },
+    opacity: 0,
+    y: 100,
+    duration: 1
+  });
+
+  // Skills section
+  gsap.from('.trigger-3', {
+    scrollTrigger: {
+      trigger: '.trigger-3',
+      start: 'top 80%',
+    },
+    opacity: 0,
+    y: 100,
+    duration: 1
+  });
+
+  // Timeline section
+  gsap.from('.trigger-2', {
+    scrollTrigger: {
+      trigger: '.trigger-2',
+      start: 'top 80%', 
+    },
+    opacity: 0,
+    y: 100,
+    duration: 1
+  });
+
+  // Contact section
+  gsap.from('.gradient-bg', {
+    scrollTrigger: {
+      trigger: '.gradient-bg',
+      start: 'top 80%',
+    },
+    opacity: 0,
+    y: 100,
+    duration: 1
+  });
+});
 </script>
 
 <template>
   <section class="space-y-24">
     <div
-      class="dot-grid-hero bg-blue-500 flex flex-col justify-end items-center pt-32 pb-20 px-2 h-screen gap-32"
+      class="trigger-0 dot-grid-hero bg-blue-500 flex flex-col justify-end items-center pt-32 pb-20 px-2 h-screen gap-32"
     >
     <div class="w-full space-y-10 flex flex-col items-center relative">
       <section class="flex items-center justify-center relative w-full pb-24 lg:text-nowrap">
@@ -64,7 +124,7 @@ useHead({
         >Scroll down<Icon name="lucide:chevron-right" size="24" class="text-white"
       /></span>
     </div>
-    <section class="base-grid">
+    <section class="base-grid trigger-1">
       <section class="col-start-5 col-span-4">
         <h2 class="home-h2 font-geistmono text-gray-400">About Me.</h2>
         <p>
@@ -128,7 +188,7 @@ useHead({
         </div>
       </div>
       <hr class="col-start-2 col-span-10 border-[#878787]" />
-      <section class="col-start-1 col-span-full flex flex-col gap-11">
+      <section class="col-start-1 col-span-full flex flex-col gap-11 trigger-3">
         <h2 class="home-h2">Compétences</h2>
         <div
           class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-20 fill-text"
@@ -450,7 +510,7 @@ useHead({
           </section>
         </div>
       </section>
-      <section class="grid-start-1 col-span-full">
+      <section class="trigger-2 grid-start-1 col-span-full">
         <h2 class="home-h2">Mon parcours</h2>
         <div>
           <ul class="relative top-16 flex flex-row justify-between">
