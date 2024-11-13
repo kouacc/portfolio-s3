@@ -1,114 +1,202 @@
 <script setup lang="ts">
-import gsap from 'gsap';
-import ScrollTrigger from 'gsap/ScrollTrigger';
+import gsap from "gsap";
+import ScrollTrigger from "gsap/ScrollTrigger";
 
 useHead({
   bodyAttrs: {
-    class: "bg-background dark:bg-background_dark overflow-x-hidden",
+    class: "bg-background dark:bg-background_dark overflow-x-hidden scroll-smooth",
   },
   title: "Portfolio - Maxence Lallemand",
 });
 
-import { onMounted } from 'vue';
+import { onMounted } from "vue";
+
+const linesCount = ref();
+const projectsCount = ref(0)
+const currentText = ref<string>("")
+const isBlinking = ref(true)
+
+const { data } = await useFetch("/api/projects/fetchprojects");
 
 onMounted(() => {
   gsap.registerPlugin(ScrollTrigger);
 
-  // Hero section fade in
-  gsap.from('.trigger-0', {
-    opacity: 0,
-    duration: 1,
-    y: 100
-  });
-
   // About section
-  gsap.from('.trigger-1', {
+  gsap.from(".trigger-1", {
     scrollTrigger: {
-      trigger: '.trigger-1',
-      start: 'top 80%',
+      trigger: ".trigger-1", 
+      start: "top 80%",
+      onEnter: () => {
+        showSecondNavigation.value = true;
+        
+        gsap.to(linesCount, {
+          value: 9999,
+          duration: 5,
+          ease: "power2.inOut",
+          onUpdate: () => {
+            linesCount.value = Math.floor(linesCount.value);
+            if (linesCount.value === 9999) {
+              linesCount.value = "9999+";
+            }
+          },
+        });
+
+        gsap.to(projectsCount, {
+          value: data.value?.length,
+          duration: 5,
+          ease: "power2.inOut",
+          onUpdate: () => {
+            projectsCount.value = Math.floor(projectsCount.value);
+          },
+        });
+      },
     },
     opacity: 0,
-    y: 100,
-    duration: 1
+    y: 100, 
+    duration: 1,
   });
 
   // Skills section
-  gsap.from('.trigger-3', {
+  gsap.from(".trigger-3", {
     scrollTrigger: {
-      trigger: '.trigger-3',
-      start: 'top 80%',
+      trigger: ".trigger-3",
+      start: "top 80%",
     },
     opacity: 0,
     y: 100,
-    duration: 1
+    duration: 1,
   });
 
   // Timeline section
-  gsap.from('.trigger-2', {
+  gsap.from(".trigger-2", {
     scrollTrigger: {
-      trigger: '.trigger-2',
-      start: 'top 80%', 
+      trigger: ".trigger-2",
+      start: "top 80%",
     },
     opacity: 0,
     y: 100,
-    duration: 1
+    duration: 1,
   });
 
   // Contact section
-  gsap.from('.gradient-bg', {
+  gsap.from(".gradient-bg-rotate", {
     scrollTrigger: {
-      trigger: '.gradient-bg',
-      start: 'top 80%',
+      trigger: ".gradient-bg-rotate", 
+      start: "top 80%",
+      onEnter: async () => {
+        const texts = ["travailler ensemble ?", "collaborer ?", "échanger ?"];
+        
+        for(let i = 0; i < texts.length; i++) {
+          let text = texts[i];
+          isBlinking.value = false;
+          currentText.value = '';
+          
+          // Type the text
+          for(let char of text) {
+            currentText.value += char;
+            await new Promise(resolve => setTimeout(resolve, 100));
+          }
+          isBlinking.value = true;
+          await new Promise(resolve => setTimeout(resolve, 2500));
+          
+          // Don't delete text if it's the last item
+          isBlinking.value = false;
+          if(i < texts.length - 1) {
+            // Delete the text
+            while(currentText.value.length > 0) {
+              currentText.value = currentText.value.slice(0, -1); 
+              await new Promise(resolve => setTimeout(resolve, 100));
+            }
+          }
+          
+          isBlinking.value = true;
+          await new Promise(resolve => setTimeout(resolve, 500));
+        }
+      
+        isBlinking.value = true;
+      }
     },
     opacity: 0,
+    y: 100, 
+    duration: 1,
+  });
+
+  gsap.from(".megazoid-text-title", {
+    opacity: 0,
     y: 100,
-    duration: 1
+    stagger: 0.2,
+    duration: 0.8,
+    ease: "power2.out",
+  });
+
+  gsap.from(".startrigger", {
+    opacity: 0,
+    y: 100,
+    stagger: 0.2,
+    duration: 0.8,
+    ease: "power2.out",
+  });
+
+  gsap.from(".startrigger", {
+    rotate: -12,
+    repeat: -1,
+    repeatDelay: 0.5,
   });
 });
+
+const showSecondNavigation = ref(false)
+
 </script>
 
 <template>
-  <section class="space-y-24">
+  <div class="space-y-24 snap-mandatory scroll-smooth">
     <div
-      class="trigger-0 dot-grid-hero bg-blue-500 flex flex-col justify-end items-center pt-32 pb-20 px-2 h-screen gap-32"
+      class="dot-grid-hero bg-blue-500 flex flex-col justify-end items-center pt-32 pb-20 px-2 h-screen gap-32 snap-start"
     >
-    <div class="w-full space-y-10 flex flex-col items-center relative">
-      <section class="flex items-center justify-center relative w-full pb-24 lg:text-nowrap">
-        <h1
-          class="select-none megazoid-text-title text-sky-400 text-5xl md:text-7xl xl:text-8xl text-center h-fit absolute top-0"
-          style="-webkit-text-stroke-width: 15pt"
+      <div class="w-full space-y-10 flex flex-col items-center relative">
+        <section
+          class="flex items-center justify-center relative w-full pb-24 lg:text-nowrap"
         >
-          Maxence Lallemand
-        </h1>
-        <h1
-          class="select-none megazoid-text-title text-white text-5xl md:text-7xl xl:text-8xl text-center h-fit absolute -top-5 -ml-8"
-          style="-webkit-text-stroke-width: 15pt"
+          <h1
+            class="select-none megazoid-text-title text-sky-400 text-5xl md:text-7xl xl:text-8xl text-center h-fit absolute top-0"
+            style="-webkit-text-stroke-width: 15pt"
+          >
+            Maxence Lallemand
+          </h1>
+          <h1
+            class="select-none megazoid-text-title text-white text-5xl md:text-7xl xl:text-8xl text-center h-fit absolute -top-5 -ml-8"
+            style="-webkit-text-stroke-width: 15pt"
+          >
+            Maxence Lallemand
+          </h1>
+          <h1
+            class="select-none megazoid-text-title text-sky-400 text-5xl md:text-7xl xl:text-8xl text-center h-fit absolute -top-10 -ml-16"
+            style="-webkit-text-stroke-width: 15pt"
+          >
+            Maxence Lallemand
+          </h1>
+          <h1
+            class="select-none megazoid-text-title text-white text-5xl md:text-7xl xl:text-8xl text-center h-fit absolute -top-[3.75rem] -ml-[6rem]"
+            style="-webkit-text-stroke-width: 15pt"
+          >
+            <Star
+              :stroke="true"
+              class="startrigger absolute -left-10 bottom-14 z-40 -rotate-12 hover:rotate-6 transition-transform"
+            />
+            Maxence Lallemand
+          </h1>
+        </section>
+
+        <h2
+          class="select-none megazoid-text-title text-white text-3xl sm:text-5xl"
+          style="-webkit-text-stroke-width: 13pt"
         >
-          Maxence Lallemand
-        </h1>
-        <h1
-          class="select-none megazoid-text-title text-sky-400 text-5xl md:text-7xl xl:text-8xl text-center h-fit absolute -top-10 -ml-16"
-          style="-webkit-text-stroke-width: 15pt"
-        >
-          Maxence Lallemand
-        </h1>
-        <h1
-          class="select-none megazoid-text-title text-white text-5xl md:text-7xl xl:text-8xl text-center h-fit absolute -top-[3.75rem] -ml-[6rem]"
-          style="-webkit-text-stroke-width: 15pt"
-        >
-        <Star :stroke="true" class="absolute -left-10 bottom-14 z-40 -rotate-12 hover:rotate-6 transition-transform" />
-          Maxence Lallemand
-        </h1>
-      </section>
-      
-      <h2
-        class="select-none megazoid-text-title text-white text-3xl sm:text-5xl"
-        style="-webkit-text-stroke-width: 13pt"
+          Développeur web
+        </h2>
+      </div>
+      <div
+        class="w-fit border-b-2 border-white p-3 px-12 flex gap-5 place-content-end"
       >
-        Développeur web
-      </h2>
-    </div>
-      <div class="w-fit border-b-2 border-white p-3 px-12 flex gap-5 place-content-end">
         <a href=""
           ><Icon name="simple-icons:linkedin" class="text-white" size="30"
         /></a>
@@ -121,10 +209,26 @@ onMounted(() => {
       </div>
       <span
         class="hidden lg:inline-flex absolute right-40 bottom-24 font-geistmono rotate-90 items-center text-white"
-        >Scroll down<Icon name="lucide:chevron-right" size="24" class="text-white"
+        >Scroll down<Icon
+          name="lucide:chevron-right"
+          size="24"
+          class="text-white"
       /></span>
     </div>
-    <section class="base-grid trigger-1">
+    <nav v-show="showSecondNavigation" class="fixed left-0 top-1/2 -translate-y-1/2 transform transition-all hover:translate-x-0 -translate-x-[calc(100%-2rem)] z-50">
+      <div class="bg-white/80 dark:bg-tertiary_dark backdrop-blur-sm border-2 border-primary dark:border-primary_dark rounded-r-xl px-8 py-4">
+        <ul class="space-y-4">
+          <li><a href="#about" class="text-text dark:text-text_dark hover:text-primary dark:hover:text-primary_dark transition-colors">À propos</a></li>
+          <li><a href="#skills" class="text-text dark:text-text_dark hover:text-primary dark:hover:text-primary_dark transition-colors">Compétences</a></li>
+          <li><a href="#timeline" class="text-text dark:text-text_dark hover:text-primary dark:hover:text-primary_dark transition-colors">Timeline</a></li>
+          <li><a href="#contact" class="text-text dark:text-text_dark hover:text-primary dark:hover:text-primary_dark transition-colors">Contact</a></li>
+        </ul>
+      </div>
+    </nav>
+    <section
+      class="base-grid trigger-1 py-16 space-y-8 items-center justify-center snap-start"
+      id="about"
+    >
       <section class="col-start-5 col-span-4">
         <h2 class="home-h2 font-geistmono text-gray-400">About Me.</h2>
         <p>
@@ -144,9 +248,9 @@ onMounted(() => {
           >
             <h3 class="font-medium absolute">Lignes de code</h3>
             <div class="grid place-items-center h-full">
-              <span class="font-geistmono text-6xl place-self-center"
-                >9999+</span
-              >
+              <span class="font-geistmono text-6xl place-self-center">{{
+                linesCount
+              }}</span>
             </div>
           </div>
           <div
@@ -158,7 +262,7 @@ onMounted(() => {
             <h3 class="font-medium absolute">Nombre de projets</h3>
             <div class="grid place-items-center h-full">
               <span class="font-geistmono text-6xl place-self-center pt-5"
-                >4</span
+                >{{ projectsCount }}</span
               >
             </div>
           </div>
@@ -188,10 +292,13 @@ onMounted(() => {
         </div>
       </div>
       <hr class="col-start-2 col-span-10 border-[#878787]" />
-      <section class="col-start-1 col-span-full flex flex-col gap-11 trigger-3">
+      <section
+        class="col-start-1 col-span-full flex flex-col gap-11 trigger-3 h-screen snap-start"
+        id="skills"
+      >
         <h2 class="home-h2">Compétences</h2>
         <div
-          class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-20 fill-text"
+          class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-64 w-full fill-text"
         >
           <section class="flex flex-col gap-5 w-fit">
             <h3 class="font-geist text-base">Intégration</h3>
@@ -510,7 +617,7 @@ onMounted(() => {
           </section>
         </div>
       </section>
-      <section class="trigger-2 grid-start-1 col-span-full">
+      <section class="trigger-2 grid-start-1 col-span-full h-screen snap-start" id="timeline">
         <h2 class="home-h2">Mon parcours</h2>
         <div>
           <ul class="relative top-16 flex flex-row justify-between">
@@ -544,7 +651,8 @@ onMounted(() => {
       </section>
     </section>
     <section
-      class="gradient-bg dark:gradient-bg-dark items-center h-[105vh] flex place-items-center"
+      class="gradient-bg-rotate dark:gradient-bg-dark-rotate items-center h-[105vh] flex place-items-center"
+      id="contact"
     >
       <div class="square-grid h-full"></div>
       <div class="grid w-full absolute">
@@ -555,28 +663,26 @@ onMounted(() => {
             <h1 class="font-geist text-[42px] lg:text-7xl fill-text">
               Et pourquoi pas...
             </h1>
-            <span
-              class="font-departuremono text-sky-400 text-[42px] lg:text-7xl text-center"
-              >travailler ensemble ?</span
-            >
+            <span class="font-departuremono text-sky-400 text-[42px] lg:text-7xl text-center relative" id="bottomherotext">
+              {{ currentText }}<span :class="{ 'animate-blink' : isBlinking}" class="text-sky-400">|</span>
+            </span>
           </div>
           <div class="inline-flex items-center gap-10">
             <ActionButton
               variant="primary"
               size="large"
               href="/contact"
-              class=""
               ><span class="text-white">Me contacter</span></ActionButton
             >
-            <ActionButton variant="secondary" size="large" text="E-mail"
-              ><Icon name="lucide:mail" class="text-white" size="24" /><span
-                class="text-white"
-                >E-mail</span
-              ></ActionButton
-            >
+            <ActionButton variant="secondary" size="large" text="E-mail">
+              <span class="text-white inline-flex items-center gap-3">
+                <Icon name="lucide:mail" class="text-white" size="24" />
+                E-mail
+              </span>
+            </ActionButton>
           </div>
         </div>
       </div>
     </section>
-  </section>
+  </div>
 </template>
