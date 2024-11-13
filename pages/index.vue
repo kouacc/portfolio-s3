@@ -83,6 +83,7 @@ onMounted(() => {
     scrollTrigger: {
       trigger: ".gradient-bg-rotate", 
       start: "top 80%",
+      once: true, // Add this to make the animation play only once
       onEnter: async () => {
         const texts = ["travailler ensemble ?", "collaborer ?", "échanger ?"];
         
@@ -114,7 +115,7 @@ onMounted(() => {
         }
       
         isBlinking.value = true;
-      }
+      },
     },
     opacity: 0,
     y: 100, 
