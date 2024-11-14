@@ -34,7 +34,7 @@ const isLocked = useScrollLock(document?.body, false);
 
 <template>
   <header
-    class="flex sm:flex-row items-center gap-3 sm:top-3 sm:left-1/2 sm:-translate-x-1/2 fixed z-10"
+    class="flex sm:flex-row items-center gap-3 sm:top-3 sm:left-1/2 sm:-translate-x-1/2 fixed z-50"
   >
     <button
       @click="(isOpen = !isOpen), (isLocked = !isLocked)"
@@ -64,30 +64,33 @@ const isLocked = useScrollLock(document?.body, false);
           class="font-medium font-geist h-fit text-4xl sm:text-base"
           @click="(isOpen = false), (isLocked = false)"
         >
-          <RouterLink
-            activeClass="transition-all rounded-lg px-2 py-1.5 bg-white text-black "
+          <NuxtLink
+            activeClass="transition-all rounded-lg bg-white text-black"
+            class="px-2 py-1.5"
             to="/"
-            >Home</RouterLink
+            >Home</NuxtLink
           >
         </li>
         <li
           class="font-medium font-geist h-fit text-4xl sm:text-base"
           @click="(isOpen = false), (isLocked = false)"
         >
-          <RouterLink
-            activeClass="transition-all rounded-lg px-2 py-1.5 bg-white text-black"
+          <NuxtLink
+            activeClass="transition-all rounded-lg bg-white text-black"
+            class="px-2 py-1.5"
             to="/projects"
-            >Projets</RouterLink
+            >Projets</NuxtLink
           >
         </li>
         <li
           class="font-medium font-geist h-fit text-4xl sm:text-base"
           @click="(isOpen = false), (isLocked = false)"
         >
-          <RouterLink
-            activeClass="transition-all rounded-lg px-2 py-1.5 bg-white text-black"
+          <NuxtLink
+            activeClass="transition-all rounded-lg bg-white text-black"
+            class="px-2 py-1.5"
             to="/contact"
-            >Contact</RouterLink
+            >Contact</NuxtLink
           >
         </li>
         <li class="h-full sm:h-fit place-content-end">

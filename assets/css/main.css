@@ -73,12 +73,6 @@
         background-position: -19px -19px;
     }
 
-    .dot-grid-hero {
-        background-image: radial-gradient(#3d46513d 10px, transparent 0);
-        background-size: 40px 40px;
-        background-position: -19px -19px;
-    }
-
     .square-grid {
         --size: 45px;
         --line: color-mix(in lch, canvasText, transparent 70%);
@@ -114,12 +108,12 @@
 
     .gradient-bg-dark-rotate {
         background: radial-gradient(65.18% 95.97% at 8.19% 69.55%, rgba(22, 101, 52, 0.65) 0%, rgba(9, 9, 11, 0.65) 100%), radial-gradient(65.04% 99% at 82.95% 69.04%, #0369A1 0%, #09090B 100%);
-        background-size: 200% 200%;
+        background-size: 400% 400%;
         animation: gradient 12.5s ease infinite;
     }
 
     .animate-blink {
-        animation: blinking 1s infinite;
+        animation: blinking 1s infinite step-end;
     }
 
     @keyframes gradient {
@@ -211,11 +205,46 @@
         --complete: 100;
     }
 
+    .dot-mask {
+        @apply w-full h-full absolute z-10;
+        mask-image: radial-gradient(#000000 10px, transparent 0%);
+        mask-size: 40px 40px;
+        mask-position: -19px -19px;
+        mask-type: alpha;
+    }
+
+    .mask1 {
+        @apply -bottom-5;
+        background-image: url(/loop.svg);
+        background-position: bottom;
+        background-size: contain;
+        background-repeat: no-repeat;
+        filter: blur(65px);
+        animation: mask1-animation 6s ease-in-out infinite;
+    }
+   
+
+    .mask2 {
+        @apply w-full h-full -left-80 -top-72;
+        background-image: radial-gradient(circle at top, #000000 20%, transparent 0);
+        background-size: contain;
+        background-repeat: no-repeat;
+        filter: blur(250px);
+    }
+
+    .mask3 {
+        @apply w-full h-full -top-80;
+        background-image: radial-gradient(circle at top right, #000000 15%, transparent 0);
+        background-size: contain;
+        background-position: top left;
+        background-repeat: no-repeat;
+        filter: blur(250px);
+    }
 }
 
 @layer utilities {
     .base-grid {
-        @apply lg:grid lg:grid-cols-12 lg:gap-8 lg:justify-center px-16
+        @apply lg:grid lg:grid-cols-12 lg:gap-8 lg:justify-center px-10
     }
 
     .content-grid {

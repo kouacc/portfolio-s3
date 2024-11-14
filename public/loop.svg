@@ -1,0 +1,5 @@
+<svg viewBox="0 0 1551 357" preserveAspectRatio="xMidYMid meet" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M16 263.006C32.662 186.339 163.13 14.8063 359.843 16.0063C605.733 17.5063 490.109 313.006 919.787 283.006C1349.46 253.006 1487.81 -122.494 1243.43 117.007C823.988 528.083 1528.54 252.673 1534.77 222.007" stroke="black" stroke-width="32" stroke-dasharray="1000" stroke-dashoffset="1000">
+  <animate attributeName="stroke-dashoffset" from="2000" to="0" dur="7s" fill="freeze" repeatCount="indefinite"/>
+</path>
+</svg>

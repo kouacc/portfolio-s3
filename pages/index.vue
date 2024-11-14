@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import gsap from "gsap";
 import ScrollTrigger from "gsap/ScrollTrigger";
+import { onMounted } from "vue";
 
 useHead({
   bodyAttrs: {
@@ -9,7 +10,7 @@ useHead({
   title: "Portfolio - Maxence Lallemand",
 });
 
-import { onMounted } from "vue";
+
 
 const linesCount = ref();
 const projectsCount = ref(0)
@@ -111,7 +112,7 @@ onMounted(() => {
           }
           
           isBlinking.value = true;
-          await new Promise(resolve => setTimeout(resolve, 500));
+          await new Promise(resolve => setTimeout(resolve, 1500));
         }
       
         isBlinking.value = true;
@@ -152,9 +153,9 @@ const showSecondNavigation = ref(false)
 <template>
   <div class="space-y-24 snap-mandatory scroll-smooth">
     <div
-      class="dot-grid-hero bg-blue-500 flex flex-col justify-end items-center pt-32 pb-20 px-2 h-screen gap-32 snap-start"
+      class="bg-blue-500 flex flex-col justify-end items-center pt-32 pb-20 px-2 h-screen gap-32 snap-start"
     >
-      <div class="w-full space-y-10 flex flex-col items-center relative">
+      <div class="w-full space-y-10 flex flex-col items-center relative z-20">
         <section
           class="flex items-center justify-center relative w-full pb-24 lg:text-nowrap"
         >
@@ -189,14 +190,14 @@ const showSecondNavigation = ref(false)
         </section>
 
         <h2
-          class="select-none megazoid-text-title text-white text-3xl sm:text-5xl"
+          class="select-none megazoid-text-title text-white text-3xl sm:text-5xl z-20"
           style="-webkit-text-stroke-width: 13pt"
         >
           Développeur web
         </h2>
       </div>
       <div
-        class="w-fit border-b-2 border-white p-3 px-12 flex gap-5 place-content-end"
+        class="w-fit border-b-2 border-white p-3 px-12 flex gap-5 place-content-end z-20"
       >
         <a href=""
           ><Icon name="simple-icons:linkedin" class="text-white" size="30"
@@ -209,14 +210,17 @@ const showSecondNavigation = ref(false)
         /></a>
       </div>
       <span
-        class="hidden lg:inline-flex absolute right-40 bottom-24 font-geistmono rotate-90 items-center text-white"
+        class="hidden lg:inline-flex absolute right-40 bottom-24 font-geistmono rotate-90 items-center text-white z-20"
         >Scroll down<Icon
           name="lucide:chevron-right"
           size="24"
           class="text-white"
       /></span>
+      <div class="dot-mask mask1"></div>
+      <div class="dot-mask mask2"></div>
+      <div class="dot-mask mask3"></div>
     </div>
-    <nav v-show="showSecondNavigation" class="fixed left-0 top-1/2 -translate-y-1/2 transform transition-all hover:translate-x-0 -translate-x-[calc(100%-2rem)] z-50">
+    <nav v-show="showSecondNavigation" class="fixed left-0 top-1/3 -translate-y-1/2 transform transition-all hover:translate-x-0 -translate-x-[calc(100%-2rem)] z-50">
       <div class="bg-white/80 dark:bg-tertiary_dark backdrop-blur-sm border-2 border-primary dark:border-primary_dark rounded-r-xl px-8 py-4">
         <ul class="space-y-4">
           <li><a href="#about" class="text-text dark:text-text_dark hover:text-primary dark:hover:text-primary_dark transition-colors">À propos</a></li>
@@ -227,7 +231,7 @@ const showSecondNavigation = ref(false)
       </div>
     </nav>
     <section
-      class="base-grid trigger-1 py-16 space-y-8 items-center justify-center snap-start"
+      class="base-grid trigger-1 py-16 space-y-8 items-center justify-center snap-start z-20"
       id="about"
     >
       <section class="col-start-5 col-span-4">
@@ -298,9 +302,7 @@ const showSecondNavigation = ref(false)
         id="skills"
       >
         <h2 class="home-h2">Compétences</h2>
-        <div
-          class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-64 w-full fill-text"
-        >
+        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-x-auto gap-y-16 w-full fill-text">
           <section class="flex flex-col gap-5 w-fit">
             <h3 class="font-geist text-base">Intégration</h3>
             <ul class="grid grid-cols-2 gap-y-4 gap-x-8 group">
