@@ -206,7 +206,7 @@
     }
 
     .dot-mask {
-        @apply w-full h-full absolute z-10;
+        @apply w-full h-full top-0 absolute z-10;
         mask-image: radial-gradient(#000000 10px, transparent 0%);
         mask-size: 40px 40px;
         mask-position: -19px -19px;
@@ -214,37 +214,59 @@
     }
 
     .mask1 {
-        @apply -bottom-5;
+        @apply w-full h-full left-0 bottom-0 absolute;
         background-image: url(/loop.svg);
         background-position: bottom;
         background-size: contain;
         background-repeat: no-repeat;
         filter: blur(65px);
-        animation: mask1-animation 6s ease-in-out infinite;
     }
    
 
     .mask2 {
-        @apply w-full h-full -left-80 -top-72;
+        @apply w-full h-full -left-[30%] -top-72 absolute;
         background-image: radial-gradient(circle at top, #000000 20%, transparent 0);
         background-size: contain;
         background-repeat: no-repeat;
         filter: blur(250px);
+        animation: shrink 10s infinite;
     }
 
     .mask3 {
-        @apply w-full h-full -top-80;
-        background-image: radial-gradient(circle at top right, #000000 15%, transparent 0);
+        @apply w-full h-full -top-80 -right-[40%] absolute;
+        background-image: radial-gradient(circle at top, #000000 15%, transparent 0);
         background-size: contain;
-        background-position: top left;
         background-repeat: no-repeat;
         filter: blur(250px);
+        animation: shrink 15s infinite;
+    }
+
+    .mask-cursor {
+        @apply w-48 h-48 z-10;
+        background-image: radial-gradient(circle, #000000 100%, transparent 0);
+        background-size: contain;
+        background-repeat: no-repeat;
+        filter: blur(150px);
+
+    }
+
+    @keyframes shrink {
+        0% {
+            transform: scale(1);
+        }
+        50% {
+            transform: scale(0.3);
+        }
+        100% {
+            transform: scale(1);
+        }
+
     }
 }
 
 @layer utilities {
     .base-grid {
-        @apply lg:grid lg:grid-cols-12 lg:gap-8 lg:justify-center px-10
+        @apply lg:grid lg:grid-cols-12 lg:gap-8 lg:justify-center px-10 sm:px-12 md:px-16 lg:px-24
     }
 
     .content-grid {

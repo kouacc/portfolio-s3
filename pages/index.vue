@@ -2,6 +2,7 @@
 import gsap from "gsap";
 import ScrollTrigger from "gsap/ScrollTrigger";
 import { onMounted } from "vue";
+import { useMouse } from "@vueuse/core";
 
 useHead({
   bodyAttrs: {
@@ -10,7 +11,7 @@ useHead({
   title: "Portfolio - Maxence Lallemand",
 });
 
-
+const { x, y } = useMouse();
 
 const linesCount = ref();
 const projectsCount = ref(0)
@@ -144,9 +145,23 @@ onMounted(() => {
     repeat: -1,
     repeatDelay: 0.5,
   });
+
+  gsap.set(".mask-cursor", { xPercent: -50, yPercent: -50 });
+
+  watch([x, y], ([newX, newY]) => {
+    gsap.to(".mask-cursor", {
+      x: newX,
+      y: newY,
+      duration: 0.3,
+      delay: 0.2,
+    });
+  });
 });
 
 const showSecondNavigation = ref(false)
+
+const sections = ['#about', '#skills', '#timeline', '#contact']
+const activeSection = ref(0)
 
 </script>
 
@@ -216,11 +231,14 @@ const showSecondNavigation = ref(false)
           size="24"
           class="text-white"
       /></span>
-      <div class="dot-mask mask1"></div>
-      <div class="dot-mask mask2"></div>
-      <div class="dot-mask mask3"></div>
+      <div class="dot-mask">
+        <div class="mask1"></div>
+        <div class="mask2"></div>
+        <div class="mask3"></div>
+        <div class="mask-cursor"></div>
+      </div>
     </div>
-    <nav v-show="showSecondNavigation" class="fixed left-0 top-1/3 -translate-y-1/2 transform transition-all hover:translate-x-0 -translate-x-[calc(100%-2rem)] z-50">
+    <nav v-show="showSecondNavigation" class="hidden md:block fixed left-0 top-1/3 -translate-y-1/2 transform transition-all hover:translate-x-0 -translate-x-[calc(100%-2rem)] z-50">
       <div class="bg-white/80 dark:bg-tertiary_dark backdrop-blur-sm border-2 border-primary dark:border-primary_dark rounded-r-xl px-8 py-4">
         <ul class="space-y-4">
           <li><a href="#about" class="text-text dark:text-text_dark hover:text-primary dark:hover:text-primary_dark transition-colors">À propos</a></li>
@@ -251,7 +269,7 @@ const showSecondNavigation = ref(false)
           <div
             class="shrink-0 col-span-2 row-span-2 rounded-xl p-2.5 primary-bg border secondary-border fill-text"
           >
-            <h3 class="font-medium absolute">Lignes de code</h3>
+            <h3 class="font-medium md:absolute">Lignes de code</h3>
             <div class="grid place-items-center h-full">
               <span class="font-geistmono text-6xl place-self-center">{{
                 linesCount
@@ -264,7 +282,7 @@ const showSecondNavigation = ref(false)
           <div
             class="shrink-0 col-start-4 col-span-2 row-span-1 rounded-xl p-2.5 primary-bg border secondary-border fill-text"
           >
-            <h3 class="font-medium absolute">Nombre de projets</h3>
+            <h3 class="font-medium md:absolute">Nombre de projets</h3>
             <div class="grid place-items-center h-full">
               <span class="font-geistmono text-6xl place-self-center pt-5"
                 >{{ projectsCount }}</span
@@ -274,7 +292,7 @@ const showSecondNavigation = ref(false)
           <div
             class="shrink-0 row-start-2 col-span-1 col-start-4 rounded-xl p-2.5 primary-bg border secondary-border fill-text"
           >
-            <h3 class="font-medium absolute">Mood actuel</h3>
+            <h3 class="font-medium md:absolute">Mood actuel</h3>
             <div class="grid place-items-center h-full">
               <span class="font-geistmono text-6xl place-self-center pt-5"
                 >😔</span
@@ -298,11 +316,11 @@ const showSecondNavigation = ref(false)
       </div>
       <hr class="col-start-2 col-span-10 border-[#878787]" />
       <section
-        class="col-start-1 col-span-full flex flex-col gap-11 trigger-3 h-screen snap-start"
+        class="col-start-1 col-span-full flex flex-col gap-11 trigger-3 h-fit md:h-screen snap-start"
         id="skills"
       >
         <h2 class="home-h2">Compétences</h2>
-        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-x-auto gap-y-16 w-full fill-text">
+        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-x-16 gap-y-16 w-full fill-text">
           <section class="flex flex-col gap-5 w-fit">
             <h3 class="font-geist text-base">Intégration</h3>
             <ul class="grid grid-cols-2 gap-y-4 gap-x-8 group">
@@ -623,33 +641,54 @@ const showSecondNavigation = ref(false)
       <section class="trigger-2 grid-start-1 col-span-full h-screen snap-start" id="timeline">
         <h2 class="home-h2">Mon parcours</h2>
         <div>
-          <ul class="relative top-16 flex flex-row justify-between">
-            <li class="space-y-4 font-geistmono">
-              <p class="font-geistmono">2023</p>
-              <p>BUT MMI à Montbéliard, parcours Dev</p>
+          <div class="hidden sm:block">
+            <ul class="relative top-16 flex flex-row justify-between before:content-[''] before:absolute before:left-0 before:right-0 before:h-[2px] before:bg-black dark:before:bg-white before:top-[7.75rem] before:-z-10">
+              <li class="space-y-4 font-geistmono">
+                <div>
+                  <p class="font-geistmono">2023</p>
+                  <p>Baccalauréat général, mention assez bien. Spécialités NSI et SES</p>
+                </div>
+          <Star />
+              </li>
+              <li class="space-y-4 font-geistmono">
+                <div>
+                  <p class="font-geistmono">2023-2026</p>
+                  <p>BUT MMI à Montbéliard, parcours Dev</p>
+                </div>
+          <Star />
+              </li>
+              <li class="space-y-4 font-geistmono">
+                <div>
+                  <p class="font-geistmono">?</p>
+                </div>
+          <Star />
+              </li>
+            </ul>
+          </div>
+          <div class="sm:hidden">
+            <ul class="relative flex flex-col gap-12 before:content-[''] before:absolute before:right-[10%] before:h-full before:w-[2px] before:bg-black dark:before:bg-white before:-z-10">
+              <li class="space-y-4 font-geistmono flex items-center gap-5 w-full">
+              <div class="w-full">
+                <p class="font-geistmono">2023</p>
+                <p>Baccalauréat général, mention assez bien. Spécialités NSI et SES</p>
+              </div>
               <Star />
-            </li>
-            <li class="space-y-4 font-geistmono">
-              <p class="font-geistmono">2023-2026</p>
-              <p>BUT MMI à Montbéliard, parcours Dev</p>
+              </li>
+              <li class="space-y-4 font-geistmono flex items-center gap-5 w-full">
+              <div class="w-full">
+                <p class="font-geistmono">2023-2026</p>
+                <p>BUT MMI à Montbéliard, parcours Dev</p>
+              </div>
               <Star />
-            </li>
-            <li class="space-y-4 font-geistmono">
-              <p class="font-geistmono">?</p>
+              </li>
+              <li class="space-y-4 font-geistmono flex items-center gap-5 w-full">
+              <div class="w-full">
+                <p class="font-geistmono">?</p>
+              </div>
               <Star />
-            </li>
-          </ul>
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            class="w-full"
-            viewBox="0 0 1303 45"
-            fill="none"
-          >
-            <path
-              d="M1302.12 24.2412C1303.29 23.0696 1303.29 21.1701 1302.12 19.9986L1283.03 0.90667C1281.86 -0.264904 1279.96 -0.264904 1278.79 0.90667C1277.62 2.07824 1277.62 3.97774 1278.79 5.14931L1295.76 22.1199L1278.79 39.0904C1277.62 40.262 1277.62 42.1615 1278.79 43.3331C1279.96 44.5047 1281.86 44.5047 1283.03 43.3331L1302.12 24.2412ZM0 25.1199H1300V19.1199H0L0 25.1199Z"
-              fill="white"
-            />
-          </svg>
+              </li>
+            </ul>
+          </div>
         </div>
       </section>
     </section>
