@@ -23,7 +23,7 @@ onMounted(() => {
 <template>
   <div class="pt-24 pb-48 container fill-text space-y-12">
     <h1
-      class="text-7xl megazoid-text-h1 text-white"
+      class="megazoid-text-h1 text-white"
       data-text="Projets"
     >
       Projets

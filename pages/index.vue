@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import gsap from "gsap";
 import ScrollTrigger from "gsap/ScrollTrigger";
+import Draggable from "gsap/Draggable";
 import { onMounted } from "vue";
 import { useMouse } from "@vueuse/core";
 
@@ -20,17 +21,26 @@ const isBlinking = ref(true)
 
 const { data } = await useFetch("/api/projects/fetchprojects");
 
+
+
 onMounted(() => {
-  gsap.registerPlugin(ScrollTrigger);
+window.addEventListener('scroll', () => {
+  const scrollY = window.scrollY;
+  if (scrollY > window.screen.height) {
+    showSecondNavigation.value = true
+  } else {
+    showSecondNavigation.value = false
+  }
+});
+
+  gsap.registerPlugin(ScrollTrigger, Draggable);
 
   // About section
   gsap.from(".trigger-1", {
     scrollTrigger: {
       trigger: ".trigger-1", 
       start: "top 80%",
-      onEnter: () => {
-        showSecondNavigation.value = true;
-        
+      onEnter: () => { 
         gsap.to(linesCount, {
           value: 9999,
           duration: 5,
@@ -133,18 +143,21 @@ onMounted(() => {
   });
 
   gsap.from(".startrigger", {
-    opacity: 0,
-    y: 100,
-    stagger: 0.2,
-    duration: 0.8,
-    ease: "power2.out",
+    rotate: -180,
+    repeat: -1,
+    repeatDelay: 10,
   });
 
   gsap.from(".startrigger", {
-    rotate: -12,
-    repeat: -1,
-    repeatDelay: 0.5,
+    opacity: 0,
+    scale: 4,
+    once: 1,
+    delay: 2,
   });
+
+  Draggable.create('.startrigger', {
+    type: "rotation",
+  })
 
   gsap.set(".mask-cursor", { xPercent: -50, yPercent: -50 });
 
@@ -168,42 +181,32 @@ const activeSection = ref(0)
 <template>
   <div class="space-y-24 snap-mandatory scroll-smooth">
     <div
-      class="bg-blue-500 flex flex-col justify-end items-center pt-32 pb-20 px-2 h-screen gap-32 snap-start"
+      class="bg-blue-500 flex flex-col justify-end items-center pt-32 pb-20 px-2 h-screen gap-32 snap-start overflow-y-hidden"
     >
       <div class="w-full space-y-10 flex flex-col items-center relative z-20">
-        <section
-          class="flex items-center justify-center relative w-full pb-24 lg:text-nowrap"
-        >
-          <h1
-            class="select-none megazoid-text-title text-sky-400 text-5xl md:text-7xl xl:text-8xl text-center h-fit absolute top-0"
-            style="-webkit-text-stroke-width: 15pt"
-          >
-            Maxence Lallemand
-          </h1>
-          <h1
-            class="select-none megazoid-text-title text-white text-5xl md:text-7xl xl:text-8xl text-center h-fit absolute -top-5 -ml-8"
-            style="-webkit-text-stroke-width: 15pt"
-          >
-            Maxence Lallemand
-          </h1>
-          <h1
-            class="select-none megazoid-text-title text-sky-400 text-5xl md:text-7xl xl:text-8xl text-center h-fit absolute -top-10 -ml-16"
-            style="-webkit-text-stroke-width: 15pt"
-          >
-            Maxence Lallemand
-          </h1>
-          <h1
-            class="select-none megazoid-text-title text-white text-5xl md:text-7xl xl:text-8xl text-center h-fit absolute -top-[3.75rem] -ml-[6rem]"
-            style="-webkit-text-stroke-width: 15pt"
-          >
-            <Star
-              :stroke="true"
-              class="startrigger absolute -left-10 bottom-14 z-40 -rotate-12 hover:rotate-6 transition-transform"
-            />
-            Maxence Lallemand
-          </h1>
+        <section class="relative w-full pb-24 flex justify-center items-center">
+          <template v-for="(_, index) in 4" :key="index">
+            <h1
+              class="select-none megazoid-text-title text-5xl md:text-7xl xl:text-8xl absolute"
+              :class="{
+                'text-sky-400': index % 2 === 0,
+                'text-white': index % 2 === 1
+              }"
+              :style="{
+                '-webkit-text-stroke-width': '15pt',
+                'top': `${index * -15}px`,
+                'margin-left': `${index * -30}px`
+              }"
+            >
+              Maxence Lallemand
+              <Star
+                v-if="index === 3"
+                :stroke="true"
+                class="startrigger absolute -left-10 bottom-14 z-40 -rotate-12 transition-transform"
+              />
+            </h1>
+          </template>
         </section>
-
         <h2
           class="select-none megazoid-text-title text-white text-3xl sm:text-5xl z-20"
           style="-webkit-text-stroke-width: 13pt"
@@ -231,7 +234,7 @@ const activeSection = ref(0)
           size="24"
           class="text-white"
       /></span>
-      <div class="dot-mask">
+      <div class="dot-mask overflow-hidden">
         <div class="mask1"></div>
         <div class="mask2"></div>
         <div class="mask3"></div>
