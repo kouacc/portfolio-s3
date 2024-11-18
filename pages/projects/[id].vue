@@ -2,6 +2,7 @@
 import { type Project } from "~/database/schema";
 import { marked } from "marked";
 import { onMounted } from "vue";
+import { vOnClickOutside } from '@vueuse/components'
 import gsap from "gsap";
 import icons from '~/assets/icons.json';
 
@@ -16,6 +17,11 @@ onMounted(() => {
   gsap.from('.trigger-cover', { opacity: 0, x: -50, duration: 1 });
   gsap.from('.trigger-info', { opacity: 0, x: -50, duration: 1, delay: 0.2 });
 })
+
+const isCarouselOpen = ref<boolean>(false);
+const isScrollLocked = useScrollLock(document?.body, false);
+
+const activeImg = ref<number>(0);
 
 const { data } = useFetch<Project>(`/api/projects/${$route.params.id}`);
 
@@ -42,7 +48,7 @@ const modified_date = data?.value ? new Date(data.value.modified_at).toLocaleStr
     </section>
     <div class="content-grid">
       <div class="col-start-1 col-span-5 space-y-8">
-        <img class="trigger-cover rounded-xl" src="/Frame 1.jpg" alt="">
+        <img class="trigger-cover rounded-xl" :src="`/content/${data?.id}/${data?.cover}`" :alt="`Cover de ${data?.title}`">
         <div class="trigger-info rounded-xl px-12 py-11 space-y-12 dot-grid dark:dot-grid-dark bg-background dark:bg-background_dark">
           <div class="font-geistmono flex flex-col gap-3">
             <span>Année de réalisation</span>
@@ -55,7 +61,7 @@ const modified_date = data?.value ? new Date(data.value.modified_at).toLocaleStr
           <div class="font-geistmono flex flex-col gap-3">
             <span>Outils</span>
             <ul class="flex gap-3">
-              <li v-for="tool in data?.tools" :key="tool">
+              <li v-for="tool in JSON.parse(data?.tools)" :key="tool">
                 <IconTooltip :name="`simple-icons:${tool}`" size="36">{{ icons.icons.find(d => d.slug === tool)?.title }}</IconTooltip>
               </li>
             </ul>
@@ -64,6 +70,23 @@ const modified_date = data?.value ? new Date(data.value.modified_at).toLocaleStr
         </div>
       </div>
       <div class="col-start-6 col-span-full prose dark:prose-invert" v-html="output"></div>
+      <section class="col-span-full">
+        <h2>Galerie</h2>
+        <CarouselContainer 
+          v-show="isCarouselOpen" 
+          :imgCount="data?.images.length" 
+          :selectedImg="activeImg"
+          @close="isCarouselOpen = false, isScrollLocked = false" 
+          @prev="activeImg > 0 && (activeImg -= 1)" 
+          @next="activeImg < (data?.images.length - 1) && (activeImg += 1)"
+          @change="(index: number) => activeImg = index"
+        >
+          <img class="w-96 h-auto" :id="`img-${activeImg}`" :src="`/content/${data?.id}/${data?.images[activeImg]}`" />
+        </CarouselContainer>
+        <div class="columns-1 md:columns-2 lg:columns-3">
+          <img class="cursor-pointer" @click="isCarouselOpen = true, isScrollLocked = true, activeImg = index" v-for="(img, index) in data?.images" :src="`/content/${data?.id}/${img}`" :alt="`${data?.title} - Image ${index}`">
+        </div>
+      </section>
     </div>
   </div>
 </template>
