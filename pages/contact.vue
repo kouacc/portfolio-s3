@@ -3,6 +3,7 @@ useHead({
   bodyAttrs: {
     class: "gradient-bg dark:gradient-bg-dark",
   },
+  title: "Contact",
 });
 
 const submitForm = async (event: Event) => {
@@ -13,6 +14,7 @@ const submitForm = async (event: Event) => {
       body: new FormData(event.target as HTMLFormElement),
     });
     alert("Message envoyé !");
+    (event.target as HTMLFormElement).reset();
   } catch (error) {
     console.error(error);
   }
@@ -20,7 +22,7 @@ const submitForm = async (event: Event) => {
 </script>
 
 <template>
-  <div class="py-24 container space-y-5 h-screen">
+  <div class="py-24 container space-y-10 lg:h-screen">
     <h1
       class="megazoid-text-h1 text-white"
       data-text="Contact"
@@ -31,7 +33,7 @@ const submitForm = async (event: Event) => {
       @submit="submitForm"
       method="post"
       enctype="multipart/form-data"
-      class="flex flex-col gap-5 h-[calc(100%-10vh)] md:h-[calc(100%-11vh)] lg:h-[calc(100%-13vh)]"
+      class="flex flex-col gap-5 md:h-[calc(100%-13vh)] lg:h-[calc(100%-15vh)] md:px-16 lg:px-24 mx-auto"
     >
       <label class="flex flex-col md:grid md:grid-cols-12 gap-2.5">
         <span class="fill-text col-span-2">Nom</span>
@@ -57,14 +59,14 @@ const submitForm = async (event: Event) => {
           name="email"
         />
       </label>
-      <label class="flex flex-col md:grid md:grid-cols-12 gap-2.5 h-full">
+      <label class="flex flex-col md:grid md:grid-cols-12 gap-2.5 h-48">
         <span class="fill-text col-span-2">Message</span>
         <textarea
           class="rounded-xl primary-bg secondary-border col-span-10 resize-none h-full"
           name="message"
         />
       </label>
-      <input type="submit" class="primary-btn-submit place-self-end" value="Envoyer" />
+      <input type="submit" class="primary-btn-submit place-self-end cursor-pointer" value="Envoyer" />
     </form>
   </div>
 </template>
