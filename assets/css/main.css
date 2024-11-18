@@ -35,22 +35,15 @@
     }
 
     .megazoid-text-h1 {
-        @apply font-megazoid text-7xl relative;
+        @apply font-megazoid text-4xl sm:text-5xl md:text-6xl lg:text-7xl relative before:absolute before:top-0 before:left-0 before:z-[-1] before:content-[attr(data-text)] before:[text-shadow:_6.5px_6.5px_0_#38BDF8] before:md:[text-shadow:_8px_8px_0_#38BDF8] before:lg:[text-shadow:_10px_10px_0_#38BDF8];
         -webkit-text-stroke-color: black;
         paint-order: stroke fill;
         z-index: 1;
-        -webkit-text-stroke-width: 10pt;
+        -webkit-text-stroke-width: 6.5pt;
+        @screen lg {
+            -webkit-text-stroke-width: 10pt;
+        }
     }
-
-    .megazoid-text-h1::before {
-    content: attr(data-text);
-    position: absolute;
-    top: 0;
-    left: 0;
-    z-index: -1;
-    color: transparent;
-    text-shadow: 10px 10px 0px #38BDF8;
-}
 
     .pagination-btn {
         @apply flex border secondary-border rounded-xl primary-bg disabled:bg-black/30 p-2
