@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { nextTick } from "vue";
-import { useScrollLock } from "@vueuse/core";
+import { useScrollLock, useElementHover } from "@vueuse/core";
 
 const props = withDefaults(
   defineProps<{
@@ -26,15 +26,31 @@ const isDark = useDark({
   },
 });
 const toggleDark = useToggle(isDark);
-
 const isOpen = ref<boolean>(false);
-
 const isLocked = useScrollLock(document?.body, false);
+const isHidden = ref<boolean>(false);
+const header = ref<HTMLElement | null>(null);
+
+const isHovered = useElementHover(header);
+
+const handleScroll = () => {
+  if (window.scrollY > 200) {
+    isHidden.value = true;
+  } else {
+    isHidden.value = false;
+  }
+}
+
+onMounted(() => {
+  window.addEventListener("scroll", handleScroll);
+});
 </script>
 
 <template>
   <header
-    class="flex sm:flex-row items-center gap-3 sm:top-3 sm:left-1/2 sm:-translate-x-1/2 fixed z-50"
+    ref="header"
+    class="flex sm:flex-row items-center gap-3 sm:top-3 sm:left-1/2 sm:-translate-x-1/2 fixed z-50 transition-all duration-300 ease-in-out"
+    :class="{ 'md:-translate-y-14' : isHidden, 'md:translate-y-0' : isHovered}"
   >
     <button
       @click="(isOpen = !isOpen), (isLocked = !isLocked)"
@@ -55,10 +71,11 @@ const isLocked = useScrollLock(document?.body, false);
     <nav
       ref="menu"
       :class="{ 'sm:rounded-full': !props.return, hidden: !isOpen }"
-      class="w-screen h-screen absolute z-20 top-0 left-0 sm:static sm:w-fit sm:h-fit sm:block sm:rounded-r-full sm:px-8 sm:py-4 backdrop-blur-sm bg-white/80 dark:bg-tertiary_dark sm:border-2 sm:border-primary sm:dark:border-primary_dark fill-text"
+      class="w-screen h-screen absolute z-20 top-0 left-0 sm:static sm:w-fit sm:h-fit sm:block sm:rounded-r-full sm:px-8 sm:py-4 backdrop-blur-sm bg-white/80 dark:bg-tertiary_dark sm:border-2 sm:border-primary sm:dark:border-primary_dark fill-text transition-all duration-300 ease-in-out"
     >
       <ul
-        class="flex flex-col sm:flex-row sm:items-center sm:justify-center gap-8 w-fit h-full sm:h-fit ml-16 py-24 sm:m-0 sm:p-0"
+        class="flex flex-col sm:flex-row sm:items-center sm:justify-center gap-8 w-fit h-full sm:h-fit ml-16 py-24 sm:m-0 sm:p-0 transition-opacity duration-100 ease-in-out"
+        :class="{ 'md:invisible' : isHidden, 'md:!visible' : isHovered }"
       >
         <li
           class="font-medium font-geist h-fit text-4xl sm:text-base"
