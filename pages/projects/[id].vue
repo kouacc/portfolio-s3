@@ -2,7 +2,6 @@
 import { type Project } from "~/database/schema";
 import { marked } from "marked";
 import { onMounted } from "vue";
-import { vOnClickOutside } from '@vueuse/components'
 import gsap from "gsap";
 import icons from '~/assets/icons.json';
 
@@ -12,6 +11,8 @@ useHead({
     class: "gradient-bg dark:gradient-bg-dark",
   },
 });
+
+
 
 onMounted(() => {
   gsap.from('.trigger-cover', { opacity: 0, x: -50, duration: 1 });
@@ -29,6 +30,11 @@ const output = computed(() => (data?.value ? marked(data.value.content) : ""));
 
 const created_date = data?.value ? new Date(data?.value.created_at).toLocaleString('fr-FR', { timeZone: 'UTC', dateStyle: "short" }) : null;
 const modified_date = data?.value ? new Date(data.value.modified_at).toLocaleString('fr-FR', { timeZone: 'UTC', dateStyle: "short" }) : null;
+
+useSeoMeta({
+  title: data?.value?.title,
+  ogImage: `https://maxencelallemand.fr/content/${data?.value?.id}/${data?.value?.cover}`,
+})
 </script>
 
 <template>
@@ -61,7 +67,7 @@ const modified_date = data?.value ? new Date(data.value.modified_at).toLocaleStr
           <div class="font-geistmono flex flex-col gap-3">
             <span>Outils</span>
             <ul class="flex gap-3">
-              <li v-for="tool in JSON.parse(data?.tools)" :key="tool">
+              <li v-for="tool in data?.tools" :key="tool">
                 <IconTooltip :name="`simple-icons:${tool}`" size="36">{{ icons.icons.find(d => d.slug === tool)?.title }}</IconTooltip>
               </li>
             </ul>
@@ -69,8 +75,8 @@ const modified_date = data?.value ? new Date(data.value.modified_at).toLocaleStr
           <NuxtLink v-if="data?.repository_link" :href="data?.repository_link" class="text-underline">Lien du repository</NuxtLink>
         </div>
       </div>
-      <div class="col-start-6 col-span-full prose dark:prose-invert" v-html="output"></div>
-      <section class="col-span-full">
+      <div class="col-start-6 col-span-full prose prose-zinc dark:prose-invert" v-html="output"></div>
+      <section v-if="data?.images && data?.images.length >= 1" class="col-span-full">
         <h2>Galerie</h2>
         <CarouselContainer 
           v-show="isCarouselOpen" 

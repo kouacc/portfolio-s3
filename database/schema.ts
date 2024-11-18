@@ -13,10 +13,13 @@ export const projectTable = sqliteTable("projects", {
     .default("En cours"),
   repository_link: text("repository_link"),
   tools: text("tools", { mode: "json" })
+    .$type<string[]>()
     .notNull()
     .default(sql`'[]'`),
   cover: text("cover"),
-  images: text("images", { mode: "json" }).default(sql`'[]'`),
+  images: text("images", { mode: "json" })
+    .$type<string[]>()
+    .default(sql`'[]'`),
   created_at: text("created_at")
     .notNull()
     .default(sql`(CURRENT_TIMESTAMP)`),
