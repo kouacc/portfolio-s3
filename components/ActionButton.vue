@@ -29,6 +29,6 @@ const sizes = {
 </script>
 
 <template>
-    <button v-if="!href" @click="props.click" class="rounded-xl px-8 border-[0.5px] border-white/40 inline-flex items-center gap-3" :class="[variantStyles[props.variant], sizes[props.size]]" :style="bgStyles[props.variant]"><slot /></button>
-    <NuxtLink v-else :to="props.href" class="rounded-xl px-8 border-[0.5px] border-white/40 inline-flex items-center gap-3" :class="[variantStyles[props.variant], sizes[props.size]]" :style="bgStyles[props.variant]"><slot /></NuxtLink>
+    <button v-if="!href" @click="props.click" class="rounded-xl px-8 border-[0.5px] border-white/40 inline-flex items-center gap-3 text-white" :class="[variantStyles[props.variant], sizes[props.size]]" :style="bgStyles[props.variant]"><slot /></button>
+    <NuxtLink v-else :to="props.href" class="rounded-xl px-8 border-[0.5px] border-white/40 inline-flex items-center gap-3 text-white" :class="[variantStyles[props.variant], sizes[props.size]]" :style="bgStyles[props.variant]"><slot /></NuxtLink>
 </template>
