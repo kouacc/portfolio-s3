@@ -1,29 +1,25 @@
-ARG NODE_VERSION=20.18.0
+# Stage de build
+FROM node:18-alpine AS builder
 
-FROM node:${NODE_VERSION}-slim as base
+WORKDIR /app
 
-WORKDIR /src
-
-# Build
-FROM base as build
-
-COPY --link package.json package-lock.json .
+COPY package*.json ./
 RUN npm install
 
-COPY --link . .
-
+COPY . .
+RUN npm run prebuild
 RUN npm run build
 
-# Run
-FROM base
+# Stage de production
+FROM node:18-alpine
 
-ENV DB_FILE_NAME=file:database.db
-ENV NODE_ENV=production
+WORKDIR /app
 
-COPY --from=build /src/.output /src/.output
-# Optional, only needed if you rely on unbundled dependencies
-# COPY --from=build /src/node_modules /src/node_modules
+# Copier uniquement les fichiers nécessaires depuis le stage de build
+COPY --from=builder /app/.output ./.output
+COPY --from=builder /app/package*.json ./
+COPY --from=builder /app/database ./database
 
 EXPOSE 3000
 
-CMD [ "node", ".output/server/index.mjs" ]
+CMD [ "node", "./.output/server/index.mjs"]
