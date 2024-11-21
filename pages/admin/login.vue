@@ -31,8 +31,8 @@ const form = ref({
 <template>
     <div class="container py-24 h-screen space-y-8">
         <h1 class="megazoid-text-h1 w-fit text-white" data-text="Backoffice">Backoffice</h1>
-        <form @submit="submitForm" class="flex flex-col gap-10 relative mx-48">
-            <div class="col-start-3 col-span-8 flex flex-col gap-7 dot-grid dark:dot-grid-dark px-24 py-20">
+        <form @submit="submitForm" class="flex flex-col gap-10 relative mx-auto h-full md:px-16 lg:px-48">
+            <div class="col-start-3 col-span-8 flex flex-col gap-7 dot-grid dark:dot-grid-dark h-[85%] lg:h-auto px-6 sm:px-12 md:px-16 lg:px-24 py-20">
                 <label class="flex flex-col gap-2.5">
                     Nom d'utilisateur
                     <input type="text" name="username" id="" required v-model="form.username">

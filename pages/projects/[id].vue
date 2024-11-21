@@ -6,13 +6,12 @@ import gsap from "gsap";
 import icons from '~/assets/icons.json';
 
 const $route = useRoute();
+
 useHead({
   bodyAttrs: {
     class: "gradient-bg dark:gradient-bg-dark",
   },
 });
-
-
 
 onMounted(() => {
   gsap.from('.trigger-cover', { opacity: 0, x: -50, duration: 1 });
@@ -52,13 +51,13 @@ useSeoMeta({
       </div>
       <span class="sm:hidden font-geistmono text-xs">Ajouté le {{ created_date }} • Modifié le {{ modified_date }}</span>
     </section>
-    <div class="content-grid">
+    <div class="content-grid space-y-10 md:space-y-0">
       <div class="col-start-1 col-span-5 space-y-8">
-        <img class="trigger-cover rounded-xl" :src="`/content/${data?.id}/${data?.cover}`" :alt="`Cover de ${data?.title}`">
-        <div class="trigger-info rounded-xl px-12 py-11 space-y-12 dot-grid dark:dot-grid-dark bg-background dark:bg-background_dark">
-          <div class="font-geistmono flex flex-col gap-3">
+        <img class="trigger-cover rounded-xl w-full" :src="`/content/${data?.id}/${data?.cover}`" :alt="`Cover de ${data?.title}`">
+        <div class="trigger-info rounded-xl px-12 py-11 flex flex-col gap-12 dot-grid dark:dot-grid-dark bg-background dark:bg-background_dark">
+          <div v-if="data?.year" class="font-geistmono flex flex-col gap-3">
             <span>Année de réalisation</span>
-            <span>{{ data?.year }}</span>
+            <span>{{ new Date(data?.year).getFullYear() }}</span>
           </div>
           <div class="font-geistmono flex flex-col gap-3">
             <span>Statut</span>
@@ -72,11 +71,11 @@ useSeoMeta({
               </li>
             </ul>
           </div>
-          <NuxtLink v-if="data?.repository_link" :href="data?.repository_link" class="text-underline">Lien du repository</NuxtLink>
+          <NuxtLink v-if="data?.repository_link" :href="data?.repository_link" class="text-underline font-geistmono">Lien</NuxtLink>
         </div>
       </div>
       <div class="col-start-6 col-span-full prose prose-zinc dark:prose-invert" v-html="output"></div>
-      <section v-if="data?.images && data?.images.length >= 1" class="col-span-full">
+      <section v-if="data?.images && data?.images.length >= 1" class="col-span-full space-y-8">
         <h2>Galerie</h2>
         <CarouselContainer 
           v-show="isCarouselOpen" 
@@ -87,10 +86,10 @@ useSeoMeta({
           @next="activeImg < (data?.images.length - 1) && (activeImg += 1)"
           @change="(index: number) => activeImg = index"
         >
-          <img class="w-96 h-auto" :id="`img-${activeImg}`" :src="`/content/${data?.id}/${data?.images[activeImg]}`" />
+          <img class="w-64 sm:w-72 md:w-80 lg:w-96 h-auto" :id="`img-${activeImg}`" :src="`/content/${data?.id}/${data?.images[activeImg]}`" />
         </CarouselContainer>
-        <div class="columns-1 md:columns-2 lg:columns-3">
-          <img class="cursor-pointer" @click="isCarouselOpen = true, isScrollLocked = true, activeImg = index" v-for="(img, index) in data?.images" :src="`/content/${data?.id}/${img}`" :alt="`${data?.title} - Image ${index}`">
+        <div class="columns-1 md:columns-2 lg:columns-3 space-y-5">
+          <img class="cursor-pointer rounded-xl" @click="isCarouselOpen = true, isScrollLocked = true, activeImg = index" v-for="(img, index) in data?.images" :src="`/content/${data?.id}/${img}`" :alt="`${data?.title} - Image ${index}`">
         </div>
       </section>
     </div>
