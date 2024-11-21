@@ -6,22 +6,19 @@ interface JWT_Structure {
 }
 
 const signature = new TextEncoder().encode(process.env.JWT_SECRET as string);
-const alg = "HS256";
 
 export async function generateJWT(
   id: number,
   username: string,
   surname: string
 ) {
-    const jwt = await new jose.SignJWT({
-    id: id,
-    username: username,
-    name: surname,
-  })
+  console.log(signature)
+  const payload = { id: id, username: username, surname: surname };
+    const jwt = await new jose.SignJWT(payload)
     .setIssuedAt()
     .setExpirationTime("2h")
-    .setProtectedHeader({ alg })
-    .sign(signature);
+    .setProtectedHeader({ alg: "HS256" })
+    .sign(signature)
   return jwt;
 }
 

@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { debounce } from "lodash-es";
 import { marked } from "marked";
-import { onClickOutside, useDraggable } from "@vueuse/core";
+import { useDraggable } from "@vueuse/core";
 import type { Project } from "~/database/schema";
 import icons from "~/assets/icons.json";
 const route = useRoute("/admin/editor/:id");
@@ -14,7 +14,7 @@ useHead({
 });
 
 definePageMeta({
-  /* middleware: 'auth', */
+  middleware: 'auth',
   layout: "editor",
 });
 
@@ -229,7 +229,7 @@ const { x, y, style } = useDraggable(iconsWindow, {
   <Transition>
     <div
       v-show="settingsOverlay"
-      class="w-screen h-screen absolute z-50 top-0 bg-black/60 transition-all"
+      class="w-screen h-screen absolute z-50 top-0 bg-black/60 transition-all overflow-y-scroll"
     >
       <div
         class="primary-bg absolute bottom-0 w-1/2 h-[calc(100vh-6rem)] p-8 rounded-r-xl space-y-6"

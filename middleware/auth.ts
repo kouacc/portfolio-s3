@@ -1,32 +1,20 @@
-import { verifyJWT } from "../utils/jwt";
+import { useJWT } from "~/composables/useJWT";
 
-export default defineNuxtRouteMiddleware(async (to, from) => {
-  // get the HTTP Authorization header
-  const headers = await useRequestHeaders();
-  if (!headers.cookie) {
-    console.log('No token found');
-    return navigateTo("/admin/login");
+export default defineNuxtRouteMiddleware(async () => {
+  const cookie = useCookie('token');
+
+  if (!cookie.value) {
+    return navigateTo('/admin/login');
   }
 
-  let authorization = headers.cookie;
-  const token = authorization.split("token=")[1];
-  
-  const isValid = await verifyJWT(token);
-  
-  //get the current unix timestamp
+  const isValid = await useJWT(cookie.value);
   const now = Math.floor(Date.now() / 1000);
-  
 
-  if (!isValid || !isValid.payload) {
-    console.log('Invalid token');
-    return abortNavigation()
-  } else {
-    if (isValid.payload.exp && isValid.payload.exp < now) {
-      return abortNavigation();
-    }
-  }
+  console.log(isValid)
+  
+  if (!isValid || !isValid.payload || (isValid.payload.exp && isValid.payload.exp < now)) {
+    return ('/admin/login');
+  } 
 
   return;
-
-  
 });
