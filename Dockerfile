@@ -20,6 +20,6 @@ COPY --from=builder /app/.output ./.output
 COPY --from=builder /app/package*.json ./
 COPY --from=builder /app/database ./database
 
-EXPOSE 3000
+EXPOSE 4000
 
-CMD [ "node", "./.output/server/index.mjs"]
+CMD [ "PORT=4000", "node", "./.output/server/index.mjs"]
