@@ -12,14 +12,17 @@ export async function generateJWT(
   username: string,
   surname: string
 ) {
-  console.log(signature)
-  const payload = { id: id, username: username, surname: surname };
+  if (!process.env.JWT_SECRET) {
+    throw new Error("JWT_SECRET is not defined");
+  } else {
+    const payload = { id: id, username: username, surname: surname };
     const jwt = await new jose.SignJWT(payload)
     .setIssuedAt()
     .setExpirationTime("2h")
     .setProtectedHeader({ alg: "HS256" })
     .sign(signature)
   return jwt;
+  }
 }
 
 export async function verifyJWT(token: string) {
