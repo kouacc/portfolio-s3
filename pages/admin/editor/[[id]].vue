@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { debounce } from "lodash-es";
 import { marked } from "marked";
-import { useDraggable } from "@vueuse/core";
 import type { Project } from "~/database/schema";
 import icons from "~/assets/icons.json";
 const route = useRoute("/admin/editor/:id");
@@ -88,6 +87,11 @@ function handleToolClick(slug: string) {
   }
 }
 
+function handlePreview() {
+  useState('preview', () => project)
+  useRouter().push("/admin/editor/preview");
+}
+
 const onFileChange = (event: Event, inputType: 'project_imgs' | 'cover_img') => {
   const target = event.target as HTMLInputElement;
   if (target.files) {
@@ -159,12 +163,6 @@ const update = debounce((e) => {
   project.content = e.target.value;
 }, 100);
 const output = computed(() => marked(project.content));
-
-const iconsWindow = ref<HTMLElement | null>(null);
-
-const { x, y, style } = useDraggable(iconsWindow, {
-  initialValue: { x: 40, y: 40 },
-});
 </script>
 
 <template>
@@ -200,6 +198,7 @@ const { x, y, style } = useDraggable(iconsWindow, {
       <li>
         <NuxtLink
           class="inline-flex items-center cursor-pointer transition-all rounded-lg hover:bg-white/10"
+          @click="handlePreview()"
           ><IconTooltip name="fa6-solid:expand" size="24" class="mx-2 my-1.5"
             ><span>Aperçu</span></IconTooltip
           ></NuxtLink
@@ -229,10 +228,10 @@ const { x, y, style } = useDraggable(iconsWindow, {
   <Transition>
     <div
       v-show="settingsOverlay"
-      class="w-screen h-screen absolute z-50 top-0 bg-black/60 transition-all overflow-y-scroll"
+      class="w-screen h-full absolute z-50 top-0 bg-black/60 transition-all"
     >
       <div
-        class="primary-bg absolute bottom-0 w-1/2 h-[calc(100vh-6rem)] p-8 rounded-r-xl space-y-6"
+        class="primary-bg absolute bottom-0 w-full md:w-5/6 lg:w-4/6 h-[calc(100vh-6rem)] p-8 space-y-6 overflow-y-scroll"
       >
         <section class="flex justify-between">
           <h2>Paramètres</h2>
@@ -312,22 +311,26 @@ const { x, y, style } = useDraggable(iconsWindow, {
               ></ActionButton
             >
           </div>
-          <img :src="cover_img">
-          <ul>
-            <li
-              v-for="img in project_imgs"
-              :key="img"
-              class="hover:bg-red-500/20"
-            >
-              <img :src="img" class="h-52" />
-            </li>
-          </ul>
+          <div v-if="cover_img" class="space-y-3">
+            <span class="font-geistmono">Cover</span>
+            <img :src="cover_img">
+          </div>
+          <div v-if="project_imgs.length > 0" class="space-y-3">
+            <span class="font-geistmono">Images</span>
+            <ul>
+              <li
+                v-for="img in project_imgs"
+                :key="img"
+                class="hover:bg-red-500/20"
+                @click="project_imgs = project_imgs.filter((i) => i !== img), projectFiles = projectFiles.filter((f) => f !== projectFiles[project_imgs.indexOf(img)]), imgsInput.value = ''"
+              >
+                <img :src="img" class="h-52" />
+              </li>
+            </ul>
+          </div>
         </div>
       </div>
       <div
-        ref="iconsWindow"
-        :style="style"
-        style="position: fixed"
         v-show="tools.isModalOpen"
         class="absolute w-2/5 h-fit right-0 bottom-0 rounded-tl-xl primary-bg p-8 space-y-5"
       >
