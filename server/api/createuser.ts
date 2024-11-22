@@ -11,5 +11,18 @@ export default defineEventHandler(async (event) => {
     var salt = crypto.randomBytes(16)
     const hashed_password = crypto.pbkdf2Sync(password as string, salt, 310000, 32, 'sha256')
 
-    await db.insert(userTable).values({ username: username, name: name, password_hash: hashed_password, salt: salt, })
+    const authorization = event.headers.get('Authorization');
+    if (!authorization) {
+        if (await db.$count(userTable) >= 1) {
+            return {
+                status: 401,
+                body: 'Unauthorized',
+            }
+        } else {
+            await db.insert(userTable).values({ username: username, name: name, password_hash: hashed_password, salt: salt, })
+        }
+    } else {
+        await db.insert(userTable).values({ username: username, name: name, password_hash: hashed_password, salt: salt, })
+    }
+
 });

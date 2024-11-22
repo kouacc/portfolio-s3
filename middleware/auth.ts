@@ -9,8 +9,6 @@ export default defineNuxtRouteMiddleware(async () => {
 
   const isValid = await useJWT(cookie.value);
   const now = Math.floor(Date.now() / 1000);
-
-  console.log(isValid)
   
   if (!isValid || !isValid.payload || (isValid.payload.exp && isValid.payload.exp < now)) {
     return ('/admin/login');

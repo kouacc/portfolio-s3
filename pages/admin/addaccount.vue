@@ -1,6 +1,6 @@
 <script setup lang="ts">
 definePageMeta({
-  middleware: 'auth'
+  middleware: 'account'
 });
 
 useHead({
@@ -20,9 +20,9 @@ const submitForm = async (event: Event) => {
 </script>
 
 <template>
-  <div class="container py-24">
+  <div class="container py-24 space-y-5 h-screen">
     <h1>Ajouter un compte</h1>
-    <form @submit="submitForm" method="post" class="flex flex-col">
+    <form @submit="submitForm" method="post" class="flex flex-col sm:px-16 md:px-40 lg:px-64 space-y-5">
       <label class="flex flex-col gap-2.5">
         <span class="fill-text">Nom d'utilisateur</span>
         <input
@@ -47,7 +47,7 @@ const submitForm = async (event: Event) => {
           name="password"
         />
       </label>
-      <input type="submit" class="fill-text" value="Ajouter" />
+      <input type="submit" class="primary-btn-submit place-self-center" value="Ajouter" />
     </form>
   </div>
 </template>
