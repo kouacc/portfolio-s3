@@ -17,7 +17,8 @@ definePageMeta({
   layout: "editor",
 });
 
-const project = reactive({
+const { data } = route.params.id ? await useFetch<Project>(`/api/projects/${route.params.id}`) : { data: null };
+const project = reactive(data?.value || {
   title: "",
   content: "# Nouveau projet",
   year: "",
@@ -26,8 +27,8 @@ const project = reactive({
   tools: [] as string[],
 });
 
-const project_imgs = ref<string[]>([]);
-const cover_img = ref<string>()
+const project_imgs = ref<string[]>(route.params.id ? project.images.map(img => `/content/${route.params.id}/${img}`) : []);
+const cover_img = ref<string>(route.params.id ? `/content/${route.params.id}/${project.cover}`: "")
 
 const coverFile = ref<File>();
 const projectFiles = ref<File[]>([]);
@@ -36,19 +37,6 @@ const coverInput = ref<HTMLInputElement>();
 const imgsInput = ref<HTMLInputElement>();
 
 const cookie = useCookie<string>("token");
-
-if (route.params.id) {
-  const { data } = await useFetch<Project>(`/api/projects/${route.params.id}`);
-  if (data) {
-    // remove id, created_at and modified_at
-    delete data.value.id;
-    delete data.value.created_at;
-    delete data.value.modified_at;
-    Object.assign(project, data.value);
-  } else {
-    console.error("Project not found");
-  }
-}
 
 const settingsOverlay = ref<boolean>(false);
 const tools = ref({
@@ -87,10 +75,6 @@ function handleToolClick(slug: string) {
   }
 }
 
-function handlePreview() {
-  useState('preview', () => project)
-  useRouter().push("/admin/editor/preview");
-}
 
 const onFileChange = (event: Event, inputType: 'project_imgs' | 'cover_img') => {
   const target = event.target as HTMLInputElement;
@@ -139,8 +123,8 @@ async function sendProject() {
     });
   }
 
-  const method = route.params.id ? "PUT" : "POST";
-  const url = route.params.id ? `/api/protected/editProject` : "/api/protected/addProject";
+  const method = route.params.id ? "PATCH" : "POST";
+  const url = route.params.id ? `/api/protected/updateProject/${route.params.id}` : "/api/protected/addProject";
   const { data } = await useFetch(url, {
     method,
     body: formData,
@@ -194,15 +178,6 @@ const output = computed(() => marked(project.content));
             ><span>Paramètres du projet</span></IconTooltip
           >
         </button>
-      </li>
-      <li>
-        <NuxtLink
-          class="inline-flex items-center cursor-pointer transition-all rounded-lg hover:bg-white/10"
-          @click="handlePreview()"
-          ><IconTooltip name="fa6-solid:expand" size="24" class="mx-2 my-1.5"
-            ><span>Aperçu</span></IconTooltip
-          ></NuxtLink
-        >
       </li>
       <li>
         <ActionButton @click="sendProject()" variant="primary" href="/admin/editor"
