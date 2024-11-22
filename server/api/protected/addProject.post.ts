@@ -1,15 +1,16 @@
 import { db } from "#imports";
 import { projectTable } from "~/database/schema";
 import fs from 'node:fs';
+import { useAuthorization } from "~/server/composables/useAuthorization";
 
 export default defineEventHandler(async (event) => {
   // read the authorization header
   const authorization = event.headers.get('Authorization');
-  if (!authorization) {
+  if (!authorization || !(await useAuthorization(authorization))) {
     return {
       status: 401,
-      body: 'Unauthorized',
-    }
+      body: "Unauthorized",
+    };
   }
 
   const formDataBody = await readMultipartFormData(event);
@@ -27,7 +28,6 @@ export default defineEventHandler(async (event) => {
       images: formDataBody.slice(7).map((image) => image.filename),
     }
 
-    console.log(project);
     const [{ insertedId: id }] = await db.insert(projectTable).values(project).onConflictDoNothing().returning({ insertedId: projectTable.id });
 
 
