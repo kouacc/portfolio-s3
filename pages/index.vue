@@ -1,7 +1,8 @@
 <script setup lang="ts">
-import gsap from "gsap";
+import gsap, { wrap } from "gsap";
 import ScrollTrigger from "gsap/ScrollTrigger";
 import Draggable from "gsap/Draggable";
+import Observer from "gsap/Observer"
 import { onMounted } from "vue";
 import { useMouse } from "@vueuse/core";
 
@@ -18,10 +19,15 @@ const linesCount = ref();
 const projectsCount = ref(0)
 const currentText = ref<string>("")
 const isBlinking = ref(true)
+const emojis = ref<{emoji: string, hour?: string}[]>([{"emoji": '🫠', "hour": "08"}, {"emoji": '😴', "hour": ''}, {"emoji": '😴', "hour": "20"}, {"emoji": '😴', "hour": '20'}])
+
+const shownEmoji = computed(() => {
+  const hour = new Date().getHours();
+  const emoji = emojis.value.find(emoji => emoji.hour === hour.toString());
+  return emoji?.emoji ?? '😴';
+});
 
 const { data } = await useFetch("/api/projects/fetchprojects");
-
-
 
 onMounted(() => {
 window.addEventListener('scroll', () => {
@@ -151,11 +157,12 @@ window.addEventListener('scroll', () => {
   gsap.from(".startrigger", {
     opacity: 0,
     scale: 4,
+    rotate: -160,
     once: 1,
     delay: 2,
   });
 
-  Draggable.create('.startrigger', {
+  Draggable.create('.star-rotate', {
     type: "rotation",
   })
 
@@ -172,37 +179,34 @@ window.addEventListener('scroll', () => {
 });
 
 const showSecondNavigation = ref(false)
-
-const sections = ['#about', '#skills', '#timeline', '#contact']
-const activeSection = ref(0)
-
 </script>
 
 <template>
   <div class="space-y-24 snap-mandatory scroll-smooth">
     <div
       class="bg-blue-500 flex flex-col justify-end items-center pt-32 pb-20 px-2 h-screen gap-32 snap-start overflow-y-hidden"
+      id="hero"
     >
       <div class="w-full space-y-10 flex flex-col items-center relative z-20">
         <section class="relative w-full pb-24 flex justify-center items-center">
           <template v-for="(_, index) in 4" :key="index">
             <h1
-              class="select-none megazoid-text-title text-5xl md:text-7xl xl:text-8xl absolute"
+              class="select-none megazoid-text-title text-5xl md:text-7xl xl:text-8xl absolute text-center"
               :class="{
                 'text-sky-400': index % 2 === 0,
                 'text-white': index % 2 === 1
               }"
-              :style="{
+                :style="{
                 '-webkit-text-stroke-width': '15pt',
-                'top': `${index * -15}px`,
-                'margin-left': `${index * -30}px`
-              }"
+                'top': `${index * -1.75}vh`,
+                'margin-left': `${index * -2.25}vw`
+                }"
             >
               Maxence Lallemand
               <Star
                 v-if="index === 3"
                 :stroke="true"
-                class="startrigger absolute -left-10 bottom-14 z-40 -rotate-12 transition-transform"
+                class="star-rotate startrigger relative -left-[5%] bottom-36 z-40 -rotate-12 transition-transform"
               />
             </h1>
           </template>
@@ -241,18 +245,8 @@ const activeSection = ref(0)
         <div class="mask-cursor"></div>
       </div>
     </div>
-    <nav v-show="showSecondNavigation" class="hidden md:block fixed left-0 top-1/3 -translate-y-1/2 transform transition-all hover:translate-x-0 -translate-x-[calc(100%-2rem)] z-50">
-      <div class="bg-white/80 dark:bg-tertiary_dark backdrop-blur-sm border-2 border-primary dark:border-primary_dark rounded-r-xl px-8 py-4">
-        <ul class="space-y-4">
-          <li><a href="#about" class="text-text dark:text-text_dark hover:text-primary dark:hover:text-primary_dark transition-colors">À propos</a></li>
-          <li><a href="#skills" class="text-text dark:text-text_dark hover:text-primary dark:hover:text-primary_dark transition-colors">Compétences</a></li>
-          <li><a href="#timeline" class="text-text dark:text-text_dark hover:text-primary dark:hover:text-primary_dark transition-colors">Timeline</a></li>
-          <li><a href="#contact" class="text-text dark:text-text_dark hover:text-primary dark:hover:text-primary_dark transition-colors">Contact</a></li>
-        </ul>
-      </div>
-    </nav>
     <section
-      class="base-grid trigger-1 py-16 space-y-8 items-center justify-center snap-start z-20"
+      class="base-grid trigger-1 py-16 space-y-28 items-center justify-center snap-start z-20"
       id="about"
     >
       <section class="col-start-5 col-span-4">
@@ -267,14 +261,14 @@ const activeSection = ref(0)
       </section>
       <div class="lg:col-start-3 lg:col-span-8">
         <div
-          class="flex flex-col lg:grid grid-cols-1 lg:grid-rows-2 lg:grid-cols-5 gap-5"
+          class="flex flex-col sm:grid sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-5 grid-rows-[auto_auto] gap-5"
         >
           <div
-            class="shrink-0 col-span-2 row-span-2 rounded-xl p-2.5 primary-bg border secondary-border fill-text"
+            class="shrink-0 lg:col-span-2 row-span-2 rounded-xl p-2.5 primary-bg border secondary-border fill-text"
           >
             <h3 class="font-medium md:absolute">Lignes de code</h3>
             <div class="grid place-items-center h-full">
-              <span class="font-geistmono text-6xl place-self-center">{{
+              <span class="font-geistmono text-6xl place-self-center px-10 py-20 sm:px-0 sm:py-0">{{
                 linesCount
               }}</span>
             </div>
@@ -298,12 +292,12 @@ const activeSection = ref(0)
             <h3 class="font-medium md:absolute">Mood actuel</h3>
             <div class="grid place-items-center h-full">
               <span class="font-geistmono text-6xl place-self-center pt-5"
-                >😔</span
+                >{{ shownEmoji }}</span
               >
             </div>
           </div>
           <svg
-            class="hidden lg:block shrink-0 row-start-2 col-start-5"
+            class="star-rotate hidden lg:block shrink-0 row-start-2 col-start-5"
             xmlns="http://www.w3.org/2000/svg"
             width="129"
             height="122"
@@ -319,7 +313,7 @@ const activeSection = ref(0)
       </div>
       <hr class="col-start-2 col-span-10 border-[#878787]" />
       <section
-        class="col-start-1 col-span-full flex flex-col gap-11 trigger-3 h-fit md:h-screen snap-start"
+        class="col-start-1 col-span-full flex flex-col gap-11 trigger-3 h-fit snap-start"
         id="skills"
       >
         <h2 class="home-h2">Compétences</h2>
@@ -641,7 +635,7 @@ const activeSection = ref(0)
           </section>
         </div>
       </section>
-      <section class="trigger-2 grid-start-1 col-span-full h-screen snap-start" id="timeline">
+      <section class="trigger-2 grid-start-1 col-span-full snap-start" id="timeline">
         <h2 class="home-h2">Mon parcours</h2>
         <div>
           <div class="hidden sm:block">
@@ -651,20 +645,20 @@ const activeSection = ref(0)
                   <p class="font-geistmono">2023</p>
                   <p>Baccalauréat général, mention assez bien. Spécialités NSI et SES</p>
                 </div>
-          <Star />
+          <Star class="star-rotate" />
               </li>
               <li class="space-y-4 font-geistmono">
                 <div>
                   <p class="font-geistmono">2023-2026</p>
                   <p>BUT MMI à Montbéliard, parcours Dev</p>
                 </div>
-          <Star />
+          <Star class="star-rotate" />
               </li>
               <li class="space-y-4 font-geistmono">
                 <div>
                   <p class="font-geistmono">?</p>
                 </div>
-          <Star />
+          <Star class="star-rotate" />
               </li>
             </ul>
           </div>
@@ -719,7 +713,7 @@ const activeSection = ref(0)
               href="/contact"
               ><span class="text-white">Me contacter</span></ActionButton
             >
-            <ActionButton variant="secondary" size="large" text="E-mail">
+            <ActionButton variant="secondary" size="large" text="E-mail" href="mailto:maxence.lallemand0@gmail.com">
               <span class="text-white inline-flex items-center gap-3">
                 <Icon name="lucide:mail" class="text-white" size="24" />
                 E-mail
