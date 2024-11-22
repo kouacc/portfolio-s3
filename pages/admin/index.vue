@@ -37,7 +37,6 @@ function onDrop(event: Event) {
     } else {
       isFileSelected.value = true
       file.value = target.files[0]
-      console.log(file.value)
     }
 }
 
