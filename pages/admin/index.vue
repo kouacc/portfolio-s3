@@ -15,7 +15,7 @@ export interface JWT {
     exp: number;
     iat: number;
     id: number;
-    name: string;
+    surname: string;
     username: string;
   };
   protectedHeader: {
