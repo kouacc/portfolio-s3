@@ -259,7 +259,7 @@
 
 @layer utilities {
     .base-grid {
-        @apply lg:grid lg:grid-cols-12 lg:gap-8 lg:justify-center px-10 sm:px-12 md:px-16 lg:px-24
+        @apply lg:grid lg:grid-cols-12 lg:gap-8 lg:justify-center px-10 sm:px-12 md:px-16 lg:px-24 auto-cols-max
     }
 
     .content-grid {
