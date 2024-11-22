@@ -22,4 +22,4 @@ COPY --from=builder /app/database ./database
 
 EXPOSE 4000
 
-CMD [ "PORT=4000", "node", "./.output/server/index.mjs"]
+CMD ["sh", "-c", "PORT=4000 node ./.output/server/index.mjs"]
