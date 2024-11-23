@@ -3,7 +3,7 @@ import { onMounted } from "vue";
 import gsap from "gsap";
 
 useHead({
-  title: "Projets",
+  title: "Projets - Maxence Lallemand",
   bodyAttrs: {
     class: "gradient-bg dark:gradient-bg-dark",
   },

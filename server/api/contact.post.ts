@@ -20,7 +20,7 @@ export default defineEventHandler(async (event) => {
           title: "Nouveau contact",
           type: "rich",
           description: `Nom : ${name}\nPrénom : ${surname}\nEmail : ${email}\nMessage : ${message}`,
-          color: 0x00ff00,
+          color: 0x3680f7,
           footer: {
             text: "Logs - Portfolio",
           },

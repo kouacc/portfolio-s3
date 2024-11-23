@@ -3,7 +3,7 @@ useHead({
   bodyAttrs: {
     class: "gradient-bg dark:gradient-bg-dark",
   },
-  title: "Contact",
+  title: "Contact - Maxence Lallemand",
 });
 
 const submitForm = async (event: Event) => {

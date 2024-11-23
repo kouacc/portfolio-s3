@@ -9,7 +9,7 @@ useHead({
   bodyAttrs: {
     class: "bg-background dark:bg-background_dark overflow-x-hidden",
   },
-  title: "Gestion - Maxence Lallemand",
+  title: "Éditeur - Maxence Lallemand",
 });
 
 definePageMeta({

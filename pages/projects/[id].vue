@@ -32,7 +32,8 @@ const modified_date = data?.value ? new Date(data.value.modified_at).toLocaleStr
 
 useSeoMeta({
   title: data?.value?.title,
-  ogImage: `https://maxencelallemand.fr/content/${data?.value?.id}/${data?.value?.cover}`,
+  ogLocale: "fr_FR",
+  ogImage: data?.value?.cover ? `https://maxencelallemand.fr/content/${data?.value?.id}/${data?.value?.cover}` : "https://maxencelallemand.fr/favicon-32x32.png",
 })
 </script>
 

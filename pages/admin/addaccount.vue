@@ -7,7 +7,7 @@ useHead({
   bodyAttrs: {
     class: "gradient-bg dark:gradient-bg-dark overflow-x-hidden",
   },
-  title: "Gestion - Maxence Lallemand",
+  title: "Ajouter un compte - Maxence Lallemand",
 });
 
 const submitForm = async (event: Event) => {
