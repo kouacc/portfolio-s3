@@ -19,7 +19,7 @@ const linesCount = ref();
 const projectsCount = ref(0)
 const currentText = ref<string>("")
 const isBlinking = ref(true)
-const emojis = ref<{emoji: string, hour?: string}[]>([{"emoji": '🫠', "hour": "08"}, {"emoji": '😴', "hour": ''}, {"emoji": '😴', "hour": "20"}, {"emoji": '😴', "hour": '20'}])
+const emojis = ref<{emoji: string, hour: string}[]>([{"emoji": '🫠', "hour": "8"}, {"emoji": '😶', "hour": '10'}, {"emoji": '😤', "hour": "14"}, {"emoji": '🥱', "hour": "16"}, {"emoji": '😴', "hour": '20'}])
 
 const hard_skills = [{
   title: "Intégration",
@@ -77,7 +77,7 @@ const activeTab = ref("Intégration")
 const shownEmoji = computed(() => {
   const hour = new Date().getHours();
   const emoji = emojis.value.find(emoji => emoji.hour === hour.toString());
-  return emoji?.emoji ?? '😴';
+  return emoji?.emoji || '😐';
 });
 
 const { data } = await useFetch("/api/projects/fetchprojects");

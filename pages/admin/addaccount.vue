@@ -39,6 +39,7 @@ const submitForm = async (event: Event) => {
           class="rounded-xl primary-bg secondary-border"
           type="text"
           name="username"
+          required
         />
       </label>
       <label class="flex flex-col gap-2.5">
@@ -47,6 +48,7 @@ const submitForm = async (event: Event) => {
           class="rounded-xl primary-bg secondary-border"
           type="text"
           name="name"
+          required
         />
       </label>
       <label class="flex flex-col gap-2.5">
@@ -55,6 +57,7 @@ const submitForm = async (event: Event) => {
           class="rounded-xl primary-bg secondary-border"
           type="password"
           name="password"
+          required
         />
       </label>
       <input type="submit" class="primary-btn-submit place-self-center" value="Ajouter" />
