@@ -206,7 +206,7 @@ const output = computed(() => marked(project.content));
       class="w-screen h-full absolute z-50 top-0 bg-black/60 transition-all"
     >
       <div
-        class="primary-bg absolute bottom-0 w-full md:w-5/6 lg:w-4/6 h-[calc(100vh-6rem)] p-8 space-y-6 overflow-y-scroll"
+        class="primary-bg absolute bottom-0 w-full md:w-5/6 lg:w-4/6 h-[calc(100vh-6rem)] p-8 space-y-6 overflow-y-auto"
       >
         <section class="flex justify-between">
           <h2>Paramètres</h2>
@@ -222,10 +222,19 @@ const output = computed(() => marked(project.content));
             <span>Titre</span>
             <input type="text" v-model="project.title" />
           </label>
-          <label class="flex flex-col gap-5">
-            <span>Lien du repository</span>
-            <input type="text" v-model="project.repository_link" />
-          </label>
+          <div class="flex justify-between gap-16">
+            <label class="flex flex-col gap-5 grow">
+              <span>Lien du repository</span>
+              <input type="text" v-model="project.repository_link" />
+            </label>
+            <label class="flex flex-col gap-5 grow">
+              <span>Statut</span>
+              <select class="rounded-xl px-5 py-2 secondary-bg" v-model="project.status">
+                <option v-for='status in ["Terminé", "En cours", "En pause", "Abandonné"]' :value="status">{{ status }}</option>
+              </select>
+            </label>
+          </div>
+            
           <div class="flex justify-between gap-16">
             <label class="flex flex-1 flex-col gap-5">
               <span>Date de réalisation</span>

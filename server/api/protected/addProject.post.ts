@@ -23,28 +23,34 @@ export default defineEventHandler(async (event) => {
       status: formDataBody[3].data.toString() as "Terminé" | "En cours" | "En pause" | "Abandonné",
       repository_link: formDataBody[4].data.toString(),
       tools: formDataBody[5].data.toString(),
-      cover: formDataBody[6].filename,
-      // get the filenames of the images, from formDataBody[7] to the end of the formdatabody array
-      images: formDataBody.slice(7).map((image) => image.filename),
+      cover: formDataBody[6]?.filename || null,
+      images: formDataBody.slice(7)?.map((image) => image.filename) || [],
     }
 
     const [{ insertedId: id }] = await db.insert(projectTable).values(project).onConflictDoNothing().returning({ insertedId: projectTable.id });
 
 
     // use Nitro storage to save the cover and images
-    const dirPath = `./public/content/${id}`;
-    if (!fs.existsSync(dirPath)) {
+    if (project.cover || project.images.length > 0) {
+      const dirPath = `./public/content/${id}`;
+      if (!fs.existsSync(dirPath)) {
       fs.mkdirSync(dirPath);
-    }
+      }
 
-    fs.appendFile(`./public/content/${id}/${project.cover}`, formDataBody[6].data, (err) => {
-      if (err) throw err;
-    });
-
-    formDataBody.slice(7).forEach((image) => {
-      fs.appendFile(`./public/content/${id}/${image.filename}`, image.data, (err) => {
+      if (project.cover && formDataBody[6]) {
+      fs.appendFile(`./public/content/${id}/${project.cover}`, formDataBody[6].data, (err) => {
         if (err) throw err;
-      })});
+      });
+      }
+
+      if (project.images.length > 0) {
+      formDataBody.slice(7).forEach((image) => {
+        fs.appendFile(`./public/content/${id}/${image.filename}`, image.data, (err) => {
+        if (err) throw err;
+        });
+      });
+      }
+    }
     
     
 
