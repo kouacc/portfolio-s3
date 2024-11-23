@@ -220,7 +220,7 @@ const output = computed(() => marked(project.content));
         <div class="space-y-5">
           <label class="flex flex-col gap-5">
             <span>Titre</span>
-            <input type="text" v-model="project.title" />
+            <input type="text" v-model="project.title" required />
           </label>
           <div class="flex justify-between gap-16">
             <label class="flex flex-col gap-5 grow">
@@ -242,6 +242,7 @@ const output = computed(() => marked(project.content));
                 class="rounded-xl secondary-bg fill-text border-none"
                 type="date"
                 v-model="project.year"
+                required
               />
             </label>
             <label class="flex flex-1 flex-col gap-5">
