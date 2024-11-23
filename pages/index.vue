@@ -441,13 +441,7 @@ const showSecondNavigation = ref(false)
               </li>
             </ul>
             <ul class="flex justify-between relative before:content-[''] before:absolute before:top-1/2 before:w-full before:h-[2px] before:bg-black dark:before:bg-white before:mx-auto before:-z-10">
-              <li>
-                <Star />
-              </li>
-              <li>
-                <Star />
-              </li>
-              <li>
+              <li v-for="i in 3">
                 <Star />
               </li>
             </ul>
@@ -467,13 +461,7 @@ const showSecondNavigation = ref(false)
               </li>
             </ul>
             <ul class="flex flex-col justify-between grow gap-[15%] relative before:content-[''] before:absolute before:left-1/2  before:w-[2px] before:h-full before:bg-black dark:before:bg-white before:mx-auto before:-z-10">
-              <li>
-                <Star />
-              </li>
-              <li>
-                <Star />
-              </li>
-              <li>
+              <li v-for="i in 3">
                 <Star />
               </li>
             </ul>
