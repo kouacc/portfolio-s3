@@ -15,6 +15,11 @@ export default defineNuxtConfig({
     viewTransition: true
   }, */
 
+  site: {
+    url: "https://maxencelallemand.fr",
+    name: "Portfolio - Maxence Lallemand",
+  },
+
   app: {
     head: {
       link: [
@@ -41,5 +46,5 @@ export default defineNuxtConfig({
     }
   },
 
-  modules: ["@nuxt/fonts", "@nuxt/icon", "@vueuse/nuxt"],
+  modules: ["@nuxt/fonts", "@nuxt/icon", "@vueuse/nuxt", '@nuxtjs/sitemap', '@nuxtjs/robots'],
 });
