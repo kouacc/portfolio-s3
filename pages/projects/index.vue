@@ -36,15 +36,18 @@ onMounted(() => {
 </script>
 
 <template>
-  <div class="pt-24 pb-48 container fill-text space-y-12">
+  <div class="pt-24 pb-48 container fill-text space-y-12" :class="{ 'h-screen' : data?.length === 0}">
     <h1
       class="megazoid-text-h1 text-white"
       data-text="Projets"
     >
       Projets
     </h1>
+    <div v-if="data?.length === 0" class="flex justify-center items-center h-full !mt-0">
+      <p>Aucun projet n'est disponible, et c'est pas normal. Merci de réessayer plus tard.</p>
+    </div>
     
-    <div class="grid grid-cols-3 gap-8">
+    <div v-if="data?.length !== 0" class="grid grid-cols-3 gap-8">
       <h2 class="col-span-full col-start-1 hidden md:block">Projets récents</h2>
       <h2 class="col-span-full col-start-1 block md:hidden">Projet récent</h2>
         <ProjectCard
@@ -57,7 +60,7 @@ onMounted(() => {
           :projectImg="`/content/${project.id}/${project.cover}`"
         />
     </div>
-    <div class="space-y-14">
+    <div v-if="data?.length !== 0" class="space-y-14">
       <section class="flex justify-between items-center">
         <h2>Tous mes projets</h2>
         <div v-if="data && data.length >= 8" class="flex gap-2">
