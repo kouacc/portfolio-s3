@@ -15,7 +15,17 @@ const submitForm = async (event: Event) => {
   const { data } = await useFetch("/api/createuser", {
     method: "POST",
     body: new FormData(event.target as HTMLFormElement),
+    headers: {
+      Authorization: useCookie("token"),
+    }
   });
+
+  if (data.value?.status === 401) {
+    alert("Vous n'avez pas l'autorisation d'ajouter un compte.");
+  } else {
+    alert("Compte ajouté !");
+    useRouter().push("/admin/login")
+  }
 };
 </script>
 

@@ -20,9 +20,16 @@ export default defineEventHandler(async (event) => {
             }
         } else {
             await db.insert(userTable).values({ username: username, name: name, password_hash: hashed_password, salt: salt, })
-        }
+            return {
+                status: 200,
+                body: 'User created',
+            }}
     } else {
         await db.insert(userTable).values({ username: username, name: name, password_hash: hashed_password, salt: salt, })
+        return {
+            status: 200,
+            body: 'User created',
+        }
     }
 
 });
