@@ -33,7 +33,7 @@ export default defineEventHandler(async (event) => {
 
     // use Nitro storage to save the cover and images
     if (project.cover || project.images.length > 0) {
-      const dirPath = `./public/content/${id}`;
+      const dirPath = `./.output/public/content/${id}`;
       //check if content folder exists, if not create it
       
       if (!fs.existsSync(dirPath)) {
@@ -41,14 +41,14 @@ export default defineEventHandler(async (event) => {
       }
 
       if (project.cover && formDataBody[6]) {
-      fs.appendFile(`./public/content/${id}/${project.cover}`, formDataBody[6].data, (err) => {
+      fs.appendFile(`./.output/public/content/${id}/${project.cover}`, formDataBody[6].data, (err) => {
         if (err) throw err;
       });
       }
 
       if (project.images.length > 0) {
       formDataBody.slice(7).forEach((image) => {
-        fs.appendFile(`./public/content/${id}/${image.filename}`, image.data, (err) => {
+        fs.appendFile(`./.output/public/content/${id}/${image.filename}`, image.data, (err) => {
         if (err) throw err;
         });
       });
