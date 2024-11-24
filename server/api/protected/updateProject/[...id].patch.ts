@@ -21,20 +21,18 @@ export default defineEventHandler(async (event) => {
 
 if (formDataBody) {
     const project = {
-        title: formDataBody[0].data.toString(),
-        content: formDataBody[1].data.toString(),
-        year: formDataBody[2].data.toString(),
-        status: formDataBody[3].data.toString() as
-            | "Terminé"
-            | "En cours"
-            | "En pause"
-            | "Abandonné",
-        repository_link: formDataBody[4].data.toString(),
-        tools: formDataBody[5].data.toString(),
-        ...(formDataBody[6]?.filename && { cover: formDataBody[6].filename }),
-        ...(formDataBody.length > 7 && { 
-            images: formDataBody.slice(7).map((image) => image.filename)
-        }),
+      title: formDataBody[0].data.toString(),
+      content: formDataBody[1].data.toString(),
+      year: formDataBody[2].data.toString(),
+      status: formDataBody[3].data.toString() as
+        | "Terminé"
+        | "En cours"
+        | "En pause"
+        | "Abandonné",
+      repository_link: formDataBody[4].data.toString(),
+      tools: formDataBody[5].data.toString(),
+      ...(formDataBody[6] && { cover: formDataBody[6].filename }),
+      ...(formDataBody.length > 7 && { images: formDataBody.slice(7).map((image) => image.filename) })
     };
 
     //handle updating images
@@ -64,5 +62,9 @@ if (formDataBody) {
         }
     
     await db.update(projectTable).set(project).where(eq(projectTable.id, id));
+    return {
+      status: 200,
+      body: JSON.stringify({ id }),
+    }
   }
 });

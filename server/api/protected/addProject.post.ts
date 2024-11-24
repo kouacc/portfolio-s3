@@ -33,6 +33,8 @@ export default defineEventHandler(async (event) => {
     // use Nitro storage to save the cover and images
     if (project.cover || project.images.length > 0) {
       const dirPath = `./public/content/${id}`;
+      //check if content folder exists, if not create it
+      
       if (!fs.existsSync(dirPath)) {
       fs.mkdirSync(dirPath);
       }
