@@ -43,7 +43,13 @@ export default defineNuxtConfig({
         driver: 'fs',
         base: './public/content'
       }
-    }
+    },
+    publicAssets: [
+      {
+        dir: './public/content',
+        maxAge: 60 * 60 * 24 * 365
+      }
+    ]
   },
 
   modules: ["@nuxt/fonts", "@nuxt/icon", "@vueuse/nuxt", '@nuxtjs/sitemap', '@nuxtjs/robots'],
