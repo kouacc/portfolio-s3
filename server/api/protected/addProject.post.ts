@@ -36,7 +36,7 @@ export default defineEventHandler(async (event) => {
       //check if content folder exists, if not create it
       
       if (!fs.existsSync(dirPath)) {
-      fs.mkdirSync(dirPath);
+      fs.mkdirSync(dirPath, { recursive: true });
       }
 
       if (project.cover && formDataBody[6]) {
