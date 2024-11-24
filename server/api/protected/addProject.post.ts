@@ -27,6 +27,7 @@ export default defineEventHandler(async (event) => {
       images: formDataBody.slice(7)?.map((image) => image.filename) || [],
     }
 
+    project.tools = JSON.parse(project.tools);
     const [{ insertedId: id }] = await db.insert(projectTable).values(project).onConflictDoNothing().returning({ insertedId: projectTable.id });
 
 
