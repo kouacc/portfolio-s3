@@ -152,14 +152,14 @@ const output = computed(() => marked(project.content));
 <template>
   <div class="pt-24 h-screen flex flex-col sm:flex-row">
     <textarea
-      class="w-full sm:w-1/2 h-1/2 sm:h-[calc(100vh-6rem)] p-10"
+      class="w-full sm:w-1/2 h-1/2 sm:h-[calc(100vh-6rem)] p-10 overflow-y-auto resize-none"
       name=""
       id=""
       v-model="project.content"
       @input="update"
     ></textarea>
     <div
-      class="w-full sm:w-1/2 h-1/2 sm:h-[calc(100vh-6rem)] p-10 prose dark:prose-invert"
+      class="w-full sm:w-1/2 h-1/2 sm:h-[calc(100vh-6rem)] p-10 prose dark:prose-invert overflow-y-auto"
       v-html="output"
     ></div>
   </div>
