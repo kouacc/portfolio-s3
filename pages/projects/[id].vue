@@ -66,7 +66,7 @@ useSeoMeta({
           </div>
           <div class="font-geistmono flex flex-col gap-3">
             <span>Outils</span>
-            <ul class="flex gap-3">
+            <ul class="flex gap-3 flex-wrap">
               <li v-for="tool in data?.tools" :key="tool">
                 <IconTooltip :name="`simple-icons:${tool}`" size="36">{{ icons.icons.find(d => d.slug === tool)?.title }}</IconTooltip>
               </li>

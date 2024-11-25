@@ -20,9 +20,6 @@ COPY --from=builder /app/.output ./.output
 COPY --from=builder /app/package*.json ./
 COPY --from=builder /app/database ./database
 
-# create content directory in /.output/public
-RUN mkdir -p ./.output/public/content
-
 EXPOSE 4000
 
 CMD ["sh", "-c", "PORT=4000 node ./.output/server/index.mjs"]

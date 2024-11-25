@@ -10,7 +10,6 @@
     "postinstall": "nuxt prepare",
     "studio": "npx drizzle-kit studio",
     "db:push": "npx drizzle-kit push",
-    "prebuild": "touch database/database.db && npx drizzle-kit push"
   },
   "dependencies": {
     "@nuxt/fonts": "^0.10.0",
