@@ -7,7 +7,6 @@ COPY package*.json ./
 RUN npm install
 
 COPY . .
-RUN npm run prebuild
 RUN npm run build
 
 # Stage de production
@@ -18,7 +17,6 @@ WORKDIR /app
 # Copier uniquement les fichiers nécessaires depuis le stage de build
 COPY --from=builder /app/.output ./.output
 COPY --from=builder /app/package*.json ./
-COPY --from=builder /app/database ./database
 
 EXPOSE 4000
 
