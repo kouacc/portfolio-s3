@@ -15,5 +15,6 @@ export default defineEventHandler(async (event) => {
   const project = await db.query.projectTable.findFirst({
     where: eq(projectTable.id, parseInt(id)),
   });
+  
   return project;
 });

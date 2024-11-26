@@ -7,6 +7,12 @@ import icons from '~/assets/icons.json';
 
 const $route = useRoute();
 
+definePageMeta({
+  validate: (route) => {
+    return !isNaN(Number(route.params.id))
+  }
+})
+
 useHead({
   bodyAttrs: {
     class: "gradient-bg dark:gradient-bg-dark",
@@ -23,7 +29,7 @@ const isScrollLocked = useScrollLock(document?.body, false);
 
 const activeImg = ref<number>(0);
 
-const { data } = useFetch<Project>(`/api/projects/${$route.params.id}`);
+const { data, error } = useFetch<Project>(`/api/projects/${$route.params.id}`);
 
 const output = computed(() => (data?.value ? marked(data.value.content) : ""));
 
