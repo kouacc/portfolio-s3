@@ -13,6 +13,15 @@ useHead({
   title: "Portfolio - Maxence Lallemand",
 });
 
+useSeoMeta({
+  title: "Portfolio - Maxence Lallemand",
+  description: "Portfolio de Maxence Lallemand, étudiant en MMI et développeur web.",
+  ogTitle: "Portfolio - Maxence Lallemand",
+  ogDescription: "Portfolio de Maxence Lallemand, étudiant en MMI et développeur web.",
+  ogImage: "https://maxencelallemand.fr/favicon-32x32.png",
+  ogUrl: "https://maxencelallemand.fr",
+})
+
 const { x, y } = useMouse();
 
 const linesCount = ref();
