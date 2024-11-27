@@ -29,12 +29,14 @@ const isScrollLocked = useScrollLock(document?.body, false);
 
 const activeImg = ref<number>(0);
 
-const { data, error } = useFetch<Project>(`/api/projects/${$route.params.id}`);
+const { data, error } = await useFetch<Project>(`/api/projects/${$route.params.id}`);
 
 const output = computed(() => (data?.value ? marked(data.value.content) : ""));
 
 const created_date = data?.value ? new Date(data?.value.created_at).toLocaleString('fr-FR', { timeZone: 'UTC', dateStyle: "short" }) : null;
 const modified_date = data?.value ? new Date(data.value.modified_at).toLocaleString('fr-FR', { timeZone: 'UTC', dateStyle: "short" }) : null;
+
+console.log(`https://maxencelallemand.fr/content/${data?.value?.id}/${data?.value?.cover}`)
 
 useSeoMeta({
   title: data?.value?.title,
