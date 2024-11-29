@@ -29,7 +29,7 @@ const isScrollLocked = useScrollLock(document?.body, false);
 
 const activeImg = ref<number>(0);
 
-const { data, error } = await useAsyncData('project', () => $fetch<Project>('/api/projects', { params: { id: $route.params.id}}));
+const { data, error } = await useAsyncData('project', () => $fetch<Project>(`/api/projects/${$route.params.id}`));
 
 const output = computed(() => (data?.value ? marked(data.value.content) : ""));
 
