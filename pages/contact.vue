@@ -6,6 +6,13 @@ useHead({
   title: "Contact - Maxence Lallemand",
 });
 
+useSeoMeta({
+  title: "Contact",
+  description: "Contactez-moi pour tout renseignement ou demande.",
+  ogLocale: "fr_FR",
+  ogImage: "https://maxencelallemand.fr/banner.webp",
+});
+
 const submitForm = async (event: Event) => {
   try {
     event.preventDefault();

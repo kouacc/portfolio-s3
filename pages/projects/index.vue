@@ -9,6 +9,13 @@ useHead({
   },
 });
 
+useSeoMeta({
+  title: "Projets",
+  description: "Découvrez tous les projets de Maxence Lallemand.",
+  ogLocale: "fr_FR",
+  ogImage: "https://maxencelallemand.fr/banner.webp",
+})
+
 const { data } = await useFetch("/api/projects/fetchprojects");
 
 const latestProjects = data.value?.sort((a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime()).slice(0, 3);

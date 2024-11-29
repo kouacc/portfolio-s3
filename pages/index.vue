@@ -18,7 +18,7 @@ useSeoMeta({
   description: "Portfolio de Maxence Lallemand, étudiant en MMI et développeur web.",
   ogTitle: "Portfolio - Maxence Lallemand",
   ogDescription: "Portfolio de Maxence Lallemand, étudiant en MMI et développeur web.",
-  ogImage: "https://maxencelallemand.fr/favicon-32x32.png",
+  ogImage: "https://maxencelallemand.fr/banner.webp",
   ogUrl: "https://maxencelallemand.fr",
 })
 

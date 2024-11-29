@@ -29,7 +29,7 @@ const isScrollLocked = useScrollLock(document?.body, false);
 
 const activeImg = ref<number>(0);
 
-const { data, error } = await useFetch<Project>(`/api/projects/${$route.params.id}`);
+const { data, error } = await useAsyncData('project', () => $fetch<Project>('/api/projects', { params: { id: $route.params.id}}));
 
 const output = computed(() => (data?.value ? marked(data.value.content) : ""));
 
@@ -41,7 +41,7 @@ console.log(`https://maxencelallemand.fr/content/${data?.value?.id}/${data?.valu
 useSeoMeta({
   title: data?.value?.title,
   ogLocale: "fr_FR",
-  ogImage: data?.value?.cover ? `https://maxencelallemand.fr/content/${data?.value?.id}/${data?.value?.cover}` : "https://maxencelallemand.fr/favicon-32x32.png",
+  ogImage: () => data?.value?.cover ? `https://maxencelallemand.fr/content/${data?.value?.id}/${data?.value?.cover}` : "https://maxencelallemand.fr/banner.webp",
 })
 </script>
 
