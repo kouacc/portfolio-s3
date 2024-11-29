@@ -14,17 +14,26 @@ const props = withDefaults(
 const isDark = useDark({
   onChanged(isDark) {
     nextTick(() => {
-      document.startViewTransition(() => {
-        nextTick(() => {
-          document.documentElement.setAttribute(
-            "data-theme",
-            isDark ? "dark" : "light"
-          );
+      if (document.startViewTransition) {
+        document.startViewTransition(() => {
+          nextTick(() => {
+            document.documentElement.setAttribute(
+              "data-theme",
+              isDark ? "dark" : "light"
+            );
+          });
         });
-      });
+      } else {
+        document.documentElement.setAttribute(
+          "data-theme",
+          isDark ? "dark" : "light"
+        );
+      }
     });
   },
 });
+
+
 const toggleDark = useToggle(isDark);
 const isOpen = ref<boolean>(false);
 const isLocked = useScrollLock(document?.body, false);
