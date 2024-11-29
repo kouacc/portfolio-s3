@@ -10,8 +10,9 @@ useHead({
 });
 
 useSeoMeta({
-  title: "Projets",
+  title: "Projets - Maxence Lallemand",
   description: "Découvrez tous les projets de Maxence Lallemand.",
+  ogTitle: "Projets - Maxence Lallemand",
   ogLocale: "fr_FR",
   ogImage: "https://maxencelallemand.fr/banner.webp",
 })

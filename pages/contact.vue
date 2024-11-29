@@ -7,8 +7,9 @@ useHead({
 });
 
 useSeoMeta({
-  title: "Contact",
+  title: "Contact - Maxence Lallemand",
   description: "Contactez-moi pour tout renseignement ou demande.",
+  ogTitle: "Contact - Maxence Lallemand",
   ogLocale: "fr_FR",
   ogImage: "https://maxencelallemand.fr/banner.webp",
 });
