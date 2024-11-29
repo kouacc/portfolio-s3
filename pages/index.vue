@@ -28,6 +28,7 @@ const linesCount = ref();
 const projectsCount = ref(0)
 const currentText = ref<string>("")
 const isBlinking = ref(true)
+const showSlideTooltip = ref(false)
 const emojis = ref<{emoji: string, hour: string}[]>([{"emoji": '🫠', "hour": "8"}, {"emoji": '😶', "hour": '10'}, {"emoji": '😤', "hour": "14"}, {"emoji": '🥱', "hour": "16"}, {"emoji": '😴', "hour": '20'}])
 
 const hard_skills = [{
@@ -240,6 +241,12 @@ window.addEventListener('scroll', () => {
   Draggable.create('.swipe-element', {
     type: "x",
     bounds: ".dragElement",
+    onPress: function() {
+      showSlideTooltip.value = true
+      setTimeout(() => {
+        showSlideTooltip.value = false
+      }, 4000)
+    },
     onDragEnd: function() {
       if (this.endX >= this.maxX - 10) {
         useRouter().replace("/projects");
@@ -343,7 +350,7 @@ const showSecondNavigation = ref(false)
           Je m’appelle Maxence, je suis étudiant de 2ème année en BUT MMI à
           Montbéliard.<br /><br />Développeur web full-stack à mes heures
           perdues, je travaille sur des projets tels que WiiLink.<br /><br />Et
-          quand je travaille pas, je joue à des jeux vidéos, écoute de la
+          quand je ne travaille pas, je joue à des jeux vidéos, écoute de la
           musique, fait du sport, ou 😴
         </p>
       </section>
@@ -480,9 +487,10 @@ const showSecondNavigation = ref(false)
       <section class="col-span-full space-y-10">
         <h2 class="home-h2">Mes projets</h2>
         <div class="sm:px-12 md:px-16 lg:px-24 mx-auto max-w-screen-xl">
+            <span class="rounded-xl primary-bg secondary-border transition-opacity absolute px-5 py-3 left-1/2 -translate-x-1/2 -translate-y-20 opacity-0" :class='{ "opacity-100" : showSlideTooltip}'>Glissez vers la fin pour changer de page !</span>
           <div ref="dragElement" class="dragElement p-2 rounded-full border secondary-border fill-text flex items-center">
             <div class="swipe-element rounded-full size-10 sm:size-12 md:size-14 lg:size-16 flex justify-center items-center bg-sky-400 cursor-grab active:cursor-grabbing"><Icon name="lucide:chevron-right" size="24"/></div>
-            <span class="home-h2 text-sm sm:text-base absolute left-1/2 -translate-x-1/2 select-none -z-10">Découvrez mes projets</span>
+            <span class="home-h2 text-sm sm:text-base absolute left-1/2 -translate-x-1/2 select-none -z-10">Découvrez vers mes projets</span>
           </div>
         </div>
       </section>

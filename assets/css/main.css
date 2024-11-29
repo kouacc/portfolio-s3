@@ -239,8 +239,8 @@
         background-image: radial-gradient(circle, #000000 100%, transparent 0);
         background-size: contain;
         background-repeat: no-repeat;
-        filter: blur(150px);
-
+        filter: blur(9.375rem);
+        -webkit-filter: blur(9.375rem);
     }
 
     @keyframes shrink {
