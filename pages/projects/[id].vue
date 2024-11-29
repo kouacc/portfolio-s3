@@ -36,8 +36,6 @@ const output = computed(() => (data?.value ? marked(data.value.content) : ""));
 const created_date = data?.value ? new Date(data?.value.created_at).toLocaleString('fr-FR', { timeZone: 'UTC', dateStyle: "short" }) : null;
 const modified_date = data?.value ? new Date(data.value.modified_at).toLocaleString('fr-FR', { timeZone: 'UTC', dateStyle: "short" }) : null;
 
-console.log(`https://maxencelallemand.fr/content/${data?.value?.id}/${data?.value?.cover}`)
-
 useSeoMeta({
   title: data?.value?.title,
   ogLocale: "fr_FR",
