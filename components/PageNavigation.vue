@@ -64,6 +64,7 @@ onMounted(() => {
     <button
       @click="(isOpen = !isOpen), (isLocked = !isLocked)"
       class="sm:hidden flex items-center fixed top-3 right-3 p-3 bg-white/80 dark:bg-tertiary_dark border-2 primary-border rounded-xl z-50"
+      :aria-label="!isOpen ? 'Ouvrir le menu' : 'Fermer le menu'"
     >
       <Icon v-if="!isOpen" name="lucide:menu" size="24" /><Icon
         v-else
@@ -120,7 +121,7 @@ onMounted(() => {
           >
         </li>
         <li class="h-full sm:h-fit place-content-end">
-          <button class="p-1 flex items-center" @click="toggleDark()">
+          <button :aria-label="isDark ? 'Mode sombre' : 'Mode clair'" class="p-1 flex items-center" @click="toggleDark()">
             <Icon v-show="!isDark" name="lucide:sun" size="24" /><Icon
               v-show="isDark"
               name="lucide:moon"

@@ -72,8 +72,8 @@ onMounted(() => {
       <section class="flex justify-between items-center">
         <h2>Tous mes projets</h2>
         <div v-if="data && data.length >= 8" class="flex gap-2">
-          <button class="pagination-btn" @click="handlePagination('prev')"><Icon name="lucide:chevron-left" size="24" /></button>
-          <button class="pagination-btn" @click="handlePagination('next')"><Icon name="lucide:chevron-right" size="24" /></button>
+          <button aria-label="Page précédent" class="pagination-btn" @click="handlePagination('prev')"><Icon name="lucide:chevron-left" size="24" /></button>
+          <button aria-label="Page suivante" class="pagination-btn" @click="handlePagination('next')"><Icon name="lucide:chevron-right" size="24" /></button>
         </div>
       </section>
       <div class="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">

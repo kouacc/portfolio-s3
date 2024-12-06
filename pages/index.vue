@@ -316,13 +316,13 @@ const showSecondNavigation = ref(false)
       <div
         class="w-fit border-b-2 border-white p-3 px-12 flex gap-5 place-content-end z-20"
       >
-        <a href="https://www.linkedin.com/in/maxence-lallemand-11bb20299/"
+        <a aria-label="Linkedin" href="https://www.linkedin.com/in/maxence-lallemand-11bb20299/"
           ><Icon name="simple-icons:linkedin" class="text-white" size="30"
         /></a>
-        <a href="https://github.com/kouacc"
+        <a aria-label="Github" href="https://github.com/kouacc"
           ><Icon name="simple-icons:github" class="text-white" size="30"
         /></a>
-        <a href="https://www.instagram.com/max__mp4/"
+        <a aria-label="Instagram" href="https://www.instagram.com/max__mp4/"
           ><Icon name="simple-icons:instagram" class="text-white" size="30"
         /></a>
       </div>
