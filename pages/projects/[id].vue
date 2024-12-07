@@ -31,10 +31,6 @@ const activeImg = ref<number>(0);
 
 const { data, error } = await useAsyncData('project', () => $fetch<Project>(`/api/projects/${$route.params.id}`));
 
-if (error) {
-  throw createError(error.statusCode, error.message);
-}
-
 const output = computed(() => (data?.value ? marked(data.value.content) : ""));
 
 const created_date = data?.value ? new Date(data?.value.created_at).toLocaleString('fr-FR', { timeZone: 'UTC', dateStyle: "short" }) : null;
