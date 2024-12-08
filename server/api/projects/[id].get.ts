@@ -15,6 +15,13 @@ export default defineEventHandler(async (event) => {
   const project = await db.query.projectTable.findFirst({
     where: eq(projectTable.id, parseInt(id)),
   });
+
+  if (!project) {
+    throw createError({
+      statusCode: 404,
+      statusMessage: "Projet introuvable",
+  });
+}
   
   return project;
 });
