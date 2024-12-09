@@ -11,6 +11,16 @@ export default defineNuxtConfig({
     },
   },
 
+  sitemap: {
+    exclude: ['/admin/**'],
+    include: ['/'],
+    
+  }
+
+  routeRules: {
+    '/admin/**': { robots: false }
+  }
+
   /* experimental: {
     viewTransition: true
   }, */
