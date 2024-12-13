@@ -3,6 +3,7 @@ import { userTable } from "~/database/schema";
 import { eq } from "../utils/orm";
 import { generateJWT } from "../../utils/jwt";
 import crypto from "crypto";
+import { useDiscordWebhook } from "../composables/useDiscordWebhook";
 
 export default defineEventHandler(async (event) => {
   const formData = await readFormData(event);
@@ -29,11 +30,7 @@ export default defineEventHandler(async (event) => {
     const cookie = setCookie(event, "token", token);
 
     //send status to webhook
-    await $fetch(process.env.DISCORD_WEBHOOK as string, {
-      method: "POST",
-      body: {
-        username: "Portfolio",
-        embeds: [
+    useDiscordWebhook([
           {
             title: "Nouvelle connexion",
             type: "rich",
@@ -44,9 +41,7 @@ export default defineEventHandler(async (event) => {
             },
             timestamp: new Date(),
           },
-        ],
-      },
-    });
+        ])
 
     // return cookie
     return cookie;

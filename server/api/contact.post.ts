@@ -1,6 +1,7 @@
 import { db } from "#imports";
 import { useFetch } from "nuxt/app";
 import { contactTable } from "~/database/schema";
+import { useDiscordWebhook } from "../composables/useDiscordWebhook";
 
 export default defineEventHandler(async (event) => {
   const form = await readFormData(event);
@@ -11,11 +12,7 @@ export default defineEventHandler(async (event) => {
   const message = form.get("message") as string;
 
   //envoi webhook
-  await $fetch(process.env.DISCORD_WEBHOOK as string, {
-    method: "POST",
-    body: {
-      username: "Portfolio",
-      embeds: [
+  useDiscordWebhook([
         {
           title: "Nouveau contact",
           type: "rich",
@@ -26,9 +23,7 @@ export default defineEventHandler(async (event) => {
           },
           timestamp: new Date(),
         },
-      ],
-    },
-  });
+      ])
 
   //envoi db
   await db.insert(contactTable).values({
