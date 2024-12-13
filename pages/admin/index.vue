@@ -59,8 +59,8 @@ async function importProjects() {
 const { data, status } = await useFetch("/api/projects/fetchprojects");
 const { payload } = await useJWT(cookie.value)
 
-async function exportData(table: "Projects" | "Contact") {
-  const { data } = await useFetch(`/api/protected/export${table}`, {
+async function exportData() {
+  const { data } = await useFetch(`/api/protected/exportContact`, {
     onRequest({ request, options }) {
       if (cookie.value) {
         options.headers.set("Authorization", cookie.value);
@@ -149,19 +149,13 @@ async function deleteProject(id: number) {
           /></ActionButton>
         </li>
         <li>
-          <ActionButton variant="secondary"
-            ><span class="text-white">Analytics</span
-            ><Icon name="lucide:chart-line" size="24" class="text-white"
+          <ActionButton variant="secondary" @click="exportDb()"
+            ><span class="text-white">Exporter database</span
+            ><Icon name="lucide:database" size="24" class="text-white"
           /></ActionButton>
         </li>
         <li>
-          <ActionButton variant="secondary" @click="showProjectImportsWindow = true"
-            ><span class="text-white">Import/export projets</span
-            ><Icon name="lucide:file-symlink" size="24" class="text-white"
-          /></ActionButton>
-        </li>
-        <li>
-          <ActionButton variant="secondary" @click="exportData('Contact')"
+          <ActionButton variant="secondary" @click="exportData()"
             ><span class="text-white">Exporter contact</span
             ><Icon
               name="lucide:rectangle-ellipsis"
@@ -176,33 +170,7 @@ async function deleteProject(id: number) {
           /></ActionButton>
         </li>
       </ul>
-      <div v-show="showProjectImportsWindow" class="bg-black/40 fixed top-0 left-0 w-screen h-screen !mt-0 flex items-center justify-center sm:grid">
-        <div class="sm:place-self-center rounded-xl primary-bg p-8 space-y-5 w-auto h-auto">
-          <section class="flex justify-between">
-        <h2>Import/export</h2>
-        <button class="flex items-center px-3 hover:bg-black/20 transition-all rounded-xl" @click="showProjectImportsWindow = false"><Icon name="lucide:x" size="24"/></button>
-          </section>
-          <div class="flex flex-col sm:flex-row divide-y sm:divide-x sm:divide-y-0 divide-secondary dark:divide-secondary_dark">
-        <div class="space-y-4 pb-4 sm:pr-4 sm:pb-0">
-          <h3 class="font-geistmono text-xl">Importer</h3>
-          <div ref="dropzone" class="rounded-lg border secondary-border px-10 py-20 flex flex-col gap-10 items-center" :class="{ 'pb-3' : isFileSelected}">
-            <input class="file:rounded-full file:px-3 file:py-2 file:border-none file:secondary-bg file:fill-text" type="file" accept="application/json" @change="(e) => onDrop(e)" />
-            <button v-show="isFileSelected" class="bg-green-500 px-4 py-2 rounded-xl" @click="importProjects()">Importer</button>
-            <p>{{ 'Projets importés !' }}</p>
-          </div>
-        </div>
-        <div class="space-y-4 pt-4 sm:pl-4 sm:pt-0">
-          <h3 class="font-geistmono text-xl">Exporter</h3>
-          <div class="flex justify-center items-center p-16">
-            <ActionButton variant="secondary" @click="exportData('Projects')">
-          <span class="text-white">Exporter</span>
-          <Icon name="lucide:rectangle-ellipsis" size="24" class="text-white"/>
-            </ActionButton>
-          </div>
-        </div>
-          </div>
-        </div>
-      </div>
+    
     </section>
   </div>
 </template>
