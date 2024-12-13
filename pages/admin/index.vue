@@ -24,37 +24,44 @@ export interface JWT {
 }
 
 const cookie = useCookie<string>("token");
-const showProjectImportsWindow = ref<boolean>(false);
-const dropzone = ref<HTMLDivElement>();
-const isFileSelected = ref<boolean>(false)
-const file = ref<File>()
+const showEditPasswordWindow = ref<boolean>(false);
+const changepassword = reactive<{ old: string; new: string; confirm: string }>({
+  old: "",
+  new: "",
+  confirm: "",
+});
+const isLocked = useScrollLock(document?.body, false);
 
-function onDrop(event: Event) {
-    event.preventDefault();
-    const target = event.target as HTMLInputElement;
-    if (!target?.files || target.files.length === 0) {
-        return;
-    } else {
-      isFileSelected.value = true
-      file.value = target.files[0]
-    }
-}
 
-async function importProjects() {
-  const request = await $fetch("/api/protected/importProject", {
+async function handleChangePassword() {
+  if (changepassword.new !== changepassword.confirm) {
+    alert("Les mots de passe ne correspondent pas");
+    return;
+  }
+
+  const pass = new FormData();
+  pass.append("oldpassword", changepassword.old);
+  pass.append("newpassword", changepassword.new);
+
+  const { status } = await $fetch("/api/protected/editpassword", {
     method: "POST",
     headers: {
       Authorization: cookie.value,
     },
-    body: file.value
-  })
-  if (request) {
-    return request.status 
+    body: pass, 
+    });
+
+  if (status === 200) {
+    alert("Mot de passe changé avec succès");
+    showEditPasswordWindow.value = false;
+    isLocked.value = false;
+    changepassword.old = "";
+    changepassword.new = "";
+    changepassword.confirm = "";
   } else {
-    return "Impossible d'importer les projets. Veuillez réessayer."
+    alert("Erreur lors du changement de mot de passe");
   }
 }
-
 
 const { data, status } = await useFetch("/api/projects/fetchprojects");
 const { payload } = await useJWT(cookie.value)
@@ -75,7 +82,7 @@ async function exportData() {
     const url = window.URL.createObjectURL(blob);
     const a = document.createElement("a");
     a.href = url;
-    a.download = `${table.toLowerCase()}-${date}.json`;
+    a.download = `contact-${date}.json`;
     a.click();
 
     setTimeout(() => {
@@ -149,7 +156,7 @@ async function deleteProject(id: number) {
           /></ActionButton>
         </li>
         <li>
-          <ActionButton variant="secondary" @click="exportDb()"
+          <ActionButton variant="secondary" href="/database/database.db"
             ><span class="text-white">Exporter database</span
             ><Icon name="lucide:database" size="24" class="text-white"
           /></ActionButton>
@@ -164,13 +171,35 @@ async function deleteProject(id: number) {
           /></ActionButton>
         </li>
         <li>
-          <ActionButton variant="secondary"
+          <ActionButton variant="secondary" @click="showEditPasswordWindow = true, isLocked = true"
             ><span class="text-red-500">Changer le mot de passe</span
             ><Icon name="lucide:key-round" size="24" class="text-red-500"
           /></ActionButton>
         </li>
       </ul>
-    
+    <div v-show="showEditPasswordWindow" class="fixed top-0 left-0 w-screen h-screen bg-black/70 grid !mt-0 z-50">
+      <div class="md:rounded-xl primary-bg border secondary-border p-10 place-self-center w-full h-full md:w-1/2 md:h-auto space-y-5 flex flex-col">
+        <section class='flex justify-between items-center'>
+          <h2>Changer de mot de passe</h2>
+          <button @click="showEditPasswordWindow = false, isLocked = false" class="flex items-center p-2 hover:bg-black/10 rounded-xl transition-all"><Icon name="lucide:x" size="24" /></button>
+        </section>
+        <div class="flex flex-col gap-4">
+          <label class="flex flex-col gap-1">
+            <span>Ancien mot de passe</span>
+            <input type="password" required v-model="changepassword.old">
+          </label>
+          <label class="flex flex-col gap-1">
+            <span>Nouveau mot de passe</span>
+            <input type="password" required v-model="changepassword.new">
+          </label>
+          <label class="flex flex-col gap-1">
+            <span>Confirmer le mot de passe</span>
+            <input type="password" required v-model="changepassword.confirm">
+          </label>
+        </div>
+        <ActionButton variant="primary" @click="handleChangePassword()" class="self-end">Changer</ActionButton>
+      </div>
+    </div>
     </section>
   </div>
 </template>
