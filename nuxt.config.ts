@@ -21,6 +21,8 @@ export default defineNuxtConfig({
         sources: ["/api/__sitemap__/urls"],
       },
     },
+    discoverImages: false,
+    discoverVideos: false,
   },
 
   robots: {
@@ -36,6 +38,9 @@ export default defineNuxtConfig({
 
   app: {
     head: {
+      htmlAttrs: {
+        lang: "fr",
+      },
       link: [
         {
           rel: "apple-touch-icon",

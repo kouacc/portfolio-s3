@@ -3,16 +3,16 @@ import { onMounted } from "vue";
 import gsap from "gsap";
 
 useHead({
-  title: "Projets - Maxence Lallemand",
+  title: "Projets",
   bodyAttrs: {
     class: "gradient-bg dark:gradient-bg-dark",
   },
 });
 
 useSeoMeta({
-  title: "Projets - Maxence Lallemand",
+  title: "Projets",
   description: "Découvrez tous les projets de Maxence Lallemand.",
-  ogTitle: "Projets - Maxence Lallemand",
+  ogTitle: "Projets",
   ogLocale: "fr_FR",
   ogImage: "https://maxencelallemand.fr/banner.webp",
 })

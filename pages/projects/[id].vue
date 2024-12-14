@@ -44,8 +44,8 @@ const created_date = data?.value ? new Date(data?.value.created_at).toLocaleStri
 const modified_date = data?.value ? new Date(data.value.modified_at).toLocaleString('fr-FR', { timeZone: 'UTC', dateStyle: "short" }) : null;
 
 useSeoMeta({
-  title: () => `${data?.value?.title} - Maxence Lallemand`,
-  ogTitle: () => `${data?.value?.title} - Maxence Lallemand`,
+  title: () => `${data?.value?.title}`,
+  ogTitle: () => `${data?.value?.title}`,
   ogLocale: "fr_FR",
   ogImage: () => data?.value?.cover ? `https://maxencelallemand.fr/content/${data?.value?.id}/${data?.value?.cover}` : "https://maxencelallemand.fr/banner.webp",
 })

@@ -10,13 +10,12 @@ useHead({
   bodyAttrs: {
     class: "bg-background dark:bg-background_dark overflow-x-hidden scroll-smooth",
   },
-  title: "Portfolio - Maxence Lallemand",
 });
 
 useSeoMeta({
-  title: "Portfolio - Maxence Lallemand",
+  title: "Accueil",
   description: "Portfolio de Maxence Lallemand, étudiant en MMI et développeur web.",
-  ogTitle: "Portfolio - Maxence Lallemand",
+  ogTitle: "Accueil",
   ogDescription: "Portfolio de Maxence Lallemand, étudiant en MMI et développeur web.",
   ogImage: "https://maxencelallemand.fr/banner.webp",
   ogUrl: "https://maxencelallemand.fr",

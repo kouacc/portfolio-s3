@@ -4,7 +4,7 @@ useHead({
   bodyAttrs: {
     class: 'bg-background dark:bg-background_dark overflow-x-hidden'
   },
-  title: 'Connexion - Maxence Lallemand'
+  title: 'Connexion'
 })
 
 const router = useRouter()
