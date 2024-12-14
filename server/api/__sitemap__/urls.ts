@@ -11,7 +11,7 @@ export default defineSitemapEventHandler(async () => {
 
     return response.map((project): SitemapUrlInput => ({
         loc: `/projects/${project.id}`,
-        lastmod: new Date(project.modified_at).toISOString(),
+        lastmod: new Date(project.modified_at),
         priority: 0.8,
         changefreq: 'monthly'
     }));
