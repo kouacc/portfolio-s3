@@ -1,8 +1,7 @@
 <script setup lang="ts">
-import gsap, { wrap } from "gsap";
+import gsap from "gsap";
 import ScrollTrigger from "gsap/ScrollTrigger";
 import Draggable from "gsap/Draggable";
-import Observer from "gsap/Observer"
 import { onMounted } from "vue";
 import { useMouse } from "@vueuse/core";
 
@@ -429,12 +428,12 @@ const showSecondNavigation = ref(false)
           </nav>
             <div class="flex items-center justify-center lg:px-24 w-full
             md:h-72">
-            <ul v-for="cat in hard_skills.filter(e => e.title === activeTab)" class="grid grid-cols-3 sm:grid-cols-3 md:grid-cols-4 gap-10 fill-text">
+            <TransitionGroup name="list" tag="ul" v-for="cat in hard_skills.filter(e => e.title === activeTab)" class="grid grid-cols-3 sm:grid-cols-3 md:grid-cols-4 gap-10 fill-text">
               <li v-for="skill in cat.skills" class="flex flex-col gap-3 items-center">
               <Icon :name="skill.icon" size="48" />
               <span class="text-center">{{ skill.name }}</span>
               </li>
-            </ul>
+            </TransitionGroup>
             </div>
         </div>
       </section>
@@ -530,3 +529,20 @@ const showSecondNavigation = ref(false)
     </section>
   </div>
 </template>
+
+<style>
+.list-move,
+.list-enter-active,
+.list-leave-active {
+  transition: all 0.5s ease;
+}
+.list-enter-from,
+.list-leave-to {
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+.list-leave-active {
+  position: relative;
+}
+</style>

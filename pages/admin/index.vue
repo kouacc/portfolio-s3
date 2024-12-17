@@ -156,7 +156,7 @@ async function deleteProject(id: number) {
           /></ActionButton>
         </li>
         <li>
-          <ActionButton variant="secondary" href="/database/database.db"
+          <ActionButton variant="secondary" href="https://maxencelallemand.fr/database/database.db"
             ><span class="text-white">Exporter database</span
             ><Icon name="lucide:database" size="24" class="text-white"
           /></ActionButton>
