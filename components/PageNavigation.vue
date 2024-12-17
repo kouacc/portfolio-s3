@@ -73,7 +73,7 @@ onMounted(() => {
       />
     </button>
     <NuxtLink
-      v-show="props.return"
+      v-if="props.return"
       @click.prevent="$router.go(-1)"
       class="fixed top-3 right-20 sm:top-auto sm:right-auto sm:static sm:px-6 sm:py-5 rounded-xl flex items-center p-3 w-fit h-fit sm:rounded-l-full tertiary-bg border-2 primary-border cursor-pointer"
       ><Icon name="lucide:corner-down-left" size="24"

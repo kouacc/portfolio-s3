@@ -426,7 +426,7 @@ const showSecondNavigation = ref(false)
               </li>
             </ul>
           </nav>
-            <div class="flex items-center justify-center lg:px-24 w-full
+            <TransitionGroup name="list" tag="div" class="flex items-center justify-center lg:px-24 w-full
             md:h-72">
             <TransitionGroup name="list" tag="ul" v-for="cat in hard_skills.filter(e => e.title === activeTab)" class="grid grid-cols-3 sm:grid-cols-3 md:grid-cols-4 gap-10 fill-text">
               <li v-for="skill in cat.skills" class="flex flex-col gap-3 items-center">
@@ -434,7 +434,7 @@ const showSecondNavigation = ref(false)
               <span class="text-center">{{ skill.name }}</span>
               </li>
             </TransitionGroup>
-            </div>
+            </TransitionGroup>
         </div>
       </section>
       <section class="trigger-2 grid-start-1 col-span-full snap-start space-y-5" id="timeline">
@@ -540,9 +540,5 @@ const showSecondNavigation = ref(false)
 .list-leave-to {
   opacity: 0;
   transform: translateY(20px);
-}
-
-.list-leave-active {
-  position: relative;
-}
+} 
 </style>
