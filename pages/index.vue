@@ -488,7 +488,7 @@ const showSecondNavigation = ref(false)
             <span class="rounded-xl primary-bg secondary-border transition-opacity absolute px-5 py-3 left-1/2 -translate-x-1/2 -translate-y-20 opacity-0" :class='{ "opacity-100" : showSlideTooltip}'>Glissez vers la fin pour changer de page !</span>
           <div ref="dragElement" class="dragElement p-2 rounded-full border secondary-border fill-text flex items-center">
             <div class="swipe-element rounded-full size-10 sm:size-12 md:size-14 lg:size-16 flex justify-center items-center bg-sky-400 cursor-grab active:cursor-grabbing"><Icon name="lucide:chevron-right" size="24"/></div>
-            <span class="home-h2 text-sm sm:text-base absolute left-1/2 -translate-x-1/2 select-none -z-10">Découvrez vers mes projets</span>
+            <span class="home-h2 text-sm sm:text-base absolute left-1/2 -translate-x-1/2 select-none -z-10">Découvrez mes projets</span>
           </div>
         </div>
       </section>
